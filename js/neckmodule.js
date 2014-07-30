@@ -611,7 +611,7 @@ var neckModule = (function() {
       scalesArray:                'majorScales',
       rootNote:                   'C',
       showInitialChord:           false,
-      chordInterval:              0,
+      chordInterval:              1,
       notesPerChord:              4
     };
 

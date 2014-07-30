@@ -18,7 +18,7 @@ sup { vertical-align: top; font-size: 0.5em; }
 #keyNotes ul { margin: 0.5em 0 0; padding: 0 !important; }
 #keyNotes li { display: inline-block; padding-right: 1em; }
 
-.neckmodule { position: relative; background: url('/images/blankneck.jpg') no-repeat 25px 22px; width: 600px; height: 166px; margin: 0; }
+.neckmodule { position: relative; background: url('../images/blankneck.jpg') no-repeat 25px 22px; width: 600px; height: 166px; margin: 0; }
 
 #controls { position: relative; }
 #color_key { position: relative; left: 0; width: 250px; }
