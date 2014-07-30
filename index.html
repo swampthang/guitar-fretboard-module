@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Neck module</title>
+	<!-- FONT -->
+  <link href='http://fonts.googleapis.com/css?family=Archivo+Narrow:400,700' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="/css/neckmodule.css">
+</head>
+<body>
+
+  <div id="neck-container"></div>
+  <div id="g-major"></div>
+  <div id="a-minor"></div>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+	<script src="/js/neckmodule.js"></script>
+  <script>
+    var neck1 = Object.create(neckModule);
+    neck1.initLayout({rootNote: 'E'});
+    var neck2 = Object.create(neckModule);
+    neck2.initLayout({myContainer: 'g-major', rootNote: 'G'});
+    var neck3 = Object.create(neckModule);
+    neck3.initLayout({
+      myContainer: 'a-minor',
+      rootNote: 'A',
+      scalesArray: 'naturalMinorScales'
+    });
+  </script>
+
+</body>
+</html>
