@@ -13,7 +13,8 @@ File dependencies:
 - images/blankneck.jpg
 - js/neckmodule.js
 
-** Adding guitar fretboard modules to your web page
+Adding guitar fretboard modules to your web page
+------------------------------------------------
 After making sure you have added the above listed dependencies to your page, all that is required to display an interactive module on your page is one div and 2 lines of javascript/jquery.
 
 Place a div inside the body of your page like this:
