@@ -1,51 +1,57 @@
 ﻿@charset "utf-8";
 /* CSS Document */
-body { 
+.guitar-module-main-wrapper { margin: 0; padding-top: 5px; }
+.guitar-module-main-wrapper, .guitar-module-main-wrapper #main_title, .guitar-module-main-wrapper h2, .guitar-module-main-wrapper p { 
 	font-family: 'Archivo Narrow', sans-serif;
 	font-size: 13px;
  }
-.top-wrapper { width: 600px; overflow: auto; }
- .top-left { width: 50%; float: left; }
- .top-right { width: 50%; float: right; }
+.guitar-module-main-wrapper .top-wrapper { width: 600px; overflow: auto; }
+ .guitar-module-main-wrapper .top-left { width: 50%; float: left; }
+ .guitar-module-main-wrapper .top-right { width: 50%; float: right; }
 
- h2.chord-name { font-size: 3.0em; margin: 20px 0 0; padding: 0; }
-.logo { position: relative; top: 5px; right: 10px; z-index: 1000; }
-.newneck-wrapper { background: #ffffff; }
-sup { vertical-align: top; font-size: 0.5em; }
-.chord_in_key { position: relative; z-index: 501; }
+.guitar-module-main-wrapper h2.chord-name { font-size: 3.0em; margin: 20px 0 0; padding: 0; }
+.guitar-module-main-wrapper .logo { position: relative; top: 5px; right: 10px; z-index: 1000; }
+.guitar-module-main-wrapper .newneck-wrapper { background: #ffffff; }
+.guitar-module-main-wrapper sup { vertical-align: top; font-size: 0.5em; }
+.guitar-module-main-wrapper .chord_in_key { position: relative; z-index: 501; }
 
-#keyNotes { position: relative; z-index: 502; }
-#keyNotes ul { margin: 0.5em 0 0; padding: 0 !important; }
-#keyNotes li { display: inline-block; padding-right: 1em; }
+.guitar-module-main-wrapper #keyNotes { position: relative; z-index: 502; }
+.guitar-module-main-wrapper #keyNotes ul { margin: 0.5em 0 0; padding: 0 !important; }
+.guitar-module-main-wrapper #keyNotes li { display: inline-block; padding-right: 1em; }
 
-.neckmodule { position: relative; background: url('../images/blankneck.jpg') no-repeat 25px 22px; width: 600px; height: 166px; margin: 0; }
+.guitar-module-main-wrapper .neckmodule { position: relative; background: url('../images/blankneck.jpg') no-repeat 25px 22px; width: 600px; height: 166px; margin: 0; }
 
-#controls { position: relative; }
-#color_key { position: relative; left: 0; width: 250px; }
-#color_key h5 {  padding: 0; margin: 0; height: 20px; }
-#main_title { font-family: 'Archivo Narrow', sans-serif; font-size: 2.75em; margin: 2px 0 0; }
+.guitar-module-main-wrapper #controls { position: relative; }
+.guitar-module-main-wrapper #color_key { position: relative; left: 0; width: 250px; }
+.guitar-module-main-wrapper #color_key h5 {  padding: 0; margin: 0; height: 20px; }
+.guitar-module-main-wrapper #main_title { font-family: 'Archivo Narrow', sans-serif; font-size: 2.75em; margin: 2px 0 0; }
 
-.showing { font-size: 16px; }
-#notesPerChord, #showing { padding: 0; margin: 0; }
-.sharp { display: none; }
-.flat { display: none; }
+.guitar-module-main-wrapper .showing { font-size: 16px; }
+.guitar-module-main-wrapper #notesPerChord, .guitar-module-main-wrapper #showing { padding: 0; margin: 0; }
+.guitar-module-main-wrapper .sharp { display: none; }
+.guitar-module-main-wrapper .flat { display: none; }
 
 /* Selectors coming soon - currently not used */
-#scaleSelector, #keyChordsSelector { padding: 0; margin: 0; }
-#scaleSelector li { display: inline-block; padding: 1em 0.5em 0 0; }
-#scaleSelector li a { color: #666666; font-weight: bold; text-decoration: none; }
-#scaleSelector li a:hover { color: blue; text-decoration: underline; }
+.guitar-module-main-wrapper #scaleSelector, .guitar-module-main-wrapper #keyChordsSelector { padding: 0; margin: 0; }
+.guitar-module-main-wrapper #scaleSelector li { display: inline-block; padding: 1em 0.5em 0 0; }
+.guitar-module-main-wrapper #scaleSelector li a { color: #666666; font-weight: bold; text-decoration: none; }
+.guitar-module-main-wrapper #scaleSelector li a:hover { color: blue; text-decoration: underline; }
 
-#keyChordsSelector li { display: block; list-style: none; }
-#keyChordsSelector li a { color: #666666; font-weight: bold; text-decoration: none; }
-#keyChordsSelector li a:hover { color: blue; text-decoration: underline; }
+.guitar-module-main-wrapper #keyChordsSelector li { display: block; list-style: none; }
+.guitar-module-main-wrapper #keyChordsSelector li a { color: #666666; font-weight: bold; text-decoration: none; }
+.guitar-module-main-wrapper #keyChordsSelector li a:hover { color: blue; text-decoration: underline; }
 
-#fretselectors { position: relative; left: 264px; top: 160px; z-index: 505; }
+.guitar-module-main-wrapper #fretselectors { position: relative; left: 264px; top: 160px; z-index: 505; }
 
-#changeKey { font-family: 'Archivo Narrow', sans-serif; margin: 0 0 0 2%; }
+.guitar-module-main-wrapper #changeKey { font-family: 'Archivo Narrow', sans-serif; margin: 0 0 0 2%; }
 /* end selectors */
 
-.string1, .string2, .string3, .string4, .string5, .string6 { 
+.guitar-module-main-wrapper .string1, 
+.guitar-module-main-wrapper .string2, 
+.guitar-module-main-wrapper .string3, 
+.guitar-module-main-wrapper .string4, 
+.guitar-module-main-wrapper .string5, 
+.guitar-module-main-wrapper .string6 { 
 	font-family: 'Archivo Narrow', sans-serif; 
 	font-weight: bold;
 	color: black;
@@ -67,36 +73,36 @@ sup { vertical-align: top; font-size: 0.5em; }
 
 /* STYLING TEMPLATES? */
 /* positioner styles for note-grid, Adding more fretboard background images/design-templates will force these settings into separate stylesheets */
-.note.string1 { top: 20px; }
-.note.string2 { top: 42px; }
-.note.string3 { top: 64px; }
-.note.string4 { top: 86px; }
-.note.string5 { top: 108px; }
-.note.string6 { top: 130px; }
+.guitar-module-main-wrapper .note.string1 { top: 20px; }
+.guitar-module-main-wrapper .note.string2 { top: 42px; }
+.guitar-module-main-wrapper .note.string3 { top: 64px; }
+.guitar-module-main-wrapper .note.string4 { top: 86px; }
+.guitar-module-main-wrapper .note.string5 { top: 108px; }
+.guitar-module-main-wrapper .note.string6 { top: 130px; }
 
-.note.fret0 { left: 3px; }
-.note.fret1 { left: 40px; }
-.note.fret2 { left: 81px; }
-.note.fret3 { left: 120px; }
-.note.fret4 { left: 164px; }
-.note.fret5 { left: 202px; }
-.note.fret6 { left: 235px; }
-.note.fret7 { left: 267px; }
-.note.fret8 { left: 299px; }
-.note.fret9 { left: 331px; }
-.note.fret10 { left: 362px; }
-.note.fret11 { left: 393px; }
-.note.fret12 { left: 424px; }
-.note.fret13 { left: 455px; }
-.note.fret14 { left: 484px; }
-.note.fret15 { left: 510px; }
-.note.fret16 { left: 537px; }
-.note.fret17 { left: 564px; }
-.note.muted { opacity: .5; }
+.guitar-module-main-wrapper .note.fret0 { left: 3px; }
+.guitar-module-main-wrapper .note.fret1 { left: 40px; }
+.guitar-module-main-wrapper .note.fret2 { left: 81px; }
+.guitar-module-main-wrapper .note.fret3 { left: 120px; }
+.guitar-module-main-wrapper .note.fret4 { left: 164px; }
+.guitar-module-main-wrapper .note.fret5 { left: 202px; }
+.guitar-module-main-wrapper .note.fret6 { left: 235px; }
+.guitar-module-main-wrapper .note.fret7 { left: 267px; }
+.guitar-module-main-wrapper .note.fret8 { left: 299px; }
+.guitar-module-main-wrapper .note.fret9 { left: 331px; }
+.guitar-module-main-wrapper .note.fret10 { left: 362px; }
+.guitar-module-main-wrapper .note.fret11 { left: 393px; }
+.guitar-module-main-wrapper .note.fret12 { left: 424px; }
+.guitar-module-main-wrapper .note.fret13 { left: 455px; }
+.guitar-module-main-wrapper .note.fret14 { left: 484px; }
+.guitar-module-main-wrapper .note.fret15 { left: 510px; }
+.guitar-module-main-wrapper .note.fret16 { left: 537px; }
+.guitar-module-main-wrapper .note.fret17 { left: 564px; }
+.guitar-module-main-wrapper .note.muted { opacity: .5; }
 
 /* Buttons that show up below the fretboard for each chord in a key area. See note re styling templates above */
-#chordButtons { margin: 1em 0; }
-.chordButton {
+.guitar-module-main-wrapper #chordButtons { margin: 1em 0; }
+.guitar-module-main-wrapper .chordButton {
 	-moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
 	-webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
 	box-shadow:inset 0px 1px 0px 0px #ffffff;
@@ -118,14 +124,15 @@ sup { vertical-align: top; font-size: 0.5em; }
         cursor: hand;
         cursor: pointer;
         
-}.chordButton:hover {
+}
+.guitar-module-main-wrapper .chordButton:hover {
 	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #dfdfdf), color-stop(1, #ededed) );
 	background:-moz-linear-gradient( center top, #dfdfdf 5%, #ededed 100% );
 	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#dfdfdf', endColorstr='#ededed');
 	background-color:#dfdfdf;
 }
 
-.chordButton.active {
+.guitar-module-main-wrapper .chordButton.active {
 	-moz-box-shadow:inset 0px 1px 0px 0px #9cf0b0;
 	-webkit-box-shadow:inset 0px 1px 0px 0px #9cf0b0;
 	box-shadow:inset 0px 1px 0px 0px #9cf0b0;
@@ -151,7 +158,8 @@ sup { vertical-align: top; font-size: 0.5em; }
 	color:#3d393d;
 	text-shadow:1px 1px 0px #c1f7c3;
 }
-.chordButton.active:hover {
+
+.guitar-module-main-wrapper .chordButton.active:hover {
 	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #14c938), color-stop(1, #96f5a9) );
 	background:-moz-linear-gradient( center top, #14c938 5%, #96f5a9 100% );
 	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#14c938', endColorstr='#96f5a9');
@@ -159,13 +167,14 @@ sup { vertical-align: top; font-size: 0.5em; }
 }
 /* This button was generated using CSSButtonGenerator.com */
 
-.note { cursor: hand; cursor: pointer; }
+/* the hand cursor is commented out for later use possibly to trigger audio */
+/*.guitar-module-main-wrapper .guitar-module-main-wrapper .note { cursor: hand; cursor: pointer; }*/
 
-#color-key-wrapper h4 {
+.guitar-module-main-wrapper #color-key-wrapper h4 {
 	margin: 15px 0 0;
 }
 
-#color-key td div {
+.guitar-module-main-wrapper #color-key td div {
 	width: 20px;
 	height: 20px;
 	border: 1px solid black;
@@ -174,9 +183,9 @@ sup { vertical-align: top; font-size: 0.5em; }
 }
 
 /* Color settings for chord interval notes in grid when viewing a chord/arpeggio */
-.red { background: #FF0000; color: #fff; }
-.blue {background: #0000FF; color: #fff; }
-.green { background: #00FF00; }
-.pink { background: #FF00FF; }
-.gray { background: #333333; color: #fff; }
-.yellow { background: #FFFF00; }
+.guitar-module-main-wrapper .red { background: #FF0000; color: #fff; }
+.guitar-module-main-wrapper .blue {background: #0000FF; color: #fff; }
+.guitar-module-main-wrapper .green { background: #00FF00; }
+.guitar-module-main-wrapper .pink { background: #FF00FF; }
+.guitar-module-main-wrapper .gray { background: #333333; color: #fff; }
+.guitar-module-main-wrapper .yellow { background: #FFFF00; }
