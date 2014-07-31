@@ -31,6 +31,8 @@ There are several parameters that can be set. Here are the params that can be se
 
 
 DEFAULTS
+========
+```
 myContainer:                'neck-container',  // string - The name of the DOM element in which the neckModule should be placed. Should be the string used in the selector and can be an id or a class placed on the DOM element. Must be unique.
 containerSelectorType:      'id',              // string - options=> 'id', 'className'
 showTitle:                  true,              // boolean - options=> true, false
@@ -48,23 +50,31 @@ rootNote:                   'C',               // string - options=> 'C', 'C#', 
 showInitialChord:           false,             // boolean - options=> true, false
 chordInterval:              0,                 // int - options=> 1-7
 notesPerChord:              4                  // int - options=> 3-5
-
-** Sending limited params
+```
+Sending limited params
+======================
 You can send any number of parameters. Anything you don't send will use the default values above.
 
-** Examples
+Examples
+--------
 
-*** Showing 2 instances
+Showing 2 instances
+-------------------
 
-// This instance sends a request for the key of E major and looks for a div with an id of 'neck-container' which is the default
+This instance sends a request for the key of E major and looks for a div with an id of 'neck-container' which is the default
+```
 var neck1 = Object.create(neckModule);
 neck1.initLayout({rootNote: 'E'});
+```
 
-// This instance sends a request for the key of G major and sets the container id to look for a div with id of 'g-major'
+This instance sends a request for the key of G major and sets the container id to look for a div with id of 'g-major'
+```
 var neck2 = Object.create(neckModule);
 neck2.initLayout({myContainer: 'g-major', rootNote: 'G'});
+```
 
-*** Showing an inital chord
+Showing an inital chord
+-----------------------
 ```
 var neck3 = Object.create(neckModule);
 neck3.initLayout({
@@ -75,4 +85,4 @@ neck3.initLayout({
   scalesArray: 'harmonicMinorScales'
 });
  ```
- The above will show the A harmonic minor scale but will initially select the 2nd note in that key which is Bdim.
+The above will show the A harmonic minor scale but will initially select the 2nd note in that key which is Bdim.
