@@ -6,6 +6,7 @@
   *   showTitle:                  true,              // boolean - options=> true, false
   *   showScaleNotes:             true,              // boolean - options=> true, false
   *   showFretRange:              true,              // boolean - options=> true, false
+  *   showResetLink:              true,              // boolean - options=> true, false
   *   showChordButtons:           true,              // boolean - options=> true, false
   *   showNotesPerChordSelector:  true,              // boolean - options=> true, false
   *   showChordNameHeader:        true,              // boolean - options=> true, false
@@ -140,7 +141,7 @@ var neckModule = (function() {
       '4':  new Array(3,5,0,2,4,'<sup>m</sup>','<sup>m7</sup>','<sup>m9</sup>'),
       '5':  new Array(4,6,1,3,5,'<sup></sup>','<sup>7</sup>','<sup>7b9</sup>'),
       '6':  new Array(5,0,2,4,6,'','<sup>maj7</sup>','<sup>maj9</sup>'),
-      '7':  new Array(6,1,3,5,0,'dim','dim7','dim7b9')
+      '7':  new Array(6,1,3,5,0,'<sup>dim</sup>','<sup>dim7</sup>','<sup>dim7b9</sup>')
     }
   };
 
@@ -440,6 +441,7 @@ var neckModule = (function() {
       console.log(this.currentScale);
       var chordName = this.currentScale[intval-1]+this.currentChordsArr[this.currentInterval][symbol_num];
       this.myContainer.find('.chord-name').html(chordName);
+      console.log('ran showChordNameHeader');
     }
   }
 
@@ -570,13 +572,19 @@ var neckModule = (function() {
   }
 
   var closeControlsDiv = function() {
-    return '</div';
+    return '</div>';
   }
 
   var buildChordInstructionsDiv = function() {
     var chordInstructionsDiv = '  <div id="chord_instructions">Use buttons below to display corresponding chord notes</div>';
 
     return chordInstructionsDiv;
+  }
+
+  var buildResetLink = function() {
+    var resetLink = '<p class="reset-link"><a href="#">Reset guitar neck to initially loaded view</a></p>';
+
+    return resetLink;
   }
 
   var buildChordButtonsDiv = function() {    
@@ -596,50 +604,53 @@ var neckModule = (function() {
 
   neck.initLayout = function() {
 
-    this.params = {
-      myContainer:                'neck-container',
-      containerSelectorType:      'id',
-      showTitle:                  true,
-      showScaleNotes:             true,
-      showFretRange:              true,
-      showChordButtons:           true,
-      showNotesPerChordSelector:  true,
-      showChordNameHeader:        true,
-      showIntervalColorKey:       true,
-      topfret:                    17,
-      lowfret:                    0,
-      scalesArray:                'majorScales',
-      rootNote:                   'C',
-      showInitialChord:           false,
-      chordInterval:              1,
-      notesPerChord:              4
-    };
+    if( objectIsEmpty(this.params) ) {
+      this.params = {
+        myContainer:                'neck-container',
+        containerSelectorType:      'id',
+        showTitle:                  true,
+        showScaleNotes:             true,
+        showFretRange:              true,
+        showResetLink:              true,
+        showChordButtons:           true,
+        showNotesPerChordSelector:  true,
+        showChordNameHeader:        true,
+        showIntervalColorKey:       true,
+        topfret:                    17,
+        lowfret:                    0,
+        scalesArray:                'majorScales',
+        rootNote:                   'C',
+        showInitialChord:           false,
+        chordInterval:              1,
+        notesPerChord:              3
+      };
 
-    if(arguments !== undefined) {
-      for ( name in arguments[0] ) {
-        if( arguments[0].hasOwnProperty(name)) {
-          this.params[name] = arguments[0][name];
+      if(arguments !== undefined) {
+        for ( name in arguments[0] ) {
+          if( arguments[0].hasOwnProperty(name)) {
+            this.params[name] = arguments[0][name];
+          }
         }
       }
     }
 
     var params = this.params;
 
-    console.log(this.params.containerSelectorType);
-    if(this.params.containerSelectorType == 'id') {
-      this.myContainer = $('#'+this.params.myContainer);
-    } else if(this.params.containerSelectorType == 'className') {
-      this.myContainer = $('.'+this.params.myContainer);
+    console.log(params.containerSelectorType);
+    if(params.containerSelectorType == 'id') {
+      this.myContainer = $('#'+params.myContainer);
+    } else if(params.containerSelectorType == 'className') {
+      this.myContainer = $('.'+params.myContainer);
     }
     
-    this.topfret = this.params.topfret;
-    this.lowfret = this.params.lowfret;
-    this.currentScale = this[this.params.scalesArray][this.params.rootNote];
-    this.currentKey = this.params.rootNote;
+    this.topfret = params.topfret;
+    this.lowfret = params.lowfret;
+    this.currentScale = this[params.scalesArray][params.rootNote];
+    this.currentKey = params.rootNote;
 
     this.htmlPieces = "";
 
-    if(this.params.showTitle) {
+    if(params.showTitle) {
       this.htmlPieces += buildMaintitleDiv();
     }
 
@@ -649,15 +660,15 @@ var neckModule = (function() {
       // TOP LEFT
       this.htmlPieces += openTopLeftDiv();
 
-        if(this.params.showScaleNotes) {
+        if(params.showScaleNotes) {
           this.htmlPieces += buildScaleNotesDiv();
         }
 
-        if(this.params.showFretRange) {
+        if(params.showFretRange) {
           this.htmlPieces += buildFretRangeInfoDiv();
         }
 
-        if(this.params.showChordNameHeader) {
+        if(params.showChordNameHeader) {
           this.htmlPieces += buildChordNameHeaderDiv();
         }
 
@@ -665,11 +676,11 @@ var neckModule = (function() {
 
       this.htmlPieces += openTopRighttDiv();
 
-        if(this.params.showNotesPerChordSelector) {
+        if(params.showNotesPerChordSelector) {
           this.htmlPieces += buildNotesPerChordSelectorDiv();
         }
 
-        if(this.params.showIntervalColorKey) {
+        if(params.showIntervalColorKey) {
           this.htmlPieces += buildColorKeyDiv();
         }
 
@@ -679,13 +690,17 @@ var neckModule = (function() {
 
     this.htmlPieces += buildNeckModuleDiv();
     
-    if(this.params.showChordButtons) {
+    if(params.showChordButtons) {
       this.htmlPieces += buildChordInstructionsDiv();
     }
 
     this.htmlPieces += openControlsDiv();
 
-    if(this.params.showChordButtons) {
+    if(params.showResetLink) {
+      this.htmlPieces += buildResetLink();
+    }
+
+    if(params.showChordButtons) {
       this.htmlPieces += buildChordButtonsDiv();
     }
   
@@ -696,7 +711,7 @@ var neckModule = (function() {
 
     this.initActions();
 
-    if(this.params.showInitialChord) {
+    if(params.showInitialChord) {
       this.notesPerChord = params.notesPerChord;
       this.intval = params.chordInterval;
       this.isolateChord(this.intval);
@@ -714,14 +729,24 @@ var neckModule = (function() {
     this.stringDivs = this.buildNoteGrid();
     container.find('.neckmodule').html(this.stringDivs);
     container.find('.notesPerChord').hide();
+
     container.find('.chordButton').click(function(){
       that.handleChordButtonClick($(this));
     });
+
     container.find('.notesPerChord a').click(function(e){
       e.preventDefault();
       var chordType = $(this).attr('ctype');
       that.setNotesPerChord(chordType);
+      that.isolateChord(that.intval);
     });
+
+    if(this.params.showResetLink) {
+      $('.reset-link').click(function(e){
+        e.preventDefault();
+        that.initLayout();
+      });
+    }
 
     switch(this.params.scalesArray) {
 
@@ -753,6 +778,18 @@ var neckModule = (function() {
   neck.getObj = function() {
     var objCopy = returnThis();
     return objCopy;
+  }
+
+  var objectIsEmpty = function(obj) {
+    if (Object.keys(obj).length === 0) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  var resetNeck = function() {
+    this.initLayout();
   }
 
   return neck;
