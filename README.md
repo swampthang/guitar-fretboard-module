@@ -2,6 +2,8 @@ Guitar Fretboard Module
 =======================
 
 A javascript module for creating multiple instances of interactive guitar fretboard diagrams showing scales and all chords in a given key.
+EXAMPLES AND MORE INFO:
+http://hotfrets.com/guitar-neck-module/
 
 Directions
 ==========

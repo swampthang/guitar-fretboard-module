@@ -7,7 +7,7 @@
  }
 .guitar-module-main-wrapper .top-wrapper { width: 600px; overflow: auto; }
  .guitar-module-main-wrapper .top-left { width: 50%; float: left; }
- .guitar-module-main-wrapper .top-right { width: 50%; float: right; }
+ .guitar-module-main-wrapper .top-right { width: 50%; float: right; position: relative; padding-top: 15px; }
 
 .guitar-module-main-wrapper h2.chord-name { font-size: 3.0em; margin: 20px 0 0; padding: 0; }
 .guitar-module-main-wrapper .logo { position: relative; top: 5px; right: 10px; z-index: 1000; }
