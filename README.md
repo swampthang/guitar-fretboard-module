@@ -89,3 +89,5 @@ neck3.initLayout({
 });
  ```
 The above will show the A harmonic minor scale but will initially select the 2nd note in that key which is Bdim.
+
+[![Analytics](https://ga-beacon.appspot.com/UA-53439951-1/guitar-fretboard-module/readme)](https://github.com/igrigorik/ga-beacon)
