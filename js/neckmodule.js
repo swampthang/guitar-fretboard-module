@@ -6,6 +6,7 @@
   *   showTitle:                  true,              // boolean - options=> true, false
   *   showScaleNotes:             true,              // boolean - options=> true, false
   *   showFretRange:              true,              // boolean - options=> true, false
+  *   showFretRangeSelectors:     true,              // boolean - options=> true, false
   *   showResetLink:              true,              // boolean - options=> true, false
   *   showChordButtons:           true,              // boolean - options=> true, false
   *   showNotesPerChordSelector:  true,              // boolean - options=> true, false
@@ -171,10 +172,10 @@ var neckModule = (function() {
   neck.buildNoteDiv = function(note, s, f)
   {
 
-    if(note.indexOf('#') != -1)
+    if(note.indexOf('#') !== -1)
     {
       noteType = 'sharp';
-    } else if(note.indexOf('b') != -1) {
+    } else if(note.indexOf('b') !== -1) {
       noteType = 'flat';
     } else {
       noteType = 'natural';
@@ -300,7 +301,6 @@ var neckModule = (function() {
       break;
     }
 
-
     for(var n=0; n<this.notesPerChord; n++)
     {
 
@@ -311,36 +311,45 @@ var neckModule = (function() {
       {
         case 0:
         var chordRoot = theNote;
-        this.myContainer.find(".note[notename='"+theNote+"']").addClass('gray').removeClass('muted');
+        this.myContainer.find(".note[notename='"+theNote+"']").addClass('gray').removeClass('muted').show();
         break;
 
         case 1:
-        this.myContainer.find(".note[notename='"+theNote+"']").addClass('red').removeClass('muted');
+        this.myContainer.find(".note[notename='"+theNote+"']").addClass('red').removeClass('muted').show();
         break;
 
         case 2:
-        this.myContainer.find(".note[notename='"+theNote+"']").addClass('blue').removeClass('muted');
+        this.myContainer.find(".note[notename='"+theNote+"']").addClass('blue').removeClass('muted').show();
         break;
 
         case 3:
-        this.myContainer.find(".note[notename='"+theNote+"']").addClass('green').removeClass('muted');
+        this.myContainer.find(".note[notename='"+theNote+"']").addClass('green').removeClass('muted').show();
         break;
 
         case 4:
-        this.myContainer.find(".note[notename='"+theNote+"']").addClass('yellow').removeClass('muted');
+        this.myContainer.find(".note[notename='"+theNote+"']").addClass('yellow').removeClass('muted').show();
         break;
       }
 
-      //alert(theNote);
-      for ( var f=this.lowfret; f<=this.topfret; f++ )
-      {
-        this.myContainer.find(".note[notename='"+theNote+"'].fret"+f).show();
-      }
     }
+
+    this.hideNotesOutOfRange();
 
     // this.myContainer.find('#title').html(chordRoot + chordType);
     this.myContainer.find('.chord_in_key').html(" (the " + interval + " chord)");
 
+  }
+
+  neck.hideNotesOutOfRange = function() {
+    for ( var f=0; f<this.lowfret; f++ )
+    {
+      this.myContainer.find(".note.fret"+f).hide();
+    }
+
+    for ( var f=(parseInt(this.topfret)+1); f<=this.total_frets; f++ )
+    {
+      this.myContainer.find(".note.fret"+f).hide();
+    }
   }
 
   neck.setNotesPerChord = function(num)
@@ -362,11 +371,10 @@ var neckModule = (function() {
     }
 
     if(!this.cropping) {this.cropping = true;}
+    this.doScale();
     if(this.showingChord)
     {
       this.showChord(this.intval);
-    } else {
-      this.doScale();
     }
 
   }
@@ -380,11 +388,10 @@ var neckModule = (function() {
       alert('Oops! You chose a lowest fret number that is higher than the upper fret number. Please reselect.');
     }
     if(!this.cropping) {this.cropping = true;}
+    this.doScale();
     if(this.showingChord)
     {
       this.showChord(this.intval);
-    } else {
-      this.doScale();
     }
   }
 
@@ -482,12 +489,42 @@ var neckModule = (function() {
         return scaleNotesDiv;
       }
 
-      // FRET RANGER
+      // FRET RANGE DISPLAY
       var buildFretRangeInfoDiv = function() {
         var infoDiv = '<div id="info"></div>';
 
         return infoDiv;
       }
+
+      // FRET RANGE SELECTORS
+      neck.buildFretRangeSelectors = function() {
+        var fretRangeSelectors = '<div id="fretselectors">Select lowest fret:';
+        fretRangeSelectors += ' <select id="lowfret">';
+        for ( var i=0; i<this.total_frets; i++ )
+        {
+          if(this.lowfret == i) { 
+            fretRangeSelectors += '   <option value="'+i+'" selected="selected">'+i+'</option>';
+          } else {
+            fretRangeSelectors += '   <option value="'+i+'">'+i+'</option>';
+          }
+        }
+        fretRangeSelectors += ' </select>';
+        fretRangeSelectors += 'Select highest fret: ';
+        fretRangeSelectors += ' <select id="highfret">'
+        for ( var i=1; i<=this.total_frets; i++ )
+        {
+          if(this.topfret == i) { 
+            fretRangeSelectors += '   <option value="'+i+'" selected="selected">'+i+'</option>';
+          } else {
+            fretRangeSelectors += '   <option value="'+i+'">'+i+'</option>';
+          }
+        }
+        fretRangeSelectors += ' </select>';
+        fretRangeSelectors += '</div>';
+
+        return fretRangeSelectors;
+      }
+
 
       // CHORD NAME
       var buildChordNameHeaderDiv = function() {
@@ -600,6 +637,7 @@ var neckModule = (function() {
         showTitle:                  true,
         showScaleNotes:             true,
         showFretRange:              true,
+        showFretRangeSelectors:     true,
         showResetLink:              true,
         showChordButtons:           true,
         showNotesPerChordSelector:  true,
@@ -657,6 +695,10 @@ var neckModule = (function() {
 
         if(params.showFretRange) {
           this.htmlPieces += buildFretRangeInfoDiv();
+        }
+
+        if(params.showFretRangeSelectors) {
+          this.htmlPieces += this.buildFretRangeSelectors();
         }
 
         if(params.showChordNameHeader) {
@@ -740,6 +782,15 @@ var neckModule = (function() {
       $('.reset-link').click(function(e){
         e.preventDefault();
         that.initLayout();
+      });
+    }
+
+    if(this.params.showFretRangeSelectors) {
+      container.find('#fretselectors #lowfret').change(function(){
+        that.setLowFret(this.value);
+      });
+      container.find('#fretselectors #highfret').change(function(){
+        that.setHighFret(this.value);
       });
     }
 

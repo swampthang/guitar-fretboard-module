@@ -41,6 +41,7 @@ containerSelectorType:      'id',              // string - options=> 'id', 'clas
 showTitle:                  true,              // boolean - options=> true, false
 showScaleNotes:             true,              // boolean - options=> true, false
 showFretRange:              true,              // boolean - options=> true, false
+showFretRangeSelectors:     true,              // boolean - options=> true, false
 showResetLink:              true,              // boolean - options=> true, false
 showChordButtons:           true,              // boolean - options=> true, false
 showNotesPerChordSelector:  true,              // boolean - options=> true, false

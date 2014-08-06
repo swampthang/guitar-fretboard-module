@@ -5,9 +5,9 @@
 	font-family: 'Archivo Narrow', sans-serif;
 	font-size: 13px;
  }
-.guitar-module-main-wrapper .top-wrapper { width: 600px; overflow: auto; }
- .guitar-module-main-wrapper .top-left { width: 50%; float: left; }
- .guitar-module-main-wrapper .top-right { width: 50%; float: right; position: relative; padding-top: 15px; }
+.guitar-module-main-wrapper .top-wrapper { width: 600px; position: relative; overflow: auto; }
+.guitar-module-main-wrapper .top-left { width: 50%; float: left; }
+.guitar-module-main-wrapper .top-right { width: 50%; float: right; position: relative; padding-top: 15px; }
 
 .guitar-module-main-wrapper h2.chord-name { font-size: 3.0em; margin: 20px 0 0; padding: 0; }
 .guitar-module-main-wrapper .logo { position: relative; top: 5px; right: 10px; z-index: 1000; }
@@ -41,7 +41,7 @@
 .guitar-module-main-wrapper #keyChordsSelector li a { color: #666666; font-weight: bold; text-decoration: none; }
 .guitar-module-main-wrapper #keyChordsSelector li a:hover { color: blue; text-decoration: underline; }
 
-.guitar-module-main-wrapper #fretselectors { position: relative; left: 264px; top: 160px; z-index: 505; }
+.guitar-module-main-wrapper #fretselectors { position: relative; }
 
 .guitar-module-main-wrapper #changeKey { font-family: 'Archivo Narrow', sans-serif; margin: 0 0 0 2%; }
 /* end selectors */
@@ -69,6 +69,8 @@
 	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#99ffffff, endColorstr=#99ffffff);
 	/* For IE 8*/
 	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#99ffffff, endColorstr=#99ffffff)";
+	border-radius: 50%;
+	behavior: url(PIE.htc);
 }
 
 /* STYLING TEMPLATES? */
@@ -98,7 +100,7 @@
 .guitar-module-main-wrapper .note.fret15 { left: 510px; }
 .guitar-module-main-wrapper .note.fret16 { left: 537px; }
 .guitar-module-main-wrapper .note.fret17 { left: 564px; }
-.guitar-module-main-wrapper .note.muted { opacity: .5; }
+.guitar-module-main-wrapper .note.muted { opacity: .4; }
 
 /* Buttons that show up below the fretboard for each chord in a key area. See note re styling templates above */
 .guitar-module-main-wrapper #chordButtons { margin: 1em 0; }
@@ -189,3 +191,7 @@
 .guitar-module-main-wrapper .pink { background: #FF00FF; }
 .guitar-module-main-wrapper .gray { background: #333333; color: #fff; }
 .guitar-module-main-wrapper .yellow { background: #FFFF00; }
+
+.guitar-module-main-wrapper div:empty, .guitar-module-main-wrapper h1:empty, .guitar-module-main-wrapper h2:empty, .guitar-module-main-wrapper h3:empty, .guitar-module-main-wrapper p {
+   display: none;
+}
