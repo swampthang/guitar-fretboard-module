@@ -6,7 +6,8 @@
 	<title>Neck module</title>
 	<!-- FONT -->
   <link href='http://fonts.googleapis.com/css?family=Archivo+Narrow:400,700' rel='stylesheet' type='text/css'>
-	<link rel="stylesheet" href="css/neckmodule.css">
+	<link rel="stylesheet" href="css/common.css">
+  <link rel="stylesheet" href="css/neckmodule.css">
 </head>
 <body>
 
@@ -18,17 +19,16 @@
 	<script src="js/neckmodule.js"></script>
   <script>
     var neck1 = Object.create(neckModule);
-    neck1.initLayout({rootNote: 'E', 'topfret': 19});
+    neck1.initLayout({rootNote: 'E'});
     var neck2 = Object.create(neckModule);
-    neck2.initLayout({myContainer: 'g-major', rootNote: 'F#', 'topfret': 19});
+    neck2.initLayout({myContainer: 'g-major', rootNote: 'F#'});
     var neck3 = Object.create(neckModule);
     neck3.initLayout({
       myContainer: 'a-minor',
       rootNote: 'A',
       showInitialChord: true,
       chordInterval: 2,
-      scalesArray: 'harmonicMinorScales',
-      'topfret': 19
+      scalesArray: 'harmonicMinorScales'
     });
   </script>
 
