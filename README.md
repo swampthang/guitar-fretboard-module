@@ -1,7 +1,7 @@
 Guitar Fretboard Module
 =======================
 
-A javascript module for creating multiple instances of interactive guitar fretboard diagrams showing scales and all chords in a given key.
+A javascript module for creating multiple instances of interactive guitar fretboard diagrams showing scales and all chords in a given key on any web page.
 EXAMPLES AND MORE INFO:
 http://hotfrets.com/guitar-neck-module/
 
@@ -9,8 +9,9 @@ Directions
 ==========
 
 File dependencies:
-- Requires jquery. Example here uses - https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js
+- Requires jquery. Examples use - https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js
 - stylesheet uses google webfont Archivo Narrow: 400 and 700. Refer to the sample file attached for implementation.
+- css/common.css
 - css/neckmodule.css
 - images/blankneck.jpg
 - js/neckmodule.js
@@ -20,15 +21,17 @@ Adding guitar fretboard modules to your web page
 After making sure you have added the above listed dependencies to your page, all that is required to display an interactive module on your page is one div and 2 lines of javascript/jquery.
 
 Place a div inside the body of your page like this:
-```<div id="neck-container"></div>```
+```
+<div id='neck-container'></div>
+```
 Place the following script somewhere on the page, preferably just before the closing body tag:
 ```
 var neck1 = Object.create(neckModule);
 neck1.initLayout();
 ```
-You can name the module anything you like. I just named it neck1.
+You can name the module anything you like. In the example above, it was arbitrarily named neck1.
 
-The above will result in a fretboard daigram showing the notes from the C major scale and provide buttons to click for displaying each chord in that key.
+The above will result in a fretboard diagram showing the notes from the C major scale and provide buttons to click for displaying each chord in that key.
 
 There are several parameters that can be set. Here are the params that can be sent to each instance of the fretboard module along with the default values.
 
@@ -91,5 +94,13 @@ neck3.initLayout({
 });
  ```
 The above will show the A harmonic minor scale but will initially select the 2nd note in that key which is Bdim.
+
+Alternate neck styles
+---------------------
+The stylesheet - common.css - is required for any of the available neck styles. In addition to the neckmodule.css style, there are 2 other guitar neck styles available both of which are 1200px wide displays. 
+The stylesheet - long-neck-g.css - will display a 'gibson-style' fretboard.
+The stylesheet - long-neck-f.css - will display a 'fender-style' fretboard, but instead of the 6th string on the bottom of the display, the 6th string is on the top as if you were watching someone else play in front of you.
+
+More styles are planned, including a vertical partial series-like display. Stay tuned :D
 
 [![Analytics](https://ga-beacon.appspot.com/UA-53439951-1/guitar-fretboard-module/readme)](https://github.com/igrigorik/ga-beacon)

@@ -13,7 +13,7 @@
   *   showNotesPerChordSelector:  true,              // boolean - options=> true, false
   *   showChordNameHeader:        true,              // boolean - options=> true, false
   *   showIntervalColorKey:       true,              // boolean - options=> true, false
-  *   topfret:                    20,                // int - options=> 1-17
+  *   topfret:                    17,                // int - options=> 1-17
   *   lowfret:                    0,                 // int - options: 0-16
   *   scalesArray:                'majorScales',     // string - options=> 'majorScales', 'naturalMinorScales', 'harmonicMinorScales'
   *   rootNote:                   'C',               // string - options=> 'C', 'C#', 'Db', 'D', 'Eb', 'E', 'F', 'F#', 'Gb', 'G', 'Ab', 'A', 'Bb', 'B'
