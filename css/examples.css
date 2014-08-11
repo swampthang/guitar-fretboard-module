@@ -22,6 +22,6 @@ h1 { font-size: 3.0em; }
 h2 { font-size: 1.75em; }
 h3 { font-size: 1.5em; text-decoration: underline; font-weight: normal; }
 
-.main-wrapper { max-width: 1024px; padding: 15px; border: 1px solid #ccc; background: url('../images/logo.png') right top no-repeat #fafafa; border-radius: 5px; margin: 15px auto 0; }
+.main-wrapper { max-width: 1300px; padding: 15px; border: 1px solid #ccc; background: url('../images/logo.png') right top no-repeat #fafafa; border-radius: 5px; margin: 15px auto 0; }
 
-.neck-module-wrappper { background-color: #fff; padding: 0 15px 15px; border: 1px solid #333; border-radius: 5px; max-width: 640px; margin: 5px; }
+.neck-module-wrappper { background-color: #fff; padding: 0 15px 15px; border: 1px solid #333; border-radius: 5px; max-width: 1280px; margin: 5px; }

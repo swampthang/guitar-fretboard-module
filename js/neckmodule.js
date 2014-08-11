@@ -7,12 +7,13 @@
   *   showScaleNotes:             true,              // boolean - options=> true, false
   *   showFretRange:              true,              // boolean - options=> true, false
   *   showFretRangeSelectors:     true,              // boolean - options=> true, false
+  *   showKeySelectors:           true,              // boolean - options=> true, false
   *   showResetLink:              true,              // boolean - options=> true, false
   *   showChordButtons:           true,              // boolean - options=> true, false
   *   showNotesPerChordSelector:  true,              // boolean - options=> true, false
   *   showChordNameHeader:        true,              // boolean - options=> true, false
   *   showIntervalColorKey:       true,              // boolean - options=> true, false
-  *   topfret:                    17,                // int - options=> 1-17
+  *   topfret:                    20,                // int - options=> 1-17
   *   lowfret:                    0,                 // int - options: 0-16
   *   scalesArray:                'majorScales',     // string - options=> 'majorScales', 'naturalMinorScales', 'harmonicMinorScales'
   *   rootNote:                   'C',               // string - options=> 'C', 'C#', 'Db', 'D', 'Eb', 'E', 'F', 'F#', 'Gb', 'G', 'Ab', 'A', 'Bb', 'B'
@@ -30,7 +31,7 @@ var neckModule = (function() {
     containerSelectorType:  'id',
     params:                 {},
     htmlPieces:             '',
-    total_frets:            17,
+    total_frets:            20,
     majorScales:            new Array(),
     naturalMinorScales:     new Array(),
     harmonicMinorScales:    new Array(),
@@ -48,7 +49,7 @@ var neckModule = (function() {
     notesPerChord:          3,
     s:                      1,
     f:                      0,
-    topfret:                17,
+    topfret:                20,
     lowfret:                0,
     pair:                   false,
     pairArr:                new Array(),
@@ -206,20 +207,51 @@ var neckModule = (function() {
   neck.changeScale = function(rootNote)
   {
 
+    var wasShowing = (this.showingChord) ? true : false;
     this.showingChord = false;
+    var select = this.myContainer.find('#minorScaleSelector');
+    select.val($('option:first', select).val());
+    select = this.myContainer.find('#harMinorScaleSelector');
+    select.val($('option:first', select).val());
     this.currentKey = rootNote;
-    this.currentScale = this[this.params.scalesArray][this.params.rootNote];
+    this.currentScale = this[this.params.scalesArray][rootNote];
     this.currentChordsArr = this.chordsArr;
     this.myContainer.find('#main_title').html('Key of '+this.currentKey);
 
     this.doScale();
 
+    if(wasShowing) {
+      this.isolateChord(this.intval);
+    }
+
   }
+
+/*
+function changeScale(rootNote)
+{
+    showingChord = false;
+    var select = $j('#minorScaleSelector');
+    select.val($j('option:first', select).val());
+    select = $j('#harMinorScaleSelector');
+    select.val($j('option:first', select).val());
+    currentKey = rootNote;
+    currentScale = majorScales[rootNote];
+    currentChordsArr = chordsArr;
+    $j('#main_title').html('Current key: '+currentKey);
+    $j('#title').html(currentKey);
+    doScale();
+}
+*/
 
   neck.changeNatMinorScale = function(rootNote)
   {
 
+    var wasShowing = (this.showingChord) ? true : false;
     this.showingChord = false;
+    var select = this.myContainer.find('#scaleSelector');
+    select.val($('option:first', select).val());
+    select = this.myContainer.find('#harMinorScaleSelector');
+    select.val($('option:first', select).val());
     this.currentKey = rootNote;
     this.currentScale = this.naturalMinorScales[rootNote];
     this.currentChordsArr = this.naturalMinorChordsArr;
@@ -227,11 +259,30 @@ var neckModule = (function() {
 
     this.doScale();
 
-  }
+    if(wasShowing) {
+      this.isolateChord(this.intval);
+    }
 
+  }
+/*
+function changeNatMinorScale(rootNote)
+{
+    var select = $j('#scaleSelector');
+    select.val($j('option:first', select).val());
+    select = $j('#harMinorScaleSelector');
+    select.val($j('option:first', select).val());
+    currentKey = rootNote;
+    currentScale = naturalMinorScales[rootNote];
+    currentChordsArr = naturalMinorChordsArr;
+    $j('#main_title').html('Current key: '+currentKey + ' natural minor');
+    $j('#title').html(currentKey);
+    doScale();
+}
+*/
   neck.changeHarmMinorScale = function(rootNote)
   {
 
+    var wasShowing = (this.showingChord) ? true : false;
     this.showingChord = false;
     this.currentKey = rootNote;
     this.currentScale = this.harmonicMinorScales[rootNote];
@@ -240,13 +291,33 @@ var neckModule = (function() {
   
     this.doScale();
 
+    if(wasShowing) {
+      this.isolateChord(this.intval);
+    }
+
   }
+
+/*
+function changeHarmMinorScale(rootNote)
+{
+    var select = $j('#scaleSelector');
+    select.val($j('option:first', select).val());
+    select = $j('#minorScaleSelector');
+    select.val($j('option:first', select).val());
+    currentKey = rootNote;
+    currentScale = harmonicMinorScales[rootNote];
+    currentChordsArr = harmonicMinorChordsArr;
+    $j('#main_title').html('Current key: '+currentKey + ' harmonic minor');
+    $j('#title').html(currentKey);
+    doScale();
+}
+*/
 
   neck.doScale = function()
   {
 
     this.myContainer.find('#chord_instructions').show();
-    this.myContainer.find('.note').removeClass('red blue green pink gray yellow');
+    this.myContainer.find('.note').removeClass('int-3 int-5 int-7 int-11 int-1 int-9');
     this.myContainer.find('.note').hide();
     this.hide_chord_divs();
     this.build_chord_buttons();
@@ -270,17 +341,25 @@ var neckModule = (function() {
     }
   }
 
+  neck.resetToScale = function() {
+    $('.note').removeClass('muted');
+    this.showingChord = false;
+    $('.chord-name').html('');
+    $('.chordButton').removeClass('active');
+    this.doScale();
+  }
+
   neck.showChord = function(interval)
   {
     this.showingChord = true;
     this.myContainer.find('#chord_instructions').hide();
-    this.myContainer.find('.note').removeClass('red blue green pink gray yellow');
+    this.myContainer.find('.note').removeClass('int-3 int-5 int-7 int-11 int-1 int-9');
     this.currentInterval = interval;
     var noteSelectArr = this.currentChordsArr[interval];
     var chordType = "";
     this.show_chord_divs();
     // hide all note divs
-    this.myContainer.find('.note').removeClass('red blue green');
+    this.myContainer.find('.note').removeClass('int-3 int-5 int-7');
     // this.myContainer.find('.note').hide();
     this.myContainer.find('.note').addClass('muted'); // set transparency rather than hiding the other scale notes
     
@@ -311,23 +390,23 @@ var neckModule = (function() {
       {
         case 0:
         var chordRoot = theNote;
-        this.myContainer.find(".note[notename='"+theNote+"']").addClass('gray').removeClass('muted').show();
+        this.myContainer.find(".note[notename='"+theNote+"']").addClass('int-1').removeClass('muted').show();
         break;
 
         case 1:
-        this.myContainer.find(".note[notename='"+theNote+"']").addClass('red').removeClass('muted').show();
+        this.myContainer.find(".note[notename='"+theNote+"']").addClass('int-3').removeClass('muted').show();
         break;
 
         case 2:
-        this.myContainer.find(".note[notename='"+theNote+"']").addClass('blue').removeClass('muted').show();
+        this.myContainer.find(".note[notename='"+theNote+"']").addClass('int-5').removeClass('muted').show();
         break;
 
         case 3:
-        this.myContainer.find(".note[notename='"+theNote+"']").addClass('green').removeClass('muted').show();
+        this.myContainer.find(".note[notename='"+theNote+"']").addClass('int-7').removeClass('muted').show();
         break;
 
         case 4:
-        this.myContainer.find(".note[notename='"+theNote+"']").addClass('yellow').removeClass('muted').show();
+        this.myContainer.find(".note[notename='"+theNote+"']").addClass('int-9').removeClass('muted').show();
         break;
       }
 
@@ -498,7 +577,8 @@ var neckModule = (function() {
 
       // FRET RANGE SELECTORS
       neck.buildFretRangeSelectors = function() {
-        var fretRangeSelectors = '<div id="fretselectors">Select lowest fret:';
+
+        var fretRangeSelectors = '<div id="fretselectors">Set lowest fret:';
         fretRangeSelectors += ' <select id="lowfret">';
         for ( var i=0; i<this.total_frets; i++ )
         {
@@ -509,7 +589,7 @@ var neckModule = (function() {
           }
         }
         fretRangeSelectors += ' </select>';
-        fretRangeSelectors += 'Select highest fret: ';
+        fretRangeSelectors += 'Set highest fret: ';
         fretRangeSelectors += ' <select id="highfret">'
         for ( var i=1; i<=this.total_frets; i++ )
         {
@@ -523,6 +603,39 @@ var neckModule = (function() {
         fretRangeSelectors += '</div>';
 
         return fretRangeSelectors;
+      }
+
+      // KEY SELECTORS
+      neck.buildKeySelectors = function() {
+        var keySelectors = '<div id="changeKey">Select key: ';
+        keySelectors += ' <select id="scaleSelector">';
+        keySelectors += '   <option value="">Major...</option>';
+        for (var key in this.majorScales) {
+          if (key === 'length' || !this.majorScales.hasOwnProperty(key)) continue;
+          keySelectors += '<option value="'+key+'">'+key+' major</option>';
+        }
+        keySelectors += ' </select>';
+
+        keySelectors += ' <select id="minorScaleSelector">';
+        keySelectors += '   <option value="">Natural minor...</option>';
+        for (var key in this.naturalMinorScales) {
+          if (key === 'length' || !this.naturalMinorScales.hasOwnProperty(key)) continue;
+          keySelectors += '<option value="'+key+'">'+key+' minor</option>';
+        }
+        keySelectors += ' </select>';
+
+        keySelectors += ' <select id="harMinorScaleSelector">';
+        keySelectors += '   <option value="">Harmonic minor...</option>';
+        for (var key in this.harmonicMinorScales) {
+          if (key === 'length' || !this.harmonicMinorScales.hasOwnProperty(key)) continue;
+          keySelectors += '<option value="'+key+'">'+key+' harmonic minor</option>';
+        }
+        keySelectors += ' </select>';
+
+        keySelectors += ' <a class="refresh-scale-link" href="#">Scale only</a>';
+        keySelectors += '</div>';
+
+        return keySelectors;
       }
 
 
@@ -559,19 +672,19 @@ var neckModule = (function() {
         colorKeyDiv += '    <table id="color-key">';
         colorKeyDiv += '      <tr>';
         colorKeyDiv += '        <td>';
-        colorKeyDiv += '          <div class="gray">1</div>';
+        colorKeyDiv += '          <div class="int-1">1</div>';
         colorKeyDiv += '        </td>';
         colorKeyDiv += '        <td>';
-        colorKeyDiv += '          <div class="red">3</div>';
+        colorKeyDiv += '          <div class="int-3">3</div>';
         colorKeyDiv += '        </td>';
         colorKeyDiv += '        <td>';
-        colorKeyDiv += '          <div class="blue">5</div>';
+        colorKeyDiv += '          <div class="int-5">5</div>';
         colorKeyDiv += '        </td>';
         colorKeyDiv += '        <td>';
-        colorKeyDiv += '          <div class="green">7</div>';
+        colorKeyDiv += '          <div class="int-7">7</div>';
         colorKeyDiv += '        </td>';
         colorKeyDiv += '        <td>';
-        colorKeyDiv += '          <div class="yellow">9</div>';
+        colorKeyDiv += '          <div class="int-9">9</div>';
         colorKeyDiv += '        </td>';
         colorKeyDiv += '      </tr>';
         colorKeyDiv += '    </table>';
@@ -638,6 +751,7 @@ var neckModule = (function() {
         showScaleNotes:             true,
         showFretRange:              true,
         showFretRangeSelectors:     true,
+        showKeySelectors:           true,
         showResetLink:              true,
         showChordButtons:           true,
         showNotesPerChordSelector:  true,
@@ -683,6 +797,10 @@ var neckModule = (function() {
       this.htmlPieces += buildMaintitleDiv();
     }
 
+    if(params.showKeySelectors) {
+      this.htmlPieces += this.buildKeySelectors();
+    }
+
     // TOP
     this.htmlPieces += openTopDiv();
 
@@ -707,6 +825,7 @@ var neckModule = (function() {
       // close topLeftDiv
       this.htmlPieces += closeDiv();
 
+      // TOP RIGHT
       this.htmlPieces += openTopRighttDiv();
 
         if(params.showNotesPerChordSelector) {
@@ -782,6 +901,31 @@ var neckModule = (function() {
       $('.reset-link').click(function(e){
         e.preventDefault();
         that.initLayout();
+      });
+    }
+
+    /*
+<div id="changeKey">Select key: 
+<select id="scaleSelector" onchange="changeScale(this.value)">
+<select id="minorScaleSelector" onchange="changeNatMinorScale(this.value)">
+<select id="harMinorScaleSelector" onchange="changeHarmMinorScale(this.value)">
+&nbsp;<a class="refresh-scale-link" href="javascript:doScale();">Refresh</a>
+</div>
+*/
+
+    if(this.params.showKeySelectors) {
+      container.find('#changeKey #scaleSelector').change(function(){
+        that.changeScale(this.value);
+      });
+      container.find('#changeKey #minorScaleSelector').change(function(){
+        that.changeNatMinorScale(this.value);
+      });
+      container.find('#changeKey #harMinorScaleSelector').change(function(){
+        that.changeHarmMinorScale(this.value);
+      });
+      container.find('.refresh-scale-link').click(function(e){
+        e.preventDefault();
+        that.resetToScale();
       });
     }
 

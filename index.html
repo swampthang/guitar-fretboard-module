@@ -18,16 +18,17 @@
 	<script src="js/neckmodule.js"></script>
   <script>
     var neck1 = Object.create(neckModule);
-    neck1.initLayout({rootNote: 'E'});
+    neck1.initLayout({rootNote: 'E', 'topfret': 19});
     var neck2 = Object.create(neckModule);
-    neck2.initLayout({myContainer: 'g-major', rootNote: 'F#'});
+    neck2.initLayout({myContainer: 'g-major', rootNote: 'F#', 'topfret': 19});
     var neck3 = Object.create(neckModule);
     neck3.initLayout({
       myContainer: 'a-minor',
       rootNote: 'A',
       showInitialChord: true,
       chordInterval: 2,
-      scalesArray: 'harmonicMinorScales'
+      scalesArray: 'harmonicMinorScales',
+      'topfret': 19
     });
   </script>
 
