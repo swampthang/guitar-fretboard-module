@@ -35,7 +35,7 @@ var neckModule = (function() {
     wrapper:                {},
     params:                 {},
     htmlPieces:             '',
-    total_frets:            20,
+    totalFrets:            20,
     majorScales:            new Array(),
     naturalMinorScales:     new Array(),
     harmonicMinorScales:    new Array(),
@@ -67,6 +67,7 @@ var neckModule = (function() {
     currentInterval:        "",
     notesOfKey:             "",
     toggleStringVisibility: true,
+    replaceInitSnippet:     false,
     strings: {
       1:  new Array('E','E#,F','F#,Gb','G','G#,Ab','A','A#,Bb','B,Cb','B#,C','C#,Db','D','D#,Eb','E,Fb','E#,F','F#,Gb','G','G#,Ab','A','A#,Bb','B,Cb','B#,C','C#,Db'),
       2:  new Array('B,Cb','B#,C','C#,Db','D','D#,Eb','E,Fb','F','F#,Gb','G','G#,Ab','A','A#,Bb','B,Cb','B#,C','C#','D','D#','E,Fb','E#,F','F#,Gb','G','G#,Ab'),
@@ -408,7 +409,7 @@ var neckModule = (function() {
       this.wrapper.find(".note.fret"+f).hide();
     }
 
-    for ( var f=(parseInt(this.topfret)+1); f<=this.total_frets; f++ )
+    for ( var f=(parseInt(this.topfret)+1); f<=this.totalFrets; f++ )
     {
       this.wrapper.find(".note.fret"+f).hide();
     }
@@ -430,7 +431,7 @@ var neckModule = (function() {
     {
 
       this.topfret = parseInt(top);
-      this.updateMetaDivs("topfret",topfret);
+      this.updateMetaDivs("topfret",this.topfret);
 
     } else {
       alert('Oops! You chose a highest fret number that is lower than the lower fret number. Please reselect.');
@@ -449,9 +450,9 @@ var neckModule = (function() {
   {
     if(parseInt(bottom) < parseInt(this.topfret))
     {
-
+      console.log(bottom);
       this.lowfret = parseInt(bottom);
-      this.updateMetaDivs("lowfret",lowfret);
+      this.updateMetaDivs("lowfret",this.lowfret);
 
     } else {
       alert('Oops! You chose a lowest fret number that is higher than the upper fret number. Please reselect.');
@@ -482,7 +483,7 @@ var neckModule = (function() {
     var note;
     for(var s=1; s<=6; s++)
     {
-        for (var f=0; f<=this.total_frets; f++)
+        for (var f=0; f<=this.totalFrets; f++)
         {
 
             note = this.strings[s][f];
@@ -544,7 +545,7 @@ var neckModule = (function() {
 
     var fretRangeSelectors = '<div id="fretselectors">Set lowest fret:';
     fretRangeSelectors += ' <select id="lowfret">';
-    for ( var i=0; i<this.total_frets; i++ )
+    for ( var i=0; i<this.totalFrets; i++ )
     {
       if(this.lowfret == i) { 
         fretRangeSelectors += '   <option value="'+i+'" selected="selected">'+i+'</option>';
@@ -555,7 +556,7 @@ var neckModule = (function() {
     fretRangeSelectors += ' </select>';
     fretRangeSelectors += 'Set highest fret: ';
     fretRangeSelectors += ' <select id="highfret">'
-    for ( var i=1; i<=this.total_frets; i++ )
+    for ( var i=1; i<=this.totalFrets; i++ )
     {
       if(this.topfret == i) { 
         fretRangeSelectors += '   <option value="'+i+'" selected="selected">'+i+'</option>';
@@ -603,8 +604,8 @@ var neckModule = (function() {
   }
 
   neck.updateMetaDivs = function(tagID, val) {
-    if(this.wrapper.find("#"+tagID).length) {
-      this.wrapper.find("#"+tagID).attr('data-content',val);
+    if(this.wrapper.find(".meta#"+tagID).length) {
+      this.wrapper.find(".meta#"+tagID).attr('data-content',val);
     } else {
       this.wrapper.append("<div class='meta' id='"+tagID+"' data-content='"+val+"'>");
     }
@@ -647,6 +648,7 @@ var neckModule = (function() {
         showNotesPerChordSelector:  true,
         showChordNameHeader:        true,
         showIntervalColorKey:       true,
+        totalFrets:                 20,
         topfret:                    17,
         lowfret:                    0,
         scalesArray:                'majorScales',
@@ -654,7 +656,8 @@ var neckModule = (function() {
         showInitialChord:           false,
         chordInterval:              0,
         notesPerChord:              3,
-        toggleStringVisibility:     true
+        toggleStringVisibility:     true,
+        replaceInitScript:          false
       };
 
       if(arguments !== undefined) {
@@ -675,11 +678,13 @@ var neckModule = (function() {
     } else if(params.containerSelectorType == 'class') {
       this.myContainer = $('.'+params.myContainer);
     }
-
+    this.totalFrets = params.totalFrets;
     this.topfret = params.topfret;
     this.lowfret = params.lowfret;
     this.currentScale = this[params.scalesArray][params.rootNote];
     this.currentKey = params.rootNote;
+    this.currentChordsArr = this.chordsArr;
+    this.wrapper = this.myContainer.find('.guitar-module-main-wrapper');
 
   }
 
@@ -781,10 +786,8 @@ var neckModule = (function() {
     if(metaData !== null) {
       this.htmlPieces += metaData;
     }
-    var el = this.myContainer;
-    el.html(this.htmlPieces);
 
-    this.initActions();
+    // this.initActions();
 
     if(params.showInitialChord) {
       this.notesPerChord = params.notesPerChord;
@@ -796,14 +799,22 @@ var neckModule = (function() {
     // close mainModuleWrapper
     this.htmlPieces += closeDiv();
 
+    var el = this.myContainer;
+    el.html(this.htmlPieces);
+
     return this.htmlPieces;
 
+  }
+
+  neck.replaceModuleInitScript = function() {
+    var snippet = "<div>\n  <script>\n function buildModule() { \n      var scripts = document.getElementsByTagName('script');\n      var this_script = scripts[scripts.length-1];\n      var container = idMaganager.processScriptInstance(this_script);\n      $(function(){\n        idMaganager.setId(container);\n        console.log(container.id);\n        var neckID = container.id;\n        necks[neckID] = Object.create(neckModule);\n        necks[neckID].initParams({myContainer: neckID});\n        necks[neckID].initLayout();\n      var replacer = setTimeout(necks[neckID].replaceModuleInitScript, 1000);\n    });\n    } \n  </script>\n</div>";
+    $('#divSnippets').find('.js-module').html(snippet);
+    return snippet;
   }
 
   neck.initActions = function() {
 
     var container = this.myContainer;
-    // console.log(this.myContainer.attr('id'));
     wrapper = this.wrapper = container.find('.guitar-module-main-wrapper');
     var that = this;
     this.stringDivs = this.buildNoteGrid();
@@ -885,6 +896,7 @@ var neckModule = (function() {
 
     }
 
+    this.updateMetaDivs('scalesArray',this.params.scalesArray);
     this.updateMetaDivs('myContainer', this.myContainer.attr('id'));
 
   }

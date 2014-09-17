@@ -88,6 +88,9 @@ $(function(){
 
       necks[containerID].initLayout();
 
+      necks[containerID].initActions();
+
     }
   });
 });
+
