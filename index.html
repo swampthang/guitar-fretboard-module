@@ -8,6 +8,8 @@
   <link href='http://fonts.googleapis.com/css?family=Archivo+Narrow:400,700' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" href="css/common.css">
   <link rel="stylesheet" href="css/neckmodule.css">
+  <link rel="stylesheet" href="css/long-neck-g.css">
+  <link rel="stylesheet" href="css/long-neck-f.css">
   <script src="http://code.jquery.com/jquery-1.9.0.js"></script>
   <script src="js/neckmodule.js"></script>
   <script src="js/id.manager.js"></script>
@@ -31,7 +33,7 @@
       console.log(container.id);
       var neckID = container.id;
       necks[neckID] = Object.create(neckModule);
-      necks[neckID].initParams({myContainer: neckID, replaceInitScript: true, totalFrets: 17});
+      necks[neckID].initParams({myContainer: neckID, replaceInitScript: true, totalFrets: 19, neckStyleClass: 'long-neck-f'});
       necks[neckID].initLayout();
       necks[neckID].initActions();
     })();
@@ -55,6 +57,7 @@
         showNotesPerChordSelector:  true,
         showChordNameHeader:        true,
         showIntervalColorKey:       true,
+        totalFrets:                 20,
         topfret:                    17,
         lowfret:                    0,
         scalesArray:                'majorScales',
@@ -62,7 +65,9 @@
         showInitialChord:           false,
         chordInterval:              0,
         notesPerChord:              3,
-        toggleStringVisibility:     true
+        toggleStringVisibility:     true,
+        neckStyleClass:             "",
+        replaceInitScript:          false
       };
     */
   </script>

@@ -1,20 +1,20 @@
 ﻿@charset "utf-8";
 /* CSS Document */
-.guitar-module-main-wrapper { margin: 0; padding-top: 5px; }
-.guitar-module-main-wrapper, .guitar-module-main-wrapper #main_title, .guitar-module-main-wrapper h2, .guitar-module-main-wrapper p { 
+.long-neck-f .guitar-module-main-wrapper { margin: 0; padding-top: 5px; }
+.long-neck-f .guitar-module-main-wrapper, .long-neck-f .guitar-module-main-wrapper #main_title, .long-neck-f .guitar-module-main-wrapper h2, .long-neck-f .guitar-module-main-wrapper p { 
 	font-family: 'Archivo Narrow', sans-serif;
 	font-size: 13px;
 }
 /* MAIN MODULE BG */
-.guitar-module-main-wrapper .neckmodule { position: relative; background: url('../images/f-neck.png') no-repeat -110px -35px; width: 1200px; height: 240px; margin: 0; }
-.guitar-module-main-wrapper .top-wrapper { width: 1200px; position: relative; overflow: auto; }
+.long-neck-f .guitar-module-main-wrapper .neckmodule { position: relative; background: url('../images/f-neck.png') no-repeat -110px -35px; width: 1200px; height: 240px; margin: 0; }
+.long-neck-f .guitar-module-main-wrapper .top-wrapper { width: 1200px; position: relative; overflow: auto; }
 
-.guitar-module-main-wrapper .string1, 
-.guitar-module-main-wrapper .string2, 
-.guitar-module-main-wrapper .string3, 
-.guitar-module-main-wrapper .string4, 
-.guitar-module-main-wrapper .string5, 
-.guitar-module-main-wrapper .string6 { 
+.long-neck-f .guitar-module-main-wrapper .string1, 
+.long-neck-f .guitar-module-main-wrapper .string2, 
+.long-neck-f .guitar-module-main-wrapper .string3, 
+.long-neck-f .guitar-module-main-wrapper .string4, 
+.long-neck-f .guitar-module-main-wrapper .string5, 
+.long-neck-f .guitar-module-main-wrapper .string6 { 
   font-family: 'Archivo Narrow', sans-serif; 
   font-weight: bold;
   color: black;
@@ -38,167 +38,167 @@
 
 /* STYLING TEMPLATES? */
 /* positioner styles for note-grid, Adding more fretboard background images/design-templates will force these settings into separate stylesheets */
-.guitar-module-main-wrapper .note.string6 { top: 39px; }
-.guitar-module-main-wrapper .note.string5 { top: 62px; }
-.guitar-module-main-wrapper .note.string4 { top: 84px; }
-.guitar-module-main-wrapper .note.string3 { top: 106px; }
-.guitar-module-main-wrapper .note.string2 { top: 128px; }
-.guitar-module-main-wrapper .note.string1 { top: 151px; }
+.long-neck-f .guitar-module-main-wrapper .note.string6 { top: 39px; }
+.long-neck-f .guitar-module-main-wrapper .note.string5 { top: 62px; }
+.long-neck-f .guitar-module-main-wrapper .note.string4 { top: 84px; }
+.long-neck-f .guitar-module-main-wrapper .note.string3 { top: 106px; }
+.long-neck-f .guitar-module-main-wrapper .note.string2 { top: 128px; }
+.long-neck-f .guitar-module-main-wrapper .note.string1 { top: 151px; }
 
-.guitar-module-main-wrapper .note.fret20 { left: -10px; }
-.guitar-module-main-wrapper .note.fret19 { left: 13px; }
-.guitar-module-main-wrapper .note.fret18 { left: 49px; }
-.guitar-module-main-wrapper .note.fret17 { left: 87px; }
-.guitar-module-main-wrapper .note.fret16 { left: 125px; }
-.guitar-module-main-wrapper .note.fret15 { left: 168px; }
-.guitar-module-main-wrapper .note.fret14 { left: 213px; }
-.guitar-module-main-wrapper .note.fret13 { left: 260px; }
-.guitar-module-main-wrapper .note.fret12 { left: 310px; }
-.guitar-module-main-wrapper .note.fret11 { left: 362px; }
-.guitar-module-main-wrapper .note.fret10 { left: 413px; }
-.guitar-module-main-wrapper .note.fret9 { left: 471px; }
-.guitar-module-main-wrapper .note.fret8 { left: 531px; }
-.guitar-module-main-wrapper .note.fret7 { left: 595px; }
-.guitar-module-main-wrapper .note.fret6 { left: 662px; }
-.guitar-module-main-wrapper .note.fret5 { left: 733px; }
-.guitar-module-main-wrapper .note.fret4 { left: 807px; }
-.guitar-module-main-wrapper .note.fret3 { left: 884px; }
-.guitar-module-main-wrapper .note.fret2 { left: 967px; }
-.guitar-module-main-wrapper .note.fret1 { left: 1052px; }
-.guitar-module-main-wrapper .note.fret0 { left: 1125px; }
-.guitar-module-main-wrapper .note.muted { opacity: .3; }
+.long-neck-f .guitar-module-main-wrapper .note.fret20 { left: -10px; }
+.long-neck-f .guitar-module-main-wrapper .note.fret19 { left: 13px; }
+.long-neck-f .guitar-module-main-wrapper .note.fret18 { left: 49px; }
+.long-neck-f .guitar-module-main-wrapper .note.fret17 { left: 87px; }
+.long-neck-f .guitar-module-main-wrapper .note.fret16 { left: 125px; }
+.long-neck-f .guitar-module-main-wrapper .note.fret15 { left: 168px; }
+.long-neck-f .guitar-module-main-wrapper .note.fret14 { left: 213px; }
+.long-neck-f .guitar-module-main-wrapper .note.fret13 { left: 260px; }
+.long-neck-f .guitar-module-main-wrapper .note.fret12 { left: 310px; }
+.long-neck-f .guitar-module-main-wrapper .note.fret11 { left: 362px; }
+.long-neck-f .guitar-module-main-wrapper .note.fret10 { left: 413px; }
+.long-neck-f .guitar-module-main-wrapper .note.fret9 { left: 471px; }
+.long-neck-f .guitar-module-main-wrapper .note.fret8 { left: 531px; }
+.long-neck-f .guitar-module-main-wrapper .note.fret7 { left: 595px; }
+.long-neck-f .guitar-module-main-wrapper .note.fret6 { left: 662px; }
+.long-neck-f .guitar-module-main-wrapper .note.fret5 { left: 733px; }
+.long-neck-f .guitar-module-main-wrapper .note.fret4 { left: 807px; }
+.long-neck-f .guitar-module-main-wrapper .note.fret3 { left: 884px; }
+.long-neck-f .guitar-module-main-wrapper .note.fret2 { left: 967px; }
+.long-neck-f .guitar-module-main-wrapper .note.fret1 { left: 1052px; }
+.long-neck-f .guitar-module-main-wrapper .note.fret0 { left: 1125px; }
+.long-neck-f .guitar-module-main-wrapper .note.muted { opacity: .3; }
 
 /* extra styles for widening neck graphic */
-.guitar-module-main-wrapper .note.fret20.string6 { top: 26px; }
-.guitar-module-main-wrapper .note.fret20.string5 { top: 52px; }
-.guitar-module-main-wrapper .note.fret20.string4 { top: 78px; }
-.guitar-module-main-wrapper .note.fret20.string3 { top: 104px; }
-.guitar-module-main-wrapper .note.fret20.string2 { top: 132px; }
-.guitar-module-main-wrapper .note.fret20.string1 { top: 156px; }
+.long-neck-f .guitar-module-main-wrapper .note.fret20.string6 { top: 26px; }
+.long-neck-f .guitar-module-main-wrapper .note.fret20.string5 { top: 52px; }
+.long-neck-f .guitar-module-main-wrapper .note.fret20.string4 { top: 78px; }
+.long-neck-f .guitar-module-main-wrapper .note.fret20.string3 { top: 104px; }
+.long-neck-f .guitar-module-main-wrapper .note.fret20.string2 { top: 132px; }
+.long-neck-f .guitar-module-main-wrapper .note.fret20.string1 { top: 156px; }
 
-.guitar-module-main-wrapper .note.fret19.string6 { top: 35px; }
-.guitar-module-main-wrapper .note.fret19.string5 { top: 64px; }
-.guitar-module-main-wrapper .note.fret19.string4 { top: 93px; }
-.guitar-module-main-wrapper .note.fret19.string3 { top: 120px; }
-.guitar-module-main-wrapper .note.fret19.string2 { top: 149px; }
-.guitar-module-main-wrapper .note.fret19.string1 { top: 178px; }
+.long-neck-f .guitar-module-main-wrapper .note.fret19.string6 { top: 35px; }
+.long-neck-f .guitar-module-main-wrapper .note.fret19.string5 { top: 64px; }
+.long-neck-f .guitar-module-main-wrapper .note.fret19.string4 { top: 93px; }
+.long-neck-f .guitar-module-main-wrapper .note.fret19.string3 { top: 120px; }
+.long-neck-f .guitar-module-main-wrapper .note.fret19.string2 { top: 149px; }
+.long-neck-f .guitar-module-main-wrapper .note.fret19.string1 { top: 178px; }
 
-.guitar-module-main-wrapper .note.fret18.string6 { top: 35px; }
-.guitar-module-main-wrapper .note.fret18.string5 { top: 64px; }
-.guitar-module-main-wrapper .note.fret18.string4 { top: 93px; }
-.guitar-module-main-wrapper .note.fret18.string3 { top: 120px; }
-.guitar-module-main-wrapper .note.fret18.string2 { top: 149px; }
-.guitar-module-main-wrapper .note.fret18.string1 { top: 178px; }
+.long-neck-f .guitar-module-main-wrapper .note.fret18.string6 { top: 35px; }
+.long-neck-f .guitar-module-main-wrapper .note.fret18.string5 { top: 64px; }
+.long-neck-f .guitar-module-main-wrapper .note.fret18.string4 { top: 93px; }
+.long-neck-f .guitar-module-main-wrapper .note.fret18.string3 { top: 120px; }
+.long-neck-f .guitar-module-main-wrapper .note.fret18.string2 { top: 149px; }
+.long-neck-f .guitar-module-main-wrapper .note.fret18.string1 { top: 178px; }
 
-.guitar-module-main-wrapper .note.fret17.string6 { top: 35px; }
-.guitar-module-main-wrapper .note.fret17.string5 { top: 64px; }
-.guitar-module-main-wrapper .note.fret17.string4 { top: 92px; }
-.guitar-module-main-wrapper .note.fret17.string3 { top: 119px; }
-.guitar-module-main-wrapper .note.fret17.string2 { top: 148px; }
-.guitar-module-main-wrapper .note.fret17.string1 { top: 177px; }
+.long-neck-f .guitar-module-main-wrapper .note.fret17.string6 { top: 35px; }
+.long-neck-f .guitar-module-main-wrapper .note.fret17.string5 { top: 64px; }
+.long-neck-f .guitar-module-main-wrapper .note.fret17.string4 { top: 92px; }
+.long-neck-f .guitar-module-main-wrapper .note.fret17.string3 { top: 119px; }
+.long-neck-f .guitar-module-main-wrapper .note.fret17.string2 { top: 148px; }
+.long-neck-f .guitar-module-main-wrapper .note.fret17.string1 { top: 177px; }
 
-.guitar-module-main-wrapper .note.fret16.string6 { top: 36px; }
-.guitar-module-main-wrapper .note.fret16.string5 { top: 64px; }
-.guitar-module-main-wrapper .note.fret16.string4 { top: 92px; }
-.guitar-module-main-wrapper .note.fret16.string3 { top: 119px; }
-.guitar-module-main-wrapper .note.fret16.string2 { top: 148px; }
-.guitar-module-main-wrapper .note.fret16.string1 { top: 176px; }
+.long-neck-f .guitar-module-main-wrapper .note.fret16.string6 { top: 36px; }
+.long-neck-f .guitar-module-main-wrapper .note.fret16.string5 { top: 64px; }
+.long-neck-f .guitar-module-main-wrapper .note.fret16.string4 { top: 92px; }
+.long-neck-f .guitar-module-main-wrapper .note.fret16.string3 { top: 119px; }
+.long-neck-f .guitar-module-main-wrapper .note.fret16.string2 { top: 148px; }
+.long-neck-f .guitar-module-main-wrapper .note.fret16.string1 { top: 176px; }
 
-.guitar-module-main-wrapper .note.fret15.string6 { top: 36px; }
-.guitar-module-main-wrapper .note.fret15.string5 { top: 64px; }
-.guitar-module-main-wrapper .note.fret15.string4 { top: 91px; }
-.guitar-module-main-wrapper .note.fret15.string3 { top: 118px; }
-.guitar-module-main-wrapper .note.fret15.string2 { top: 147px; }
-.guitar-module-main-wrapper .note.fret15.string1 { top: 175px; }
+.long-neck-f .guitar-module-main-wrapper .note.fret15.string6 { top: 36px; }
+.long-neck-f .guitar-module-main-wrapper .note.fret15.string5 { top: 64px; }
+.long-neck-f .guitar-module-main-wrapper .note.fret15.string4 { top: 91px; }
+.long-neck-f .guitar-module-main-wrapper .note.fret15.string3 { top: 118px; }
+.long-neck-f .guitar-module-main-wrapper .note.fret15.string2 { top: 147px; }
+.long-neck-f .guitar-module-main-wrapper .note.fret15.string1 { top: 175px; }
 
-.guitar-module-main-wrapper .note.fret14.string6 { top: 36px; }
-.guitar-module-main-wrapper .note.fret14.string5 { top: 64px; }
-.guitar-module-main-wrapper .note.fret14.string4 { top: 91px; }
-.guitar-module-main-wrapper .note.fret14.string3 { top: 118px; }
-.guitar-module-main-wrapper .note.fret14.string2 { top: 147px; }
-.guitar-module-main-wrapper .note.fret14.string1 { top: 175px; }
+.long-neck-f .guitar-module-main-wrapper .note.fret14.string6 { top: 36px; }
+.long-neck-f .guitar-module-main-wrapper .note.fret14.string5 { top: 64px; }
+.long-neck-f .guitar-module-main-wrapper .note.fret14.string4 { top: 91px; }
+.long-neck-f .guitar-module-main-wrapper .note.fret14.string3 { top: 118px; }
+.long-neck-f .guitar-module-main-wrapper .note.fret14.string2 { top: 147px; }
+.long-neck-f .guitar-module-main-wrapper .note.fret14.string1 { top: 175px; }
 
-.guitar-module-main-wrapper .note.fret13.string6 { top: 38px; }
-.guitar-module-main-wrapper .note.fret13.string5 { top: 64px; }
-.guitar-module-main-wrapper .note.fret13.string4 { top: 90px; }
-.guitar-module-main-wrapper .note.fret13.string3 { top: 117px; }
-.guitar-module-main-wrapper .note.fret13.string2 { top: 144px; }
-.guitar-module-main-wrapper .note.fret13.string1 { top: 172px; }
+.long-neck-f .guitar-module-main-wrapper .note.fret13.string6 { top: 38px; }
+.long-neck-f .guitar-module-main-wrapper .note.fret13.string5 { top: 64px; }
+.long-neck-f .guitar-module-main-wrapper .note.fret13.string4 { top: 90px; }
+.long-neck-f .guitar-module-main-wrapper .note.fret13.string3 { top: 117px; }
+.long-neck-f .guitar-module-main-wrapper .note.fret13.string2 { top: 144px; }
+.long-neck-f .guitar-module-main-wrapper .note.fret13.string1 { top: 172px; }
 
-.guitar-module-main-wrapper .note.fret12.string6 { top: 36px; }
-.guitar-module-main-wrapper .note.fret12.string5 { top: 63px; }
-.guitar-module-main-wrapper .note.fret12.string4 { top: 90px; }
-.guitar-module-main-wrapper .note.fret12.string3 { top: 117px; }
-.guitar-module-main-wrapper .note.fret12.string2 { top: 145px; }
-.guitar-module-main-wrapper .note.fret12.string1 { top: 172px; }
+.long-neck-f .guitar-module-main-wrapper .note.fret12.string6 { top: 36px; }
+.long-neck-f .guitar-module-main-wrapper .note.fret12.string5 { top: 63px; }
+.long-neck-f .guitar-module-main-wrapper .note.fret12.string4 { top: 90px; }
+.long-neck-f .guitar-module-main-wrapper .note.fret12.string3 { top: 117px; }
+.long-neck-f .guitar-module-main-wrapper .note.fret12.string2 { top: 145px; }
+.long-neck-f .guitar-module-main-wrapper .note.fret12.string1 { top: 172px; }
 
-.guitar-module-main-wrapper .note.fret11.string6 { top: 37px; }
-.guitar-module-main-wrapper .note.fret11.string5 { top: 63px; }
-.guitar-module-main-wrapper .note.fret11.string4 { top: 89px; }
-.guitar-module-main-wrapper .note.fret11.string3 { top: 116px; }
-.guitar-module-main-wrapper .note.fret11.string2 { top: 143px; }
-.guitar-module-main-wrapper .note.fret11.string1 { top: 170px; }
+.long-neck-f .guitar-module-main-wrapper .note.fret11.string6 { top: 37px; }
+.long-neck-f .guitar-module-main-wrapper .note.fret11.string5 { top: 63px; }
+.long-neck-f .guitar-module-main-wrapper .note.fret11.string4 { top: 89px; }
+.long-neck-f .guitar-module-main-wrapper .note.fret11.string3 { top: 116px; }
+.long-neck-f .guitar-module-main-wrapper .note.fret11.string2 { top: 143px; }
+.long-neck-f .guitar-module-main-wrapper .note.fret11.string1 { top: 170px; }
 
-.guitar-module-main-wrapper .note.fret10.string6 { top: 38px; }
-.guitar-module-main-wrapper .note.fret10.string5 { top: 64px; }
-.guitar-module-main-wrapper .note.fret10.string4 { top: 90px; }
-.guitar-module-main-wrapper .note.fret10.string3 { top: 116px; }
-.guitar-module-main-wrapper .note.fret10.string2 { top: 142px; }
-.guitar-module-main-wrapper .note.fret10.string1 { top: 167px; }
+.long-neck-f .guitar-module-main-wrapper .note.fret10.string6 { top: 38px; }
+.long-neck-f .guitar-module-main-wrapper .note.fret10.string5 { top: 64px; }
+.long-neck-f .guitar-module-main-wrapper .note.fret10.string4 { top: 90px; }
+.long-neck-f .guitar-module-main-wrapper .note.fret10.string3 { top: 116px; }
+.long-neck-f .guitar-module-main-wrapper .note.fret10.string2 { top: 142px; }
+.long-neck-f .guitar-module-main-wrapper .note.fret10.string1 { top: 167px; }
 
-.guitar-module-main-wrapper .note.fret9.string6 { top: 37px; }
-.guitar-module-main-wrapper .note.fret9.string5 { top: 63px; }
-.guitar-module-main-wrapper .note.fret9.string4 { top: 89px; }
-.guitar-module-main-wrapper .note.fret9.string3 { top: 114px; }
-.guitar-module-main-wrapper .note.fret9.string2 { top: 140px; }
-.guitar-module-main-wrapper .note.fret9.string1 { top: 166px; }
+.long-neck-f .guitar-module-main-wrapper .note.fret9.string6 { top: 37px; }
+.long-neck-f .guitar-module-main-wrapper .note.fret9.string5 { top: 63px; }
+.long-neck-f .guitar-module-main-wrapper .note.fret9.string4 { top: 89px; }
+.long-neck-f .guitar-module-main-wrapper .note.fret9.string3 { top: 114px; }
+.long-neck-f .guitar-module-main-wrapper .note.fret9.string2 { top: 140px; }
+.long-neck-f .guitar-module-main-wrapper .note.fret9.string1 { top: 166px; }
 
-.guitar-module-main-wrapper .note.fret8.string6 { top: 39px; }
-.guitar-module-main-wrapper .note.fret8.string5 { top: 64px; }
-.guitar-module-main-wrapper .note.fret8.string4 { top: 89px; }
-.guitar-module-main-wrapper .note.fret8.string3 { top: 114px; }
-.guitar-module-main-wrapper .note.fret8.string2 { top: 139px; }
-.guitar-module-main-wrapper .note.fret8.string1 { top: 163px; }
+.long-neck-f .guitar-module-main-wrapper .note.fret8.string6 { top: 39px; }
+.long-neck-f .guitar-module-main-wrapper .note.fret8.string5 { top: 64px; }
+.long-neck-f .guitar-module-main-wrapper .note.fret8.string4 { top: 89px; }
+.long-neck-f .guitar-module-main-wrapper .note.fret8.string3 { top: 114px; }
+.long-neck-f .guitar-module-main-wrapper .note.fret8.string2 { top: 139px; }
+.long-neck-f .guitar-module-main-wrapper .note.fret8.string1 { top: 163px; }
 
-.guitar-module-main-wrapper .note.fret7.string6 { top: 39px; }
-.guitar-module-main-wrapper .note.fret7.string5 { top: 64px; }
-.guitar-module-main-wrapper .note.fret7.string4 { top: 88px; }
-.guitar-module-main-wrapper .note.fret7.string3 { top: 113px; }
-.guitar-module-main-wrapper .note.fret7.string2 { top: 137px; }
-.guitar-module-main-wrapper .note.fret7.string1 { top: 162px; }
+.long-neck-f .guitar-module-main-wrapper .note.fret7.string6 { top: 39px; }
+.long-neck-f .guitar-module-main-wrapper .note.fret7.string5 { top: 64px; }
+.long-neck-f .guitar-module-main-wrapper .note.fret7.string4 { top: 88px; }
+.long-neck-f .guitar-module-main-wrapper .note.fret7.string3 { top: 113px; }
+.long-neck-f .guitar-module-main-wrapper .note.fret7.string2 { top: 137px; }
+.long-neck-f .guitar-module-main-wrapper .note.fret7.string1 { top: 162px; }
 
-.guitar-module-main-wrapper .note.fret6.string6 { top: 38px; }
-.guitar-module-main-wrapper .note.fret6.string5 { top: 63px; }
-.guitar-module-main-wrapper .note.fret6.string4 { top: 87px; }
-.guitar-module-main-wrapper .note.fret6.string3 { top: 111px; }
-.guitar-module-main-wrapper .note.fret6.string2 { top: 135px; }
-.guitar-module-main-wrapper .note.fret6.string1 { top: 160px; }
+.long-neck-f .guitar-module-main-wrapper .note.fret6.string6 { top: 38px; }
+.long-neck-f .guitar-module-main-wrapper .note.fret6.string5 { top: 63px; }
+.long-neck-f .guitar-module-main-wrapper .note.fret6.string4 { top: 87px; }
+.long-neck-f .guitar-module-main-wrapper .note.fret6.string3 { top: 111px; }
+.long-neck-f .guitar-module-main-wrapper .note.fret6.string2 { top: 135px; }
+.long-neck-f .guitar-module-main-wrapper .note.fret6.string1 { top: 160px; }
 
-.guitar-module-main-wrapper .note.fret5.string6 { top: 40px; }
-.guitar-module-main-wrapper .note.fret5.string5 { top: 64px; }
-.guitar-module-main-wrapper .note.fret5.string4 { top: 87px; }
-.guitar-module-main-wrapper .note.fret5.string3 { top: 111px; }
-.guitar-module-main-wrapper .note.fret5.string2 { top: 135px; }
-.guitar-module-main-wrapper .note.fret5.string1 { top: 158px; }
+.long-neck-f .guitar-module-main-wrapper .note.fret5.string6 { top: 40px; }
+.long-neck-f .guitar-module-main-wrapper .note.fret5.string5 { top: 64px; }
+.long-neck-f .guitar-module-main-wrapper .note.fret5.string4 { top: 87px; }
+.long-neck-f .guitar-module-main-wrapper .note.fret5.string3 { top: 111px; }
+.long-neck-f .guitar-module-main-wrapper .note.fret5.string2 { top: 135px; }
+.long-neck-f .guitar-module-main-wrapper .note.fret5.string1 { top: 158px; }
 
-.guitar-module-main-wrapper .note.fret4.string6 { top: 37px; }
-.guitar-module-main-wrapper .note.fret4.string5 { top: 62px; }
-.guitar-module-main-wrapper .note.fret4.string4 { top: 85px; }
-.guitar-module-main-wrapper .note.fret4.string3 { top: 108px; }
-.guitar-module-main-wrapper .note.fret4.string2 { top: 132px; }
-.guitar-module-main-wrapper .note.fret4.string1 { top: 156px; }
+.long-neck-f .guitar-module-main-wrapper .note.fret4.string6 { top: 37px; }
+.long-neck-f .guitar-module-main-wrapper .note.fret4.string5 { top: 62px; }
+.long-neck-f .guitar-module-main-wrapper .note.fret4.string4 { top: 85px; }
+.long-neck-f .guitar-module-main-wrapper .note.fret4.string3 { top: 108px; }
+.long-neck-f .guitar-module-main-wrapper .note.fret4.string2 { top: 132px; }
+.long-neck-f .guitar-module-main-wrapper .note.fret4.string1 { top: 156px; }
 
-.guitar-module-main-wrapper .note.fret3.string6 { top: 37px; }
-.guitar-module-main-wrapper .note.fret3.string5 { top: 60px; }
-.guitar-module-main-wrapper .note.fret3.string4 { top: 83px; }
-.guitar-module-main-wrapper .note.fret3.string3 { top: 106px; }
-.guitar-module-main-wrapper .note.fret3.string2 { top: 129px; }
-.guitar-module-main-wrapper .note.fret3.string1 { top: 152px; }
+.long-neck-f .guitar-module-main-wrapper .note.fret3.string6 { top: 37px; }
+.long-neck-f .guitar-module-main-wrapper .note.fret3.string5 { top: 60px; }
+.long-neck-f .guitar-module-main-wrapper .note.fret3.string4 { top: 83px; }
+.long-neck-f .guitar-module-main-wrapper .note.fret3.string3 { top: 106px; }
+.long-neck-f .guitar-module-main-wrapper .note.fret3.string2 { top: 129px; }
+.long-neck-f .guitar-module-main-wrapper .note.fret3.string1 { top: 152px; }
 
 /* Color settings for chord interval notes in grid when viewing a chord/arpeggio */
-.guitar-module-main-wrapper .int-1 { background: #333333; color: #ffffff; } /* root */
-.guitar-module-main-wrapper .int-3 { background: #FF0000; color: #fff; } /* 3rd */
-.guitar-module-main-wrapper .int-5 {background: #0000FF; color: #fff; } /* 5th */
-.guitar-module-main-wrapper .int-9 { background: #FFFF00; } /* 9th */
-.guitar-module-main-wrapper .int-7 { background: #00FF00; } /* 7th */
-.guitar-module-main-wrapper .int-11 { background: #FF00FF; } /* reserved for 11th? */
+.long-neck-f .guitar-module-main-wrapper .int-1 { background: #333333; color: #ffffff; } /* root */
+.long-neck-f .guitar-module-main-wrapper .int-3 { background: #FF0000; color: #fff; } /* 3rd */
+.long-neck-f .guitar-module-main-wrapper .int-5 {background: #0000FF; color: #fff; } /* 5th */
+.long-neck-f .guitar-module-main-wrapper .int-9 { background: #FFFF00; } /* 9th */
+.long-neck-f .guitar-module-main-wrapper .int-7 { background: #00FF00; } /* 7th */
+.long-neck-f .guitar-module-main-wrapper .int-11 { background: #FF00FF; } /* reserved for 11th? */

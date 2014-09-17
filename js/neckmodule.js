@@ -22,6 +22,7 @@
   *   notesPerChord:              4                  // int - options=> 3-5
   *   allowFreeze:                false              // if set to true, a freeze and reset button are shown allowing you to freeze the settings and hide all controls
   *   toggleStringVisibility:     true               // if set to true, viewer will be able to toggle string viewability
+  *   neckStyleClass:             ''                 // string - whatever is entered here will be a class name that is added to the container
   * };
   **/
 
@@ -67,6 +68,7 @@ var neckModule = (function() {
     currentInterval:        "",
     notesOfKey:             "",
     toggleStringVisibility: true,
+    neckStyleClass:         "",
     replaceInitSnippet:     false,
     strings: {
       1:  new Array('E','E#,F','F#,Gb','G','G#,Ab','A','A#,Bb','B,Cb','B#,C','C#,Db','D','D#,Eb','E,Fb','E#,F','F#,Gb','G','G#,Ab','A','A#,Bb','B,Cb','B#,C','C#,Db'),
@@ -648,8 +650,8 @@ var neckModule = (function() {
         showNotesPerChordSelector:  true,
         showChordNameHeader:        true,
         showIntervalColorKey:       true,
-        totalFrets:                 20,
-        topfret:                    17,
+        totalFrets:                 21,
+        topfret:                    21,
         lowfret:                    0,
         scalesArray:                'majorScales',
         rootNote:                   'C',
@@ -657,6 +659,7 @@ var neckModule = (function() {
         chordInterval:              0,
         notesPerChord:              3,
         toggleStringVisibility:     true,
+        neckStyleClass:             "",
         replaceInitScript:          false
       };
 
@@ -678,13 +681,22 @@ var neckModule = (function() {
     } else if(params.containerSelectorType == 'class') {
       this.myContainer = $('.'+params.myContainer);
     }
-    this.totalFrets = params.totalFrets;
+
     this.topfret = params.topfret;
     this.lowfret = params.lowfret;
+    this.totalFrets = params.totalFrets;
+
+    if(params.topfret > this.totalFrets) {
+      this.topfret = this.totalFrets;
+    }
+    
     this.currentScale = this[params.scalesArray][params.rootNote];
     this.currentKey = params.rootNote;
     this.currentChordsArr = this.chordsArr;
     this.wrapper = this.myContainer.find('.guitar-module-main-wrapper');
+    if(params.neckStyleClass !== "") {
+      this.myContainer.addClass(params.neckStyleClass);
+    }
 
   }
 
@@ -898,6 +910,9 @@ var neckModule = (function() {
 
     this.updateMetaDivs('scalesArray',this.params.scalesArray);
     this.updateMetaDivs('myContainer', this.myContainer.attr('id'));
+    this.updateMetaDivs('myContainer', this.totalFrets);
+    this.updateMetaDivs('myContainer', this.topfret);
+    this.updateMetaDivs('myContainer', this.lowfret);
 
   }
 
