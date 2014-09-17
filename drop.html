@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Neck module</title>
+	<!-- FONT -->
+  <link href='http://fonts.googleapis.com/css?family=Archivo+Narrow:400,700' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="css/common.css">
+  <link rel="stylesheet" href="css/long-neck-g.css">
+  <style>
+    .drag-div {
+      width: 100px;
+      height: 30px;
+      background-color: lightblue;
+      position: relative;
+      display: inline-block;
+      margin: 10px;
+      text-align: center;
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      padding: 5px;
+    }
+    .dropzone {
+      width: 100px;
+      height: 100px;
+      border: 1px solid gray;
+    }
+  </style>
+</head>
+<body>
+
+<div class="dropzone" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+<div class="drag-div" id="C_majorScales" draggable="true" ondragstart="drag(event)">C major</div>
+<div class="drag-div" id="E_majorScales" draggable="true" ondragstart="drag(event)">E major</div>
+<div id="container"></div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+<script src="js/neckmodule.js"></script>
+<script src="js/drop.js"></script>
+</body>
+</html>

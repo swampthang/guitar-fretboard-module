@@ -59,6 +59,22 @@
 .guitar-module-main-wrapper .note.fret17 { left: 565px; }
 .guitar-module-main-wrapper .note.muted { opacity: .25; }
 
+.guitar-module-main-wrapper .string-togglers { position: absolute; top: 6px; right: -14px; }
+.guitar-module-main-wrapper .string-togglers li {
+  list-style: none;
+  margin-bottom: 2px;
+  height: 20px;
+  width: 20px;
+  overflow: hidden;
+  background: url('../images/show-hide-toggle.png') no-repeat -26px top;
+  cursor: pointer;
+}
+
+.guitar-module-main-wrapper .string-togglers li.off {
+  background-position: 0 0;
+}
+
+
 /* Color settings for chord interval notes in grid when viewing a chord/arpeggio */
 .guitar-module-main-wrapper .int-1 { background: #333333; color: #fff; } /* root */
 .guitar-module-main-wrapper .int-3 { background: #FF0000; color: #fff; } /* 3rd */
