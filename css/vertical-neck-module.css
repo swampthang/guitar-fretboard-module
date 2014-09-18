@@ -1,0 +1,43 @@
+@charset "utf-8";
+/* CSS Document */
+.vertical-neck-module {
+  position: relative;
+  background: url('../images/long-vertical-fretboard.png') no-repeat center top;
+  background-size: 100%;
+  height: 434px;
+  width: 212px;
+  overflow: hidden;
+}
+
+.note { background-color: red; height: 20px; width: 20px; position: absolute; border-radius: 50%; }
+
+.string1 { left: 175px; }
+.string2 { left: 148px; }
+.string3 { left: 119px; }
+.string4 { left: 90px; }
+.string5 { left: 61px; }
+.string6 { left: 33px; }
+
+.fret0 { top: 7px; }
+.fret1 { top: 58px; }
+.fret2 { top: 122px; }
+.fret3 { top: 189px; }
+.fret4 { top: 255px; }
+.fret5 { top: 319px; }
+.fret6 { top: 387px; }
+.fret7 { top: 0; }
+.fret8 { top: 0; }
+.fret9 { top: 0; }
+.fret10 { top: 0; }
+.fret11 { top: 0; }
+.fret12 { top: 0; }
+.fret13 { top: 0; }
+.fret14 { top: 0; }
+.fret15 { top: 0; }
+.fret16 { top: 0; }
+.fret17 { top: 0; }
+.fret18 { top: 0; }
+.fret19 { top: 0; }
+.fret20 { top: 0; }
+.fret21 { top: 0; }
+.fret22 { top: 0; }
