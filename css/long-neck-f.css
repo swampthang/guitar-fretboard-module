@@ -202,3 +202,9 @@
 .long-neck-f .guitar-module-main-wrapper .int-9 { background: #FFFF00; } /* 9th */
 .long-neck-f .guitar-module-main-wrapper .int-7 { background: #00FF00; } /* 7th */
 .long-neck-f .guitar-module-main-wrapper .int-11 { background: #FF00FF; } /* reserved for 11th? */
+
+.long-neck-f .string-togglers {
+position: absolute;
+top: 26px;
+right: 30px;
+}

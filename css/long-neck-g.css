@@ -32,8 +32,8 @@
 
 /* STYLING TEMPLATES? */
 /* positioner styles for note-grid, Adding more fretboard background images/design-templates will force these settings into separate stylesheets */
-.long-neck-g .guitar-module-main-wrapper .note.string1 { top: 29px; }
-.long-neck-g .guitar-module-main-wrapper .note.string2 { top: 52px; }
+.long-neck-g .guitar-module-main-wrapper .note.string1 { top: 33px; }
+.long-neck-g .guitar-module-main-wrapper .note.string2 { top: 54px; }
 .long-neck-g .guitar-module-main-wrapper .note.string3 { top: 74px; }
 .long-neck-g .guitar-module-main-wrapper .note.string4 { top: 96px; }
 .long-neck-g .guitar-module-main-wrapper .note.string5 { top: 118px; }
@@ -196,3 +196,9 @@
 .long-neck-g .guitar-module-main-wrapper .int-9 { background: #FFFF00; } /* 9th */
 .long-neck-g .guitar-module-main-wrapper .int-7 { background: #00FF00; } /* 7th */
 .long-neck-g .guitar-module-main-wrapper .int-11 { background: #FF00FF; } /* reserved for 11th? */
+
+.long-neck-g .string-togglers {
+position: absolute;
+top: 17px;
+left: -27px;
+}

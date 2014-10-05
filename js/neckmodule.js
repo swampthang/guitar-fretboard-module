@@ -818,9 +818,9 @@ var neckModule = (function() {
 
   }
 
-  neck.replaceModuleInitScript = function() {
-    var snippet = "<div>\n  <script>\n function buildModule() { \n      var scripts = document.getElementsByTagName('script');\n      var this_script = scripts[scripts.length-1];\n      var container = idMaganager.processScriptInstance(this_script);\n      $(function(){\n        idMaganager.setId(container);\n        console.log(container.id);\n        var neckID = container.id;\n        necks[neckID] = Object.create(neckModule);\n        necks[neckID].initParams({myContainer: neckID});\n        necks[neckID].initLayout();\n      var replacer = setTimeout(necks[neckID].replaceModuleInitScript, 1000);\n    });\n    } \n  </script>\n</div>";
-    $('#divSnippets').find('.js-module').html(snippet);
+  neck.replaceModuleInitScript = function(id) {
+    var snippet = '<div><script id="neckModuleScript" type="text/javascript">\n    function buildModule() {\n      var this_script = document.getElementById("neckModuleScript");\n      var container = idMaganager.processScriptInstance(this_script);\n      console.log(container);\n      var neckID = idMaganager.setId(container);\n      neckModuleInit(neckID);\n    }\n    </script></div>';
+    $('.js-module')[0].innerHTML = snippet;
     return snippet;
   }
 
@@ -910,9 +910,9 @@ var neckModule = (function() {
 
     this.updateMetaDivs('scalesArray',this.params.scalesArray);
     this.updateMetaDivs('myContainer', this.myContainer.attr('id'));
-    this.updateMetaDivs('myContainer', this.totalFrets);
-    this.updateMetaDivs('myContainer', this.topfret);
-    this.updateMetaDivs('myContainer', this.lowfret);
+    this.updateMetaDivs('totalFrets', this.totalFrets);
+    this.updateMetaDivs('topfret', this.topfret);
+    this.updateMetaDivs('lowfret', this.lowfret);
 
   }
 

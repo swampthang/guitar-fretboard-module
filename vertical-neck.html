@@ -3,74 +3,58 @@
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Vertical Fretboard Example</title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="/css/vertical-neck-module.css?id=23456">
-        <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-    </head>
-    <body>
-        <!--[if lt IE 7]>
-            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-        <![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Vertical Fretboard Example</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href='http://fonts.googleapis.com/css?family=Archivo+Narrow:400,700' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="/css/vertical-neck-module.css?id=23456">
+  <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+  <style>
+    ul.chord-grid li {
+      display: inline-block;
+      list-style: none;
+      margin: 0 15px 0 0;
+    }
+  </style>
+</head>
+<body>
+<!--[if lt IE 7]>
+<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/?locale=en">upgrade your browser</a> to improve your experience.</p>
+<![endif]-->
+  <ul class="chord-grid">
+    <li><div id="c-major-7"></div></li>
+    <li><div id="d-minor-7"></div></li>
+    <li><div id="f-major-7"></div></li>
+    <li><div id="g-7"></div></li>
+  </ul>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.2.min.js"><\/script>')</script>
+<script>var $ = jQuery;</script>
+<script src="/js/vertical.neckmodule.js"></script>
+<script>
+  var cmaj7Chord = Object.create(chordModule);
+  cmaj7Chord.initParams({container: "c-major-7", rootnote: "C", chordtype: "major"});
+  cmaj7Chord.initLayout();
+  cmaj7Chord.initActions();
 
-        <div class="vertical-neck-module">
-            <div class="note string1 fret0"></div>
-            <div class="note string1 fret1"></div>
-            <div class="note string1 fret2"></div>
-            <div class="note string1 fret3"></div>
-            <div class="note string1 fret4"></div>
-            <div class="note string1 fret5"></div>
-            <div class="note string1 fret6"></div>
+  var dm7Chord = Object.create(chordModule);
+  dm7Chord.initParams({container: "d-minor-7", rootnote: "D", chordtype: "min7", position: 5});
+  dm7Chord.initLayout();
+  dm7Chord.initActions();
 
-            <div class="note string2 fret0"></div>
-            <div class="note string2 fret1"></div>
-            <div class="note string2 fret2"></div>
-            <div class="note string2 fret3"></div>
-            <div class="note string2 fret4"></div>
-            <div class="note string2 fret5"></div>
-            <div class="note string2 fret6"></div>
+  var fmaj7Chord = Object.create(chordModule);
+  fmaj7Chord.initParams({container: "f-major-7", rootnote: "F", chordtype: "maj7", position: 5});
+  fmaj7Chord.initLayout();
+  fmaj7Chord.initActions();
 
-            <div class="note string3 fret0"></div>
-            <div class="note string3 fret1"></div>
-            <div class="note string3 fret2"></div>
-            <div class="note string3 fret3"></div>
-            <div class="note string3 fret4"></div>
-            <div class="note string3 fret5"></div>
-            <div class="note string3 fret6"></div>
+  var g7Chord = Object.create(chordModule);
+  g7Chord.initParams({container: "g-7", rootnote: "G", chordtype: "dom7", position: 5});
+  g7Chord.initLayout();
+  g7Chord.initActions();
 
-            <div class="note string4 fret0"></div>
-            <div class="note string4 fret1"></div>
-            <div class="note string4 fret2"></div>
-            <div class="note string4 fret3"></div>
-            <div class="note string4 fret4"></div>
-            <div class="note string4 fret5"></div>
-            <div class="note string4 fret6"></div>
-
-
-            <div class="note string5 fret0"></div>
-            <div class="note string5 fret1"></div>
-            <div class="note string5 fret2"></div>
-            <div class="note string5 fret3"></div>
-            <div class="note string5 fret4"></div>
-            <div class="note string5 fret5"></div>
-            <div class="note string5 fret6"></div>
-
-
-            <div class="note string6 fret0"></div>
-            <div class="note string6 fret1"></div>
-            <div class="note string6 fret2"></div>
-            <div class="note string6 fret3"></div>
-            <div class="note string6 fret4"></div>
-            <div class="note string6 fret5"></div>
-            <div class="note string6 fret6"></div>
-        </div>
-
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.2.min.js"><\/script>')</script>
-
-    </body>
+</script>
+</body>
 </html>

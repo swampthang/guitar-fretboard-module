@@ -1,43 +1,146 @@
 @charset "utf-8";
 /* CSS Document */
+.vertical-neck-module-wrapper {
+  font-family: 'Archivo Narrow', sans-serif;
+  text-align: center;
+  width: 212px;
+  /*border: 2px solid #999999;*/
+  border-radius: 4px;
+}
+
+.vertical-neck-module-wrapper h2 {
+  margin-bottom: 0;
+  font-size: 3.5em;
+  margin-top: 0;
+}
+
+.vertical-neck-module-wrapper sup {
+  position: relative;
+  font-size: 35%;
+  line-height: 0;
+  vertical-align: baseline;
+  top: -1.0em;
+}
+
+/*.vertical-neck-module-wrapper h2.tight {
+  margin-bottom: 0;
+  border-bottom: 5px solid #000000
+}*/
+
+.vertical-neck-module-wrapper .position-selector-holder {
+  /*border-top: 1px solid black;*/
+}
+
+.vertical-neck-module-container {
+  overflow: hidden;
+  height: 342px;
+  border: 1px solid #999999;
+  border-radius: 4px;
+  background: #efefef;
+}
+
+.open { height: 371px; }
+
 .vertical-neck-module {
   position: relative;
   background: url('../images/long-vertical-fretboard.png') no-repeat center top;
   background-size: 100%;
-  height: 434px;
-  width: 212px;
+  height: 2970px;
+  width: 100%;
   overflow: hidden;
 }
 
-.note { background-color: red; height: 20px; width: 20px; position: absolute; border-radius: 50%; }
+.vertical-neck-module .string1, 
+.vertical-neck-module .string2, 
+.vertical-neck-module .string3, 
+.vertical-neck-module .string4, 
+.vertical-neck-module .string5, 
+.vertical-neck-module .string6 { 
+  font-family: 'Archivo Narrow', sans-serif; 
+  font-weight: bold;
+  color: black;
+  text-align: center;
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  padding-top: 1px;
+  /*border: solid 1px #FFC200;*/
+  border: solid 1px #666666;
+  border-radius: 50%;
+  background: #e2e2e2; /* Old browsers */
+  background: -moz-linear-gradient(top,  #e2e2e2 0%, #dbdbdb 50%, #d1d1d1 51%, #fefefe 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#e2e2e2), color-stop(50%,#dbdbdb), color-stop(51%,#d1d1d1), color-stop(100%,#fefefe)); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top,  #e2e2e2 0%,#dbdbdb 50%,#d1d1d1 51%,#fefefe 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top,  #e2e2e2 0%,#dbdbdb 50%,#d1d1d1 51%,#fefefe 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top,  #e2e2e2 0%,#dbdbdb 50%,#d1d1d1 51%,#fefefe 100%); /* IE10+ */
+  background: linear-gradient(to bottom,  #e2e2e2 0%,#dbdbdb 50%,#d1d1d1 51%,#fefefe 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e2e2e2', endColorstr='#fefefe',GradientType=0 ); /* IE6-9 */
+}
 
-.string1 { left: 175px; }
-.string2 { left: 148px; }
-.string3 { left: 119px; }
-.string4 { left: 90px; }
-.string5 { left: 61px; }
-.string6 { left: 33px; }
+.vertical-neck-module .note {
+  overflow: hidden;
+  cursor: pointer;
+}
 
-.fret0 { top: 7px; }
-.fret1 { top: 58px; }
-.fret2 { top: 122px; }
-.fret3 { top: 189px; }
-.fret4 { top: 255px; }
-.fret5 { top: 319px; }
-.fret6 { top: 387px; }
-.fret7 { top: 0; }
-.fret8 { top: 0; }
-.fret9 { top: 0; }
-.fret10 { top: 0; }
-.fret11 { top: 0; }
-.fret12 { top: 0; }
-.fret13 { top: 0; }
-.fret14 { top: 0; }
-.fret15 { top: 0; }
-.fret16 { top: 0; }
-.fret17 { top: 0; }
-.fret18 { top: 0; }
-.fret19 { top: 0; }
-.fret20 { top: 0; }
-.fret21 { top: 0; }
-.fret22 { top: 0; }
+.vertical-neck-module .note.on {
+  opacity: 1.0;
+}
+
+.vertical-neck-module .note.off {
+  opacity: 0.25;
+}
+
+.vertical-neck-module.pos1 { top: -27px; }
+.vertical-neck-module.pos2 { top: -90px; }
+.vertical-neck-module.pos3 { top: -156px; }
+.vertical-neck-module.pos4 { top: -220px; }
+.vertical-neck-module.pos5 { top: -286px; }
+.vertical-neck-module.pos6 { top: -351px; }
+.vertical-neck-module.pos7 { top: -417px; }
+.vertical-neck-module.pos8 { top: -483px; }
+.vertical-neck-module.pos9 { top: -547px; }
+.vertical-neck-module.pos10 { top: -612px; }
+.vertical-neck-module.pos11 { top: -677px; }
+.vertical-neck-module.pos12 { top: -742px; }
+.vertical-neck-module.pos13 { top: -808px; }
+.vertical-neck-module.pos14 { top: -873px; }
+.vertical-neck-module.pos15 { top: -939px; }
+.vertical-neck-module.pos16 { top: -1005px; }
+.vertical-neck-module.pos17 { top: -1071px; }
+
+/*.vertical-neck-module .note { background-color: red; height: 20px; width: 20px; position: absolute; border-radius: 50%; }*/
+
+.vertical-neck-module .string1 { left: 172px; }
+.vertical-neck-module .string2 { left: 144px; }
+.vertical-neck-module .string3 { left: 117px; }
+.vertical-neck-module .string4 { left: 88px; }
+.vertical-neck-module .string5 { left: 59px; }
+.vertical-neck-module .string6 { left: 31px; }
+
+.vertical-neck-module .fret0 { top: 4px; }
+.vertical-neck-module .fret1 { top: 58px; }
+.vertical-neck-module .fret2 { top: 122px; }
+.vertical-neck-module .fret3 { top: 189px; }
+.vertical-neck-module .fret4 { top: 255px; }
+.vertical-neck-module .fret5 { top: 319px; }
+.vertical-neck-module .fret6 { top: 384px; }
+.vertical-neck-module .fret7 { top: 449px; }
+.vertical-neck-module .fret8 { top: 514px; }
+.vertical-neck-module .fret9 { top: 579px; }
+.vertical-neck-module .fret10 { top: 640px; }
+.vertical-neck-module .fret11 { top: 710px; }
+.vertical-neck-module .fret12 { top: 774px; }
+.vertical-neck-module .fret13 { top: 839px; }
+.vertical-neck-module .fret14 { top: 905px; }
+.vertical-neck-module .fret15 { top: 969px; }
+.vertical-neck-module .fret16 { top: 1035px; }
+.vertical-neck-module .fret17 { top: 1100px; }
+.vertical-neck-module .fret18 { top: 1162px; }
+.vertical-neck-module .fret19 { top: 1229px; }
+.vertical-neck-module .fret20 { top: 1295px; }
+.vertical-neck-module .fret21 { top: 1361px; }
+.vertical-neck-module .fret22 { top: 1427px; }
+
+#position-selectors {
+  margin: 10px 0;
+}

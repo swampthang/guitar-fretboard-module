@@ -5,6 +5,7 @@ var idMaganager = {
     idPrefixText: "guitar-module-container-",
 
     processScriptInstance: function(this_script) {
+      console.log(this_script);
       var div= document.createElement('div');
       div.className = "temp";
       this_script.parentNode.insertBefore(div, this_script);
@@ -18,7 +19,8 @@ var idMaganager = {
         var newID = this.findNextAvailableID();
         container.id = newID;
       }
-      container.appendChild(document.createTextNode('Hello, my ID is '+container.id));
+      return container.id;
+      // container.appendChild(document.createTextNode('Hello, my ID is '+container.id));
     },
 
     classCounter: function() {
@@ -63,8 +65,18 @@ var idMaganager = {
 var $ = jQuery;
 
 var necks = {};
+var chordNecks = {};
 
 $(function(){
+  setModuleParams();
+});
+
+// extend idManager to use for the vertical chord module
+var chordIdManager = $.extend(idMaganager);
+chordIdManager.classNameText = "hotfrets-chord-module";
+chordIdManager.idPrefixText = "chord-module-container-";
+
+function setModuleParams () {
   $('.guitar-module-main-wrapper').each(function(){
 
     var container = $(this).parent();
@@ -92,5 +104,34 @@ $(function(){
 
     }
   });
-});
 
+  $('.vertical-neck-module-wrapper').each(function(){
+
+    var container = $(this).parent();
+    var containerID = container.attr('id');
+    console.log(containerID);
+    if($(this).find('.meta').length) {
+
+      chordNecks[containerID] = Object.create(chordModule);
+
+      var presetParams = {};
+      $(this).find('.meta').each(function(){
+        var paramName = $(this).attr('id');
+        var paramVal = $(this).attr('data-content');
+        // check for boolean
+        if(paramVal == "true") { paramVal = true; }
+        if(paramVal == "false") { paramVal = false; }
+        presetParams[paramName] = paramVal;
+      });
+      presetParams['container'] = containerID;
+      
+      chordNecks[containerID].initParams(presetParams);
+
+      chordNecks[containerID].initLayout();
+
+      chordNecks[containerID].initActions();
+
+    }
+  });
+
+}
