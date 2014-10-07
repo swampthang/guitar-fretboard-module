@@ -1,5 +1,5 @@
 var chordModule = (function() {
-
+// IDEA! Maybe include a boolean - editorMode = true/false and not create the buttons, selectors, etc if editorMode == false
   var $ = jQuery.noConflict();
 
   var chord = {
@@ -19,6 +19,7 @@ var chordModule = (function() {
     stringDivs:               "",
     naturals:                 ('A','B','C','D','E','F','G'),
     accidentals:              ('A#','Bb','C#','Db','D#','Eb','F#','Gb','G#','Ab'),
+    viewMode:                 "arpeggio",
     strings: {
       1:  new Array('E','E#,F','F#,Gb','G','G#,Ab','A','A#,Bb','B,Cb','B#,C','C#,Db','D','D#,Eb','E,Fb','E#,F','F#,Gb','G','G#,Ab','A','A#,Bb','B,Cb','B#,C','C#,Db','D','D#,Eb'),
       2:  new Array('B,Cb','B#,C','C#,Db','D','D#,Eb','E,Fb','E#,F','F#,Gb','G','G#,Ab','A','A#,Bb','B,Cb','B#,C','C#','D','D#','E,Fb','E#,F','F#,Gb','G','G#,Ab','A','A#,Bb'),
@@ -200,6 +201,10 @@ var chordModule = (function() {
     return selectors;
   };
 
+  chord.buildViewModeControls = function() {
+    //  stopped here
+  }
+
   chord.buildChord = function(root,type) {
     var chordNotes = this.setChordNotes(root,type);
     this.wrapper.find('.note').hide().removeClass('in-chord on off').removeAttr('interval');
@@ -211,6 +216,7 @@ var chordModule = (function() {
     this.updateMaintitleDiv();
     this.updateMetaDivs('rootnote',root);
     this.updateMetaDivs('chordtype',type);
+    this.createNotation();
   }
 
   chord.replaceModuleInitScript = function() {
@@ -230,7 +236,8 @@ var chordModule = (function() {
         rootnote:                   'C',
         toggleStringVisibility:     true,
         neckStyleClass:             "",
-        position:                   0
+        position:                   0,
+        viewMode:                   "arpeggio"
       };
 
       if(arguments !== undefined) {
@@ -255,6 +262,8 @@ var chordModule = (function() {
     this.rootnote = params.rootnote;
     this.chordtype = params.chordtype;
     this.position = params.position;
+    this.viewMode = params.viewMode;
+
     if(params.neckStyleClass !== "") {
       this.container.addClass(params.neckStyleClass);
     }
@@ -262,8 +271,9 @@ var chordModule = (function() {
   };
 
   chord.notesInView = function() {
-    var pos = this.position;
-    var topfret = this.position + 4;
+    var pos = parseInt(this.position);
+    var topfret = pos + 4;
+    if(pos == 0) { topfret = 5; } // if in open position, the top fret is still going to be the 5th fret
     console.log(topfret);
     var notesOnString = [];
     notesOnString[6]=[];
@@ -277,7 +287,7 @@ var chordModule = (function() {
       // starts on 6th string
       var cnt = 0;
       for(var f=pos; f<=topfret; f++) {
-        var checkNote = this.wrapper.find('.f'+s+'_'+f).hasClass('in-chord');
+        var checkNote = (this.wrapper.find('.f'+s+'_'+f).hasClass('in-chord') && this.wrapper.find('.f'+s+'_'+f).hasClass('on'));
         if(checkNote) {
           notesOnString[s][cnt]=this.wrapper.find('.f'+s+'_'+f+'.in-chord');
           cnt++;
@@ -298,15 +308,15 @@ var chordModule = (function() {
 
   }
 
-  chord.incrementChord = function() {
-    var $ = jQuery;
-    var notes = this.notesInView();
-    // iterate through each combination of strings and notes (recursive function maybe?)
-    this.wrapper.find('.note').hide();
-    for(var s=1;s<=6;s++) {
-      notes[s][0].show();
-    }
-  }
+  // chord.incrementChord = function() {
+  //   var $ = jQuery;
+  //   var notes = this.notesInView();
+  //   // iterate through each combination of strings and notes (recursive function maybe?)
+  //   this.wrapper.find('.note').hide();
+  //   for(var s=1;s<=6;s++) {
+  //     notes[s][0].show();
+  //   }
+  // }
 
 
   chord.initLayout = function() {
@@ -369,6 +379,7 @@ var chordModule = (function() {
     wrapper.find('.note').click(function(){
       console.log('ran toggleVisible');
       that.toggleVisible($(this));
+      that.createNotation();
     });
 
     this.wrapper.find('.note').hide();
@@ -382,6 +393,8 @@ var chordModule = (function() {
     this.updateMetaDivs('rootnote',this.rootnote);
     this.updateMetaDivs('chordtype',this.chordtype);
 
+    this.createNotation();
+
   };
 
   chord.updateMetaDivs = function(tagID, val) {
@@ -390,6 +403,91 @@ var chordModule = (function() {
     } else {
       this.wrapper.append("<div class='meta' id='"+tagID+"' data-content='"+val+"'>");
     }
+  }
+
+  chord.initChordMode = function() {
+  /**
+    * set styles for chord mode
+    * activate reset link/button on first note click
+    * maybe create some sort of animating note background?
+    * activate a hide-others or save chord-notes link/button
+    */
+    this.wrapper.find('.note.in-chord').addClass('pulse');
+  }
+
+  chord.stackChordNotation = function(notes) {
+
+    var lastItem = notes[1].length-1;
+    var lastEl = notes[1][lastItem];
+    console.log(lastEl);
+    var chordStack = " :w (";
+
+    for(var s=6; s>=1; s--) {
+
+      for (var n=0; n<notes[s].length; n++) {
+
+        var id = notes[s][n].attr('id');
+        var positionArray = id.substr(2).split("_");
+
+        if(notes[s][n] != lastEl) {
+
+          if(n==0) {
+
+            chordStack += positionArray[1] + "/" + positionArray[0] + ".";
+
+          } else {
+
+            notes[s][n].addClass('off').removeClass('on');
+
+          }
+
+        } else {
+          console.log('on lastEl');
+          if(n==0) {
+
+            chordStack += positionArray[1] + "/" + positionArray[0] + ")";
+          
+          } else {
+
+            notes[s][n].addClass('off').removeClass('on');
+
+          }
+
+        }
+
+      }
+    }
+    // doublecheck to be sure the string isn't gonna break
+    if (chordStack.charAt(chordStack.length - 1) == ".") {
+      chordStack = chordStack.slice(0,-1) + ')';
+    }
+    return chordStack;
+  }
+
+  chord.buildArpeggioNotation = function(notes) {
+    var arpeggioNotes = "";
+    for(var s=6; s>=1; s--) {
+      for (var n=0; n<notes[s].length; n++) {
+        var id = notes[s][n].attr('id');
+        var positionArray = id.substr(2).split("_");
+        arpeggioNotes += positionArray[1] + "/" + positionArray[0] + " ";
+      }
+    }
+    return arpeggioNotes;
+  }
+
+  chord.createNotation = function() {
+    var vextab = "options space=20\n tabstave notation=true\n ";
+    vextab += "notes ";
+    var notesOnString = this.notesInView();
+    if(this.viewMode == 'arpeggio') {
+      vextab += this.buildArpeggioNotation(notesOnString);
+    } else {
+      vextab += this.stackChordNotation(notesOnString);
+    }
+    
+    notationData = vextab;
+    render();
   }
 
   chord.switchPosition = function(pos) {
@@ -411,6 +509,7 @@ var chordModule = (function() {
     this.position = pos;
     this.buildChord(this.rootnote,this.chordtype);
     this.updateMetaDivs('position',pos);
+    this.createNotation();
   }
 
   var getCurrentPositionClassName = function(str) {

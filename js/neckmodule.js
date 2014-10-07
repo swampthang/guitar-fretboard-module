@@ -27,7 +27,7 @@
   **/
 
 var neckModule = (function() {
-
+// IDEA! Maybe include a boolean - editorMode = true/false and not create the buttons, selectors, etc if editorMode == false
   var $ = jQuery.noConflict();
 
   var neck = {
