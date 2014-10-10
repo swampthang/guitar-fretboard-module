@@ -33,71 +33,32 @@
 <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/?locale=en">upgrade your browser</a> to improve your experience.</p>
 <![endif]-->
   <ul class="chord-grid">
-    <li>
-      <div id="c-major-7"></div>
-      <div class="vextab-container">
-  <canvas id="chord-notation"></canvas>
-    <div id="error"></div>
-</div>
-    </li>
-<!--     <li><div id="d-minor-7"></div></li>
+    <li><div id="c-major-7"></div></li>
+    <li><div id="d-minor-7"></div></li>
     <li><div id="f-major-7"></div></li>
-    <li><div id="g-7"></div></li> -->
+    <li><div id="g-7"></div></li>
   </ul>
-<script>
-    var notationData = "options space=20\n tabstave notation=true\n notes :w (0/6.3/6.0/3.1/2.0/1.0/1)";
-    var render;
-    jQuery(function($) {
-      Vex.Flow.Artist.DEBUG = true;
-      Vex.Flow.VexTab.DEBUG = true;
+  <script>
 
-      renderer = new Vex.Flow.Renderer($('#chord-notation')[0],
-        Vex.Flow.Renderer.Backends.CANVAS);
-
-      artist = new Vex.Flow.Artist(10, 10, 250, {scale: 0.8});
-      vextab = new Vex.Flow.VexTab(artist);
-
-      render = function() {
-        try {
-          vextab.reset();
-          artist.reset();
-          vextab.parse(notationData);
-          artist.render(renderer);
-          $("#error").text("");
-        } catch (e) {
-          console.log(e);
-          $("#error").html(e.message.replace(/[\n]/g, '<br/>'));
-        }
-      }
-
-      $('#notation-data').change(function(){
-        console.log('i changed');
-        render();
-      });
-      // $("#notation-data").change(_.throttle(render, 250));
-      render();
-     });
-  </script>
-<script>
   var cmaj7Chord = Object.create(chordModule);
-  cmaj7Chord.initParams({container: "c-major-7", rootnote: "C", chordtype: "major", viewMode: "chord"});
+  cmaj7Chord.initParams({container: "c-major-7", rootnote: "C", chordtype: "major"});
   cmaj7Chord.initLayout();
   cmaj7Chord.initActions();
 
-  // var dm7Chord = Object.create(chordModule);
-  // dm7Chord.initParams({container: "d-minor-7", rootnote: "D", chordtype: "min7", position: 5});
-  // dm7Chord.initLayout();
-  // dm7Chord.initActions();
+  var dm7Chord = Object.create(chordModule);
+  dm7Chord.initParams({container: "d-minor-7", rootnote: "D", chordtype: "min7", position: 5});
+  dm7Chord.initLayout();
+  dm7Chord.initActions();
 
-  // var fmaj7Chord = Object.create(chordModule);
-  // fmaj7Chord.initParams({container: "f-major-7", rootnote: "F", chordtype: "maj7", position: 5});
-  // fmaj7Chord.initLayout();
-  // fmaj7Chord.initActions();
+  var fmaj7Chord = Object.create(chordModule);
+  fmaj7Chord.initParams({container: "f-major-7", rootnote: "F", chordtype: "maj7", position: 5});
+  fmaj7Chord.initLayout();
+  fmaj7Chord.initActions();
 
-  // var g7Chord = Object.create(chordModule);
-  // g7Chord.initParams({container: "g-7", rootnote: "G", chordtype: "dom7", position: 5});
-  // g7Chord.initLayout();
-  // g7Chord.initActions();
+  var g7Chord = Object.create(chordModule);
+  g7Chord.initParams({container: "g-7", rootnote: "G", chordtype: "dom7", position: 5});
+  g7Chord.initLayout();
+  g7Chord.initActions();
 
 </script>
 </body>

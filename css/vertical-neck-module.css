@@ -4,7 +4,7 @@
   font-family: 'Archivo Narrow', sans-serif;
   text-align: center;
   width: 212px;
-  /*border: 2px solid #999999;*/
+  position: relative;
   border-radius: 4px;
 }
 
@@ -22,10 +22,21 @@
   top: -1.0em;
 }
 
-/*.vertical-neck-module-wrapper h2.tight {
-  margin-bottom: 0;
-  border-bottom: 5px solid #000000
-}*/
+.vertical-neck-module-wrapper .chord-controls {
+  position: absolute;
+  bottom: 150px;
+  right: -40px;
+  background: #efefef;
+  border: 1px solid #cccccc;
+  border-radius: 4px;
+  padding: 10px;
+  z-index: 100;
+  overflow: auto;
+}
+
+.chord-grid {
+  position: relative;
+}
 
 .vertical-neck-module-wrapper .position-selector-holder {
   /*border-top: 1px solid black;*/
@@ -37,6 +48,7 @@
   border: 1px solid #999999;
   border-radius: 4px;
   background: #efefef;
+  position: relative;
 }
 
 .open { height: 371px; }
