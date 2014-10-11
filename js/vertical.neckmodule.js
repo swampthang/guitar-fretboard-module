@@ -345,12 +345,6 @@ var chordModule = (function() {
     // MAIN MODULE WRAPPER
     this.htmlPieces += openMainWrapper();
 
-    this.htmlPieces += openChordControlsDiv();
-    this.htmlPieces += this.buildPositionSelectors(this.position);
-    this.htmlPieces += this.buildChordTypeSelectors(this.chordtype);
-    this.htmlPieces += this.buildRootNoteSelectors(this.rootnote);
-    this.htmlPieces += closeDiv();
-
     this.htmlPieces += this.buildMaintitleDiv();
 
     // TOP
@@ -365,6 +359,12 @@ var chordModule = (function() {
     // close mainModuleWrapper
     this.htmlPieces += closeDiv();
     this.htmlPieces += buildVexTabContainer();
+    this.htmlPieces += openChordControlsDiv();
+    this.htmlPieces += this.buildPositionSelectors(this.position);
+    this.htmlPieces += this.buildChordTypeSelectors(this.chordtype);
+    this.htmlPieces += this.buildRootNoteSelectors(this.rootnote);
+    this.htmlPieces += buildViewModeToggle(this.viewMode);
+    this.htmlPieces += closeDiv();
     container.html(this.htmlPieces);
 
     return this.htmlPieces;
@@ -395,6 +395,13 @@ var chordModule = (function() {
       that.switchPosition(pos);
     });
 
+    wrapper.find('.view-mode-selector').change(function(e){
+      e.preventDefault();
+      var mode = $(this).val();
+      that.viewMode = mode;
+      that.createNotation();
+    });
+
     wrapper.find('.note').click(function(){
       console.log('ran toggleVisible');
       that.toggleVisible($(this));
@@ -413,6 +420,8 @@ var chordModule = (function() {
     this.updateMetaDivs('chordtype',this.chordtype);
 
     this.createNotation();
+
+    this.container.find('.chord-controls').draggable();
 
   };
 
@@ -434,6 +443,15 @@ var chordModule = (function() {
     this.wrapper.find('.note.in-chord').addClass('pulse');
   }
 
+  chord.toggleViewMode = function() {
+    if(this.viewMode == "arpeggio") {
+      this.viewMode = "chord";
+    } else {
+      this.viewMode = "arpeggio";
+    }
+    this.createNotation();
+  }
+
   chord.processNoteName = function(noteName) {
 
     if(noteName.indexOf('#') !== -1) {
@@ -446,14 +464,7 @@ var chordModule = (function() {
   }
 
   chord.findOctave = function(string,fret) {
-    /* 
-    1: new Array(5,8,20),
-    2: new Array(4,1,13),
-    3: new Array(4,5,17),
-    4: new Array(4,10,22),
-    5: new Array(3,3,15),
-    6: new Array(3,8,20)
-    */
+
     if(fret >= this.noteOctaves[string][2]) {
       // eg, string 5 fret 16
       return this.noteOctaves[string][0] + 2;
@@ -556,7 +567,7 @@ var chordModule = (function() {
 
   chord.createNotation = function() {
     this.initVexFlow();
-    var vextab = "options space=20\n tabstave notation=true\n ";
+    var vextab = "options space=10\n tabstave notation=true\n ";
     vextab += "notes ";
     var notesOnString = this.notesInView();
     if(this.viewMode == 'arpeggio') {
@@ -566,7 +577,7 @@ var chordModule = (function() {
     }
     
     notationData = vextab;
-    var viewWidth = (this.viewMode == "arpeggio") ? 400 : 250;
+    var viewWidth = (this.viewMode == "arpeggio") ? 335 : 300;
     this.renderNotation(viewWidth);
   }
 
@@ -620,6 +631,14 @@ var chordModule = (function() {
     return '<div class="vextab-container">\n <canvas id="chord-notation"></canvas>\n <div id="error"></div>\n</div>';
   }
 
+  var buildViewModeToggle = function(mode) {
+    if(mode == "arpeggio") {
+      return "<div>\n  <select class='view-mode-selector'>\n    <option value='arpeggio' selected>Arpeggio Mode</option>\n    <option value='chord'>Chord Mode</option>\n    </select>\n  </div>";
+    } else {
+      return "<div>\n  <select class='view-mode-selector'>\n    <option value='arpeggio'>Arpeggio Mode</option>\n    <option value='chord' selected>Chord Mode</option>\n    </select>\n  </div>";
+    }
+  }
+
   chord.buildMaintitleDiv = function() {
     var symbol = this.getSymbol(this.chordtype);
     return '<h2 class="chord-name">'+this.rootnote+((symbol != "") ? '<sup>'+symbol+'</sup>' : "")+'</h2>';
@@ -656,37 +675,3 @@ var chordModule = (function() {
   return chord;
 
 })();
-
-// var notationData = "options space=20\n tabstave notation=true\n notes :w (0/6.3/6.0/3.1/2.0/1.0/1)";
-// var render;
-// var $ = jQuery;
-
-// Vex.Flow.Artist.DEBUG = true;
-// Vex.Flow.VexTab.DEBUG = true;
-
-// renderer = new Vex.Flow.Renderer($('#chord-notation')[0],
-//   Vex.Flow.Renderer.Backends.CANVAS);
-
-// $('#notation-data').change(function(){
-//   console.log('i changed');
-//   this.renderNotation();
-// });
-
-// this.renderNotation();
-
-// render = function(width) {
-//   artist = new Vex.Flow.Artist(10, 10, width, {scale: 0.8});
-//   vextab = new Vex.Flow.VexTab(artist);
-//   try {
-//     vextab.reset();
-//     artist.reset();
-//     vextab.parse(notationData);
-//     artist.render(renderer);
-//     $("#error").text("");
-//   } catch (e) {
-//     console.log(e);
-//     $("#error").html(e.message.replace(/[\n]/g, '<br/>'));
-//   }
-// }
-
-

@@ -6,12 +6,17 @@
   width: 212px;
   position: relative;
   border-radius: 4px;
+  margin: 0 15px;
 }
 
 .vertical-neck-module-wrapper h2 {
   margin-bottom: 0;
   font-size: 3.5em;
   margin-top: 0;
+}
+
+.vertical-neck-module-wrapper .vextab-container {
+  margin-left: -25px;
 }
 
 .vertical-neck-module-wrapper sup {
@@ -23,15 +28,16 @@
 }
 
 .vertical-neck-module-wrapper .chord-controls {
-  position: absolute;
-  bottom: 150px;
-  right: -40px;
+  position: relative;
+  left: 77px;
+  top: -150px;
   background: #efefef;
   border: 1px solid #cccccc;
   border-radius: 4px;
   padding: 10px;
   z-index: 100;
   overflow: auto;
+  width: 120px;
 }
 
 .chord-grid {
@@ -152,7 +158,3 @@
 .vertical-neck-module .fret20 { top: 1295px; }
 .vertical-neck-module .fret21 { top: 1361px; }
 .vertical-neck-module .fret22 { top: 1427px; }
-
-#position-selectors {
-  margin: 10px 0;
-}
