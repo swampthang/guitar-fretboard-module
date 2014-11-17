@@ -321,6 +321,10 @@ var neckModule = (function() {
     this.showingChord = false;
     $('.chord-name').html('');
     $('.chordButton').removeClass('active');
+    $('.meta#notesPerChord').remove();
+    $('.meta#currentInterval').remove();
+    $('.meta#showInitialChord').remove();
+    $('.meta#chordInterval').remove();
     this.doScale();
   }
 
@@ -696,7 +700,6 @@ var neckModule = (function() {
     if(params.topfret > this.totalFrets) {
       this.topfret = this.totalFrets;
     }
-    debugger;
     this.currentScale = this[params.scalesArray][params.rootNote];
     this.currentKey = params.rootNote;
     this.currentChordsArr = this.chordsArr;
@@ -801,7 +804,8 @@ var neckModule = (function() {
     if(params.showChordButtons) {
       this.htmlPieces += buildChordButtonsDiv();
     }
-    
+    this.htmlPieces += buildNeckStyleSelector();
+
     // close controlsDiv
     this.htmlPieces += closeDiv();
     if(metaData !== null) {
@@ -928,6 +932,8 @@ var neckModule = (function() {
     this.updateMetaDivs('topfret', this.topfret);
     this.updateMetaDivs('lowfret', this.lowfret);
 
+    this.initStringDisplay();
+
     console.log(this.hideControls);
     if(this.params.hideControls) {
       wrapper.find('.controls-toggler .hide-controls').hide();
@@ -936,6 +942,20 @@ var neckModule = (function() {
       wrapper.find('.controls-toggler .show-controls').hide();
     }
 
+    this.wrapper.find('.neckstyle-selector li').click(function(){
+      that.switchNeckStyle($(this));
+    });
+
+  }
+
+  neck.initStringDisplay = function() {
+    // ran on initActions();
+    for(var s=1;s<=6;s++) {
+      if(this.wrapper.find('#hideString'+s).length) {
+        var el = this.wrapper.find('.string-togglers li[string='+s+']');
+        this.toggleShowHideString(s,el);
+      }
+    }
   }
 
   neck.toggleControls = function() {
@@ -956,6 +976,21 @@ var neckModule = (function() {
       this.wrapper.find('.controls-toggler span.show-controls').show();
     }
     
+  }
+
+  neck.switchNeckStyle = function(el) {
+    var selector = el.attr('class');
+    this.myContainer.removeAttr('class');
+    switch (selector) {
+      case 'neck-f' :
+        this.neckStyleClass = 'long-neck-f';
+        this.myContainer.addClass(this.neckStyleClass);
+      break;
+      case 'neck-g' :
+        this.neckStyleClass = 'long-neck-g';
+        this.myContainer.addClass(this.neckStyleClass);
+      break;
+    }
   }
 // END MODULE METHODS ********************************************************* \\
 
@@ -1094,6 +1129,10 @@ var neckModule = (function() {
     chordButtonsDiv += '  </div>';
 
    return chordButtonsDiv;
+  }
+
+  var buildNeckStyleSelector = function() {
+    return "<div class='neckstyle-selector'>\n  <ul>\n    <li class='neck-default'></li>\n    <li class='neck-g'></li>\n    <li class='neck-f'></li>\n  </ul>\n</div>";
   }
 
   var returnThis = function() {

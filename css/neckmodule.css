@@ -93,6 +93,38 @@
   cursor: pointer;
 }
 
+.guitar-module-main-wrapper .neckstyle-selector {
+  position: relative;
+  overflow: auto;
+}
+
+.guitar-module-main-wrapper .neckstyle-selector li {
+  display: inline-block;
+  height: 40px;
+  width: 120px;
+  cursor: pointer;
+}
+
+.guitar-module-main-wrapper .neckstyle-selector li.selected {
+  border: 1px solid red;
+  border-radius: 3px;
+}
+
+.guitar-module-main-wrapper .neckstyle-selector li.neck-default {
+  background: url('../images/blankneck.jpg') no-repeat center 7px;
+  background-size: contain;
+}
+
+.guitar-module-main-wrapper .neckstyle-selector li.neck-g {
+  background: url('../images/g-neck.png') no-repeat center 9px;
+  background-size: contain;
+}
+
+.guitar-module-main-wrapper .neckstyle-selector li.neck-f {
+  background: url('../images/f-neck.png') no-repeat center 9px;
+  background-size: contain;
+}
+
 .guitar-module-main-wrapper .string-togglers li.off {
   background-position: 0 0;
 }
