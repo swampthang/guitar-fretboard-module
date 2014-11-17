@@ -70,6 +70,8 @@ var neckModule = (function() {
     toggleStringVisibility: true,
     neckStyleClass:         "",
     replaceInitSnippet:     false,
+    controlsHidden:         false,
+    hideControls:           false,
     strings: {
       1:  new Array('E','E#,F','F#,Gb','G','G#,Ab','A','A#,Bb','B,Cb','B#,C','C#,Db','D','D#,Eb','E,Fb','E#,F','F#,Gb','G','G#,Ab','A','A#,Bb','B,Cb','B#,C','C#,Db'),
       2:  new Array('B,Cb','B#,C','C#,Db','D','D#,Eb','E,Fb','F','F#,Gb','G','G#,Ab','A','A#,Bb','B,Cb','B#,C','C#','D','D#','E,Fb','E#,F','F#,Gb','G','G#,Ab'),
@@ -324,11 +326,14 @@ var neckModule = (function() {
 
   neck.showChord = function(interval)
   {
+    console.log(interval);
     this.showingChord = true;
     this.wrapper.find('#chord_instructions').hide();
     this.wrapper.find('.note').removeClass('int-3 int-5 int-7 int-11 int-1 int-9');
     this.currentInterval = interval;
+
     var noteSelectArr = this.currentChordsArr[interval];
+    console.log(this.currentChordsArr);
     var chordType = "";
     this.show_chord_divs();
     // hide all note divs
@@ -337,7 +342,8 @@ var neckModule = (function() {
     this.wrapper.find('.note').addClass('muted'); // set transparency rather than hiding the other scale notes
     
     this.notesPerChord = parseInt(this.notesPerChord);
-
+    console.log(this.notesPerChord);
+    console.log(noteSelectArr);
     switch (this.notesPerChord) {
       case 3:
         chordType = noteSelectArr[5];
@@ -545,7 +551,7 @@ var neckModule = (function() {
   // FRET RANGE SELECTORS
   neck.buildFretRangeSelectors = function() {
 
-    var fretRangeSelectors = '<div id="fretselectors">Set lowest fret:';
+    var fretRangeSelectors = '<div class="controller" id="fretselectors">Set lowest fret:';
     fretRangeSelectors += ' <select id="lowfret">';
     for ( var i=0; i<this.totalFrets; i++ )
     {
@@ -574,7 +580,7 @@ var neckModule = (function() {
 
   // KEY SELECTORS
   neck.buildKeySelectors = function() {
-    var keySelectors = '<div id="changeKey">Select key: ';
+    var keySelectors = '<div class="controller" id="changeKey">Select key: ';
     keySelectors += ' <select id="scaleSelector">';
     keySelectors += '   <option value="">Major...</option>';
     for (var key in this.majorScales) {
@@ -660,7 +666,8 @@ var neckModule = (function() {
         notesPerChord:              3,
         toggleStringVisibility:     true,
         neckStyleClass:             "",
-        replaceInitScript:          false
+        replaceInitScript:          false,
+        hideControls:               false
       };
 
       if(arguments !== undefined) {
@@ -689,7 +696,7 @@ var neckModule = (function() {
     if(params.topfret > this.totalFrets) {
       this.topfret = this.totalFrets;
     }
-    
+    debugger;
     this.currentScale = this[params.scalesArray][params.rootNote];
     this.currentKey = params.rootNote;
     this.currentChordsArr = this.chordsArr;
@@ -729,6 +736,8 @@ var neckModule = (function() {
 
   // MAIN MODULE WRAPPER
   this.htmlPieces += openMainWrapper();
+
+  this.htmlPieces += buildControlsToggler();
 
     if(params.showTitle) {
       this.htmlPieces += buildMaintitleDiv();
@@ -830,6 +839,7 @@ var neckModule = (function() {
     wrapper = this.wrapper = container.find('.guitar-module-main-wrapper');
     var that = this;
     this.stringDivs = this.buildNoteGrid();
+
     wrapper.find('.neckmodule').html(this.stringDivs);
     var togglers = buildStringViewTogglers();
     wrapper.find('.neckmodule').append(togglers);
@@ -864,6 +874,10 @@ var neckModule = (function() {
       });
     }
 
+    wrapper.find('.controls-toggler span').click(function(){
+      that.toggleControls();
+    });
+
     if(this.params.showKeySelectors) {
       wrapper.find('#changeKey #scaleSelector').change(function(){
         that.changeScale(this.value);
@@ -888,7 +902,7 @@ var neckModule = (function() {
         that.setHighFret(this.value);
       });
     }
-
+    // debugger;
     switch(this.params.scalesArray) {
 
       case 'majorScales' :
@@ -914,69 +928,85 @@ var neckModule = (function() {
     this.updateMetaDivs('topfret', this.topfret);
     this.updateMetaDivs('lowfret', this.lowfret);
 
+    console.log(this.hideControls);
+    if(this.params.hideControls) {
+      wrapper.find('.controls-toggler .hide-controls').hide();
+      this.toggleControls();
+    } else {
+      wrapper.find('.controls-toggler .show-controls').hide();
+    }
+
   }
 
+  neck.toggleControls = function() {
+    // debugger;
+    if(this.controlsHidden) {
+      // show controls
+      this.controlsHidden = false;
+      this.updateMetaDivs('hideControls',false);
+      this.wrapper.find('.controller').show();
+      this.wrapper.find('.controls-toggler span.hide-controls').show();
+      this.wrapper.find('.controls-toggler span.show-controls').hide();
+    } else {
+      // hide controls
+      this.controlsHidden = true;
+      this.updateMetaDivs('hideControls',true);
+      this.wrapper.find('.controller').hide();
+      this.wrapper.find('.controls-toggler span.hide-controls').hide();
+      this.wrapper.find('.controls-toggler span.show-controls').show();
+    }
+    
+  }
 // END MODULE METHODS ********************************************************* \\
 
 
 // DISPLAY BUILDERS ******************************************************************************** //
 
   var openMainWrapper = function() {
-    var mainWrapper = '<div class="guitar-module-main-wrapper">';
+    return '<div class="guitar-module-main-wrapper">';
+  }
 
-    return mainWrapper;
+  var buildControlsToggler = function() {
+    return "<div class='controls-toggler'>\n  <span class='show-controls'>Show Controls</span>\n  <span class='hide-controls'>Hide Controls</span>\n</div>";
   }
 
   var buildMaintitleDiv = function() {
-    var mainTitleDiv = '<div id="main_title"></div>';
-
-    return mainTitleDiv;
+    return '<div id="main_title"></div>';
   }
 
   // TOP DIV BUILDER
   var openTopDiv = function() {
-    topDivStart = '<div class="top-wrapper">';
-
-    return topDivStart;
+    return '<div class="top-wrapper">';
   }
     // TOP LEFT BUILDER
     var openTopLeftDiv = function() {
-      topLeftDivStart = '<div class="top-left">';
-
-      return topLeftDivStart;
+      return '<div class="top-left">';
     }
 
       // SCALE NOTES
       var buildScaleNotesDiv = function() {
-        var scaleNotesDiv = '<div id="keyNotes"></div>';
-        return scaleNotesDiv;
+        return '<div id="keyNotes"></div>';
       }
 
       // FRET RANGE DISPLAY
       var buildFretRangeInfoDiv = function() {
-        var infoDiv = '<div id="info"></div>';
-
-        return infoDiv;
+        return '<div class="controller" id="info"></div>';
       }
 
       // CHORD NAME
       var buildChordNameHeaderDiv = function() {
-        var chordNameHeaderDiv = '<h2 class="chord-name"></h2>';
-
-        return chordNameHeaderDiv;
+        return '<h2 class="chord-name"></h2>';
       }
 
     // TOP RIGHT BUILDER
     var openTopRighttDiv = function() {
-      topRightDivStart = '<div class="top-right">';
-
-      return topRightDivStart;
+      return '<div class="top-right">';
     }
 
       // NOTES PER CHORD SELECTOR
       var buildNotesPerChordSelectorDiv = function() {
 
-        var notesPerChordSelectorDiv = '<div>';
+        var notesPerChordSelectorDiv = '<div class="controller">';
         notesPerChordSelectorDiv += ' <div class="showing"></div>';
         notesPerChordSelectorDiv += ' <div class="notesPerChord">Show <a ctype="3" href="#">basic chords</a>, <a ctype="4" href="#">7th chords</a> or <a ctype="5" href="#">9th chords</a>.</div>';
         notesPerChordSelectorDiv += '</div>';
@@ -1016,19 +1046,15 @@ var neckModule = (function() {
 
 
   var closeDiv = function() {
-    divCloser = '</div>';
-
-    return divCloser;
+    return '</div>';
   }
 
   var buildNeckModuleDiv = function() {
-    var neckModuleDiv = '<div class="neckmodule"></div>';
-
-    return neckModuleDiv;
+    return '<div class="neckmodule"></div>';
   }
 
   var buildStringViewTogglers = function() {
-    var stringViewTogglersDiv = '<div class="string-togglers">';
+    var stringViewTogglersDiv = '<div class="string-togglers controller">';
     stringViewTogglersDiv += '  <ul>';
     stringViewTogglersDiv += '    <li string="1"></li>';
     stringViewTogglersDiv += '    <li string="2"></li>';
@@ -1044,26 +1070,20 @@ var neckModule = (function() {
 
   var openControlsDiv = function() {
     // all the subsequent stuff gets injected into here so this has to be created first!
-    var controlsDiv = '<div id="controls">';
-
-    return controlsDiv;
+    return '<div class="controller" id="controls">';
   }
 
   var buildChordInstructionsDiv = function() {
-    var chordInstructionsDiv = '  <div id="chord_instructions">Use buttons below to display corresponding chord notes</div>';
-
-    return chordInstructionsDiv;
+    return '  <div class="controller" id="chord_instructions">Use buttons below to display corresponding chord notes</div>';
   }
 
   var buildResetLink = function() {
-    var resetLink = '<p class="reset-link"><a href="#">Reset guitar neck to initially loaded view</a></p>';
-
-    return resetLink;
+    return '<p class="reset-link controller"><a href="#">Reset guitar neck to initially loaded view</a></p>';
   }
 
   var buildChordButtonsDiv = function() {    
     
-    var chordButtonsDiv = '  <div id="chordButtons">';
+    var chordButtonsDiv = '  <div class="controller" id="chordButtons">';
     chordButtonsDiv += '    <div class="chordButton" scaleInt="1">Cmaj7</div>';
     chordButtonsDiv += '    <div class="chordButton" scaleInt="2">Dm7</div>';
     chordButtonsDiv += '    <div class="chordButton" scaleInt="3">Em7</div>';

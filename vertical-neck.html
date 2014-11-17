@@ -10,13 +10,14 @@
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href='http://fonts.googleapis.com/css?family=Archivo+Narrow:400,700' rel='stylesheet' type='text/css'>
-  <link rel="stylesheet" href="/css/vertical-neck-module.css?id=23456">
+  <link rel="stylesheet" href="/css/vertical-neck-module.css?id=33456">
 
   <script src="/js/vexflow-min.js"></script>
   <script src="/js/underscore-min.js"></script>
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-  <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.2.min.js"><\/script>')</script>
-  <script src="//code.jquery.com/ui/1.11.1/jquery-ui.js"></script>
+  <!-- <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.2.min.js"><\/script>')</script> -->
+  <script src="/js/jquery.js"></script>
+  <script src="/js/jquery-ui.js"></script>
   <script src="/js/vertical.neckmodule.js"></script>  
   <script src="/js/tabdiv.js"></script>
   <script src="/js/tabdiv-debug.js"></script>
@@ -26,8 +27,16 @@
       display: inline-block;
       list-style: none;
       margin: 0 15px 0 0;
+      vertical-align: top;
     }
   </style>
+  <!--[if gte IE 9]>
+    <style type="text/css">
+      .gradient {
+         filter: none;
+      }
+    </style>
+  <![endif]-->
 </head>
 <body>
 <!--[if lt IE 7]>

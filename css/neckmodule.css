@@ -1,7 +1,30 @@
 ﻿@charset "utf-8";
 /* CSS Document */
+.guitar-module-main-wrapper { position: relative; }
 .guitar-module-main-wrapper .top-wrapper { width: 600px; position: relative; overflow: auto; }
 .guitar-module-main-wrapper .neckmodule { position: relative; background: url('../images/blankneck.jpg') no-repeat 25px 22px; width: 600px; height: 166px; margin: 0; }
+
+.guitar-module-main-wrapper .controls-toggler {
+  position: absolute;
+  top: 5px;
+  right: 150px;
+  border: 2px solid #cccccc;
+  border-radius: 3px;
+  padding: 5px;
+  z-index: 3000;
+  text-align: center;
+  width: 55px;
+  line-height: 1.0em;
+  background: #eeefff;
+  font-size: 0.9em;
+  font-weight: bold;
+}
+
+.guitar-module-main-wrapper .controls-toggler span {
+  display: block;
+  cursor: pointer;
+  color: rgb(255, 97, 0);
+}
 
 .guitar-module-main-wrapper .string1, 
 .guitar-module-main-wrapper .string2, 

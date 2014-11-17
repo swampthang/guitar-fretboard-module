@@ -16,12 +16,15 @@ var chordModule = (function() {
     typeArr:                  [],
     positionArr:              [],
     noteArr:                  [],
+    noteMetaArray:            [],
     stringDivs:               "",
     naturals:                 ('A','B','C','D','E','F','G'),
     accidentals:              ('A#','Bb','C#','Db','D#','Eb','F#','Gb','G#','Ab'),
     viewMode:                 "chord",
     notationData:             "",
     renderer:                 {},
+    hideControls:             false,
+    controlsHidden:           false,
     strings: {
       1:  new Array('E','E#,F','F#,Gb','G','G#,Ab','A','A#,Bb','B,Cb','B#,C','C#,Db','D','D#,Eb','E,Fb','E#,F','F#,Gb','G','G#,Ab','A','A#,Bb','B,Cb','B#,C','C#,Db','D','D#,Eb'),
       2:  new Array('B,Cb','B#,C','C#,Db','D','D#,Eb','E,Fb','E#,F','F#,Gb','G','G#,Ab','A','A#,Bb','B,Cb','B#,C','C#','D','D#','E,Fb','E#,F','F#,Gb','G','G#,Ab','A','A#,Bb'),
@@ -50,15 +53,23 @@ var chordModule = (function() {
     // after major scale notes come altered notes - (7=>m3), (8=>b7), (9=>b5), (10=>#5), (11=>b9), (12=>#9), (13=>#11)
     chordTypes: {
       'major': {'symbol': '', 'selectName': 'Major Triad', 'arrayPositions': [0,2,4], 'intervals': [1,3,5], 'basicType': 'major', 'scaleInterval': 1},
-      'minor': {'symbol': 'm', 'selectName': 'Minor Triad', 'arrayPositions': [0,7,4], 'intervals': [1,3,5], 'basicType': 'minor', 'scaleInterval': 1},
-      'diminished': {'symbol': 'd', 'selectName': 'Diminished Triad', 'arrayPositions': [0,7,9], 'intervals': [1,3,5], 'basicType': 'diminished', 'scaleInterval': 7},
+      '2': {'symbol': '2', 'selectName': '2', 'arrayPositions': [0,1,4], 'intervals': [1,2,5], 'basicType': 'major', 'scaleInterval': 1},
+      '6': {'symbol': '6', 'selectName': '6', 'arrayPositions': [0,2,4,5], 'intervals': [1,3,5,6], 'basicType': 'major', 'scaleInterval': 1},
       'maj7': {'symbol': 'maj7', 'selectName': 'Major 7th', 'arrayPositions': [0,2,4,6], 'intervals': [1,3,5,7], 'basicType': 'major', 'scaleInterval': 1},
+      'maj9': {'symbol': 'maj9', 'selectName': 'Major 9th', 'arrayPositions': [0,2,4,6,1], 'intervals': [1,3,5,7], 'basicType': 'major', 'scaleInterval': 1},
+      'sus4': {'symbol': 'sus4', 'selectName': 'sus4', 'arrayPositions': [0,3,4], 'intervals': [1,4,5], 'basicType': 'major', 'scaleInterval': 1},
+      'add9': {'symbol': 'add9', 'selectName': 'Add 9', 'arrayPositions': [0,1,2,4], 'intervals': [1,2,3,5], 'basicType': 'major', 'scaleInterval': 1},
+      '11': {'symbol': '11', 'selectName': '11', 'arrayPositions': [0,1,3,4,8], 'intervals': [1,4,5,'b7',9,11], 'basicType': 'major', 'scaleInterval': 1},
+      'maj13': {'symbol': 'maj13', 'selectName': 'Major 13th', 'arrayPositions': [0,2,4,6,1,5], 'intervals': [1,3,5,7,9,13], 'basicType': 'major', 'scaleInterval': 1},
+      'minor': {'symbol': 'm', 'selectName': 'Minor Triad', 'arrayPositions': [0,7,4], 'intervals': [1,3,5], 'basicType': 'minor', 'scaleInterval': 1},
       'min7': {'symbol': 'm7', 'selectName': 'Minor 7th', 'arrayPositions': [0,7,4,8], 'intervals': [1,3,5,7], 'basicType': 'minor', 'scaleInterval': 6},
+      'min6': {'symbol': 'm6', 'selectName': 'Minor 6th', 'arrayPositions': [0,7,4,5], 'intervals': [1,'b3',5,6], 'basicType': 'minor', 'scaleInterval': 1},
+      'min9': {'symbol': 'm9', 'selectName': 'Minor 9th', 'arrayPositions': [0,7,4,8,1], 'intervals': [1,3,5,7], 'basicType': 'minor', 'scaleInterval': 1},
+      'min6/9': {'symbol': 'm6/9', 'selectName': 'Minor 6/9', 'arrayPositions': [0,7,4,5,1], 'intervals': [1,3,5,7], 'basicType': 'minor', 'scaleInterval': 1},
       'dom7': {'symbol': '7', 'selectName': 'Dominant 7th', 'arrayPositions': [0,2,4,8], 'intervals': [1,3,5,7], 'basicType': '', 'scaleInterval': 5},
       'min7b5': {'symbol': 'm7b5', 'selectName': 'Minor 7b5', 'arrayPositions': [0,7,9,8], 'intervals': [1,3,5,7], 'basicType': '', 'scaleInterval': 7},
+      'diminished': {'symbol': 'd', 'selectName': 'Diminished Triad', 'arrayPositions': [0,7,9], 'intervals': [1,3,5], 'basicType': 'diminished', 'scaleInterval': 7},
       'dim7': {'symbol': 'd7', 'selectName': 'Diminished 7th', 'arrayPositions': [0,7,9,5], 'intervals': [1,3,5,7], 'basicType': '', 'scaleInterval': 1},
-      'maj9': {'symbol': 'maj9', 'selectName': 'Major 9th', 'arrayPositions': [0,2,4,6,1], 'intervals': [1,3,5,7], 'basicType': '', 'scaleInterval': 1},
-      'min9': {'symbol': 'm9', 'selectName': 'Minor 9th', 'arrayPositions': [0,7,4,8,1], 'intervals': [1,3,5,7], 'basicType': '', 'scaleInterval': 1},
       'dom9': {'symbol': '9', 'selectName': 'Dominant 9th', 'arrayPositions': [0,2,4,8,1], 'intervals': [1,3,5,7], 'basicType': '', 'scaleInterval': 1},
       'dom7b5': {'symbol': '7b5', 'selectName': 'Dominant 7b5', 'arrayPositions': [0,2,9,8], 'intervals': [1,3,5,7], 'basicType': '', 'scaleInterval': 1},
       'dom7b5b9': {'symbol': '7b5b9', 'selectName': 'Dominant 7b5b9', 'arrayPositions': [0,2,9,8,11], 'intervals': [1,3,5,7], 'basicType': '', 'scaleInterval': 1},
@@ -114,18 +125,61 @@ var chordModule = (function() {
 
       var metaData = "";
       this.container.find('.meta').each(function(){
+
         var paramName = $(this).attr('id');
         var paramVal = $(this).attr('data-content');
-        // check for boolean
+
+        // check for true/fase text and change to boolean value
         if(paramVal == "true") { paramVal = true; }
         if(paramVal == "false") { paramVal = false; }
+
         metaData += '<div class="meta" id="'+paramName+'" data-content="'+paramVal+'"></div>\n';
+
       });
       return metaData;
     } else {
       return null;
     }
   };
+
+  chord.preserveNoteMetaData = function() {
+
+    if(this.container.find('.notemeta').length) {
+      var noteMetaArray = [];
+      var noteMetaData = "";
+      this.container.find('.notemeta').each(function(){
+
+        var paramName = $(this).attr('id');
+        var paramVal = $(this).attr('data-content');
+
+        // check for true/fase text and change to boolean value
+        if(paramVal == "true") { paramVal = true; }
+        if(paramVal == "false") { paramVal = false; }
+        noteMetaArray.push(paramName);
+        noteMetaData += '<div class="notemeta" id="'+paramName+'" data-content="'+paramVal+'"></div>\n';
+
+      });
+      this.noteMetaArray = noteMetaArray;
+      return noteMetaData;
+    } else {
+      return null;
+    }
+  };
+
+  chord.filterByNoteMetaData = function() {
+    var notesShowing = this.notesInView();
+    for(var s=1;s<=6;s++) {
+      var thisStringNotes = notesShowing[s];
+    
+      for(var n=0; n<thisStringNotes.length;n++) {
+        var thisNoteId = thisStringNotes[n].attr("id");
+        
+        if(this.noteMetaArray.indexOf(thisNoteId) == -1) {
+          thisStringNotes[n].removeClass('on').addClass('off');
+        }
+      }
+    }
+  }
 
   chord.buildNoteGrid = function() {
     var note;
@@ -232,6 +286,12 @@ var chordModule = (function() {
     this.updateMaintitleDiv();
     this.updateMetaDivs('rootnote',root);
     this.updateMetaDivs('chordtype',type);
+    
+    if(this.preserveNoteMetaData() !== null) {
+      this.filterByNoteMetaData();
+    } else {
+      this.resetNoteMetas();
+    }
     this.createNotation();
   }
 
@@ -253,7 +313,8 @@ var chordModule = (function() {
         toggleStringVisibility:     true,
         neckStyleClass:             "",
         position:                   0,
-        viewMode:                   "chord"
+        viewMode:                   "chord",
+        hideControls:               false
       };
 
       if(arguments !== undefined) {
@@ -289,8 +350,7 @@ var chordModule = (function() {
   chord.notesInView = function() {
     var pos = parseInt(this.position);
     var topfret = pos + 4;
-    if(pos == 0) { topfret = 5; } // if in open position, the top fret is still going to be the 5th fret
-    console.log(topfret);
+    if(pos == 0) { topfret = 5; } // if in open position, the top fret is still going to be the 5th fre
     var notesOnString = [];
     notesOnString[6]=[];
     notesOnString[5]=[];
@@ -336,15 +396,15 @@ var chordModule = (function() {
 
 
   chord.initLayout = function() {
-
     var container = this.container;
     var metaData = this.preserveMetaData();
+    var noteMetaData = this.preserveNoteMetaData();
     var params = this.params;
     this.htmlPieces = "";
 
     // MAIN MODULE WRAPPER
     this.htmlPieces += openMainWrapper();
-
+    this.htmlPieces += buildControlsToggler();
     this.htmlPieces += this.buildMaintitleDiv();
 
     // TOP
@@ -356,14 +416,21 @@ var chordModule = (function() {
       this.htmlPieces += metaData;
     }
 
+    if(noteMetaData !== null) {
+      this.htmlPieces += noteMetaData;
+    }
+
     // close mainModuleWrapper
     this.htmlPieces += closeDiv();
     this.htmlPieces += buildVexTabContainer();
     this.htmlPieces += openChordControlsDiv();
-    this.htmlPieces += this.buildPositionSelectors(this.position);
-    this.htmlPieces += this.buildChordTypeSelectors(this.chordtype);
+    this.htmlPieces += createControlsHeader();
+    this.htmlPieces += openSelectorsWrapper();
     this.htmlPieces += this.buildRootNoteSelectors(this.rootnote);
+    this.htmlPieces += this.buildChordTypeSelectors(this.chordtype);
+    this.htmlPieces += this.buildPositionSelectors(this.position);
     this.htmlPieces += buildViewModeToggle(this.viewMode);
+    this.htmlPieces += closeDiv();
     this.htmlPieces += closeDiv();
     container.html(this.htmlPieces);
 
@@ -378,34 +445,53 @@ var chordModule = (function() {
 
     this.stringDivs = this.buildNoteGrid();
 
+    console.log(this.hideControls);
+    if(this.params.hideControls) {
+      wrapper.find('.controls-toggler .hide-controls').hide();
+      this.toggleControls();
+    } else {
+      wrapper.find('.controls-toggler .show-controls').hide();
+    }
+
     wrapper.find('.vertical-neck-module').html(this.stringDivs);
 
-    wrapper.find('#rootnote').change(function(){
+    wrapper.find('.selectors-wrapper #rootnote').change(function(){
+      that.removeCurrentNoteMetas();
       that.buildChord(this.value,that.chordtype);
-
     });
 
-    wrapper.find('#chordtype').change(function(){
+    wrapper.find('.selectors-wrapper #chordtype').change(function(){
+      that.removeCurrentNoteMetas();
       that.buildChord(that.rootnote,this.value);
     });
 
-    wrapper.find('#position-selectors').change(function(e){
+    wrapper.find('.selectors-wrapper #position-selectors').change(function(e){
       e.preventDefault();
+      that.removeCurrentNoteMetas();
       var pos = $(this).val();
       that.switchPosition(pos);
     });
 
-    wrapper.find('.view-mode-selector').change(function(e){
+    wrapper.find('.selectors-wrapper .view-mode-selector').change(function(e){
       e.preventDefault();
       var mode = $(this).val();
       that.viewMode = mode;
       that.createNotation();
+      that.resetNoteMetas();
+    });
+
+    wrapper.find('.controls-toggler span').click(function(){
+      that.toggleControls();
     });
 
     wrapper.find('.note').click(function(){
-      console.log('ran toggleVisible');
-      that.toggleVisible($(this));
-      that.createNotation();
+      if(!$(this).hasClass('freeze')) {
+        var string = that.getFretString($(this),"string");
+        that.toggleNoteOnString(string,$(this));
+        that.createNotation();
+        that.resetNoteMetas();
+      }
+      
     });
 
     this.wrapper.find('.note').hide();
@@ -419,8 +505,14 @@ var chordModule = (function() {
     this.updateMetaDivs('rootnote',this.rootnote);
     this.updateMetaDivs('chordtype',this.chordtype);
 
-    this.createNotation();
+    this.resetNoteMetas();
 
+    var noteMetaData = this.preserveNoteMetaData();
+    if(noteMetaData !== null) {
+      this.filterByNoteMetaData();
+    }
+
+    this.createNotation();
     this.container.find('.chord-controls').draggable();
 
   };
@@ -430,6 +522,14 @@ var chordModule = (function() {
       this.wrapper.find(".meta#"+tagID).attr('data-content',val);
     } else {
       this.wrapper.append("<div class='meta' id='"+tagID+"' data-content='"+val+"'>");
+    }
+  }
+
+  chord.updateNoteMetaDiv = function(tagID, val) {
+    if(this.wrapper.find(".notemeta#"+tagID).length) {
+      this.wrapper.find(".notemeta#"+tagID).attr('data-content',val);
+    } else {
+      this.wrapper.append("<div class='notemeta' id='"+tagID+"' data-content='"+val+"'>");
     }
   }
 
@@ -450,6 +550,56 @@ var chordModule = (function() {
       this.viewMode = "arpeggio";
     }
     this.createNotation();
+  }
+
+  chord.toggleNoteOnString = function(string,note) {
+    // TODO: need to turn on all notes when switching to arpeggio mode
+    // if in chord mode turn off all other notes on this string except for
+    // the note sent here
+    // string = string-number
+    // note = note element
+    if(this.viewMode == 'chord' && note.hasClass('off')) {
+      note.removeClass('off').addClass('on');
+      var notesOnString = this.notesInView();
+      var thisStringNotes = notesOnString[string];
+      for (var n=0;n<thisStringNotes.length; n++) {
+
+        if(thisStringNotes[n][0] != note[0]) {
+          // turn these off
+          thisStringNotes[n].removeClass('on').addClass('off');
+        }
+      }
+      this.resetNoteMetas();
+    } else {
+      if(note.hasClass('on')) {
+        var id = note.attr('id');
+        this.removeNoteMeta(id);
+      }
+      this.toggleVisible(note);
+    }
+  }
+
+  chord.resetNoteMetas = function() {
+    this.removeCurrentNoteMetas();
+    var notes = this.notesInView();
+    for(var s=1; s<=6; s++) {
+      for(var n=0; n<notes[s].length; n++) {
+        if(notes[s][n].hasClass('in-chord') && notes[s][n].hasClass('on')) {
+          var id = notes[s][n].attr('id');
+          this.updateNoteMetaDiv(id,'in-chord on');
+        }
+      }
+    }
+  }
+
+  chord.removeCurrentNoteMetas = function() {
+    this.wrapper.find('.notemeta').remove();
+  }
+
+  chord.removeNoteMeta = function(id) {
+    if($('.notemeta#'+id).length) {
+      $('.notemeta#'+id).remove();
+    }
   }
 
   chord.processNoteName = function(noteName) {
@@ -487,14 +637,13 @@ var chordModule = (function() {
   }
 
   chord.initVexFlow = function() {
-    Vex.Flow.Artist.DEBUG = true;
-    Vex.Flow.VexTab.DEBUG = true;
+    Vex.Flow.Artist.DEBUG = false;
+    Vex.Flow.VexTab.DEBUG = false;
     var notationContainer = this.container.find('#chord-notation')[0];
     this.renderer = new Vex.Flow.Renderer(notationContainer,
       Vex.Flow.Renderer.Backends.CANVAS);
 
     this.container.find('#notation-data').change(function(){
-      console.log('i changed');
       this.renderNotation();
     });
 
@@ -504,8 +653,7 @@ var chordModule = (function() {
   chord.stackChordNotation = function(notes) {
 
     var lastItem = notes[1].length-1;
-    var lastEl = notes[1][lastItem];
-    console.log(lastEl);
+    var lastEl = notes[1][lastItem]
     var chordStack = " :w (";
 
     for(var s=6; s>=1; s--) {
@@ -530,7 +678,7 @@ var chordModule = (function() {
           }
 
         } else {
-          console.log('on lastEl');
+   
           if(n==0) {
 
             chordStack += noteName + fret + "/" + string + ")";
@@ -591,7 +739,6 @@ var chordModule = (function() {
       artist.render(this.renderer);
       $("#error").text("");
     } catch (e) {
-      console.log(e);
       $("#error").html(e.message.replace(/[\n]/g, '<br/>'));
     }
   }
@@ -618,6 +765,31 @@ var chordModule = (function() {
     this.createNotation();
   }
 
+  chord.toggleControls = function() {
+    // debugger;
+    if(this.controlsHidden) {
+      // show controls
+      this.controlsHidden = false;
+      this.updateMetaDivs('hideControls',false);
+      this.wrapper.find('.controls').show();
+      this.wrapper.find('.controls-toggler span.hide-controls').show();
+      this.wrapper.find('.controls-toggler span.show-controls').hide();
+      this.wrapper.find('.note.in-chord.on').removeClass('freeze');
+      this.wrapper.find('.note.in-chord.off').removeClass('freeze');
+    } else {
+      // hide controls
+      this.controlsHidden = true;
+      this.updateMetaDivs('hideControls',true);
+      this.wrapper.find('.note.in-chord.on').addClass('freeze');
+      this.wrapper.find('.note.in-chord.off').addClass('freeze');
+      this.wrapper.find('.controls').hide();
+      this.wrapper.find('.controls-toggler span.hide-controls').hide();
+      this.wrapper.find('.controls-toggler span.show-controls').show();
+    }
+    
+  }
+
+
   var getCurrentPositionClassName = function(str) {
     var arr = str.split(" ");
     var positionClassName = "";
@@ -639,13 +811,25 @@ var chordModule = (function() {
     }
   }
 
+  var buildControlsToggler = function() {
+    return "<div class='controls-toggler'>\n  <span class='show-controls'>Show Controls</span>\n  <span class='hide-controls'>Hide Controls</span>\n</div>";
+  }
+
   chord.buildMaintitleDiv = function() {
     var symbol = this.getSymbol(this.chordtype);
     return '<h2 class="chord-name">'+this.rootnote+((symbol != "") ? '<sup>'+symbol+'</sup>' : "")+'</h2>';
   };
 
   var openChordControlsDiv = function() {
-    return "<div class='chord-controls'>";
+    return "<div class='chord-controls controls'>";
+  }
+
+  var createControlsHeader = function(){
+    return "<div class='controls-header gradient'>\n <h3>Controls</h3></div>";
+  }
+
+  var openSelectorsWrapper = function() {
+    return "<div class='selectors-wrapper'>";
   }
 
   var openMainWrapper = function() {

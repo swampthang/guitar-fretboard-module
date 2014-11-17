@@ -19,24 +19,35 @@
   <div id="test-div"></div>
   <script>
     var testNeck = Object.create(neckModule);
-    testNeck.initParams({myContainer: 'test-div', totalFrets: 17});
+    testNeck.initParams({
+      myContainer: 'test-div', 
+      rootNote: 'C',
+      showInitialChord: true,
+      chordInterval: 2,
+      totalFrets: 17,
+      topfret: 17,
+      lowfret:0,
+      notesPerChord: 4,
+      scalesArray: 'majorScales'
+    });
     testNeck.initLayout();
     testNeck.initActions();
+    debugger;
   </script>
   <div>
     <script type="text/javascript">
-    (function(){
-      var scripts = document.getElementsByTagName('script');
-      var this_script = scripts[scripts.length-1];
-      var container = idMaganager.processScriptInstance(this_script);
-      idMaganager.setId(container);
-      console.log(container.id);
-      var neckID = container.id;
-      necks[neckID] = Object.create(neckModule);
-      necks[neckID].initParams({myContainer: neckID, replaceInitScript: true, totalFrets: 19, neckStyleClass: 'long-neck-g'});
-      necks[neckID].initLayout();
-      necks[neckID].initActions();
-    })();
+    // (function(){
+    //   var scripts = document.getElementsByTagName('script');
+    //   var this_script = scripts[scripts.length-1];
+    //   var container = idMaganager.processScriptInstance(this_script);
+    //   idMaganager.setId(container);
+    //   console.log(container.id);
+    //   var neckID = container.id;
+    //   necks[neckID] = Object.create(neckModule);
+    //   necks[neckID].initParams({myContainer: neckID, replaceInitScript: true, totalFrets: 19, neckStyleClass: 'long-neck-g'});
+    //   necks[neckID].initLayout();
+    //   necks[neckID].initActions();
+    // })();
 
     </script>
   </div>

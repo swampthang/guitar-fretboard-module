@@ -1,27 +1,5 @@
 @charset "utf-8";
 /* CSS Document */
-.vertical-neck-module-wrapper .controls-toggler {
-  position: absolute;
-  top: 5px;
-  left: 0;
-  border: 2px solid #cccccc;
-  border-radius: 3px;
-  padding: 5px;
-  z-index: 3000;
-  text-align: center;
-  width: 50px;
-  line-height: 1.0em;
-  background: #eeefff;
-  font-size: 0.9em;
-  font-weight: bold;
-}
-
-.vertical-neck-module-wrapper .controls-toggler span {
-  display: block;
-  cursor: pointer;
-  color: rgb(255, 97, 0);
-}
-
 .vertical-neck-module-wrapper {
   font-family: 'Archivo Narrow', sans-serif;
   text-align: center;
@@ -64,7 +42,6 @@
 }
 
 .vertical-neck-module-wrapper .chord-controls .controls-header {
-  cursor: move;
   height: 25px;
   color: #fff;
   display: block;
@@ -109,7 +86,7 @@
 
 .vertical-neck-module {
   position: relative;
-  background: url('../images/long-vertical-fretboard.png') no-repeat center top;
+  background: url('../images/long-vertical-fretboard_50.png') no-repeat center top;
   background-size: 100%;
   height: 2970px;
   width: 100%;
@@ -154,15 +131,6 @@
 
 .vertical-neck-module .note.off {
   opacity: 0.25;
-}
-
-.vertical-neck-module .note.on.freeze {
-  cursor: default;
-}
-
-.vertical-neck-module .note.off.freeze {
-  cursor: default;
-  opacity: 0;
 }
 
 .vertical-neck-module.pos1 { top: -27px; }

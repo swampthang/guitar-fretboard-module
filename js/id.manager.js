@@ -76,34 +76,34 @@ var chordIdManager = $.extend(idMaganager);
 chordIdManager.classNameText = "hotfrets-chord-module";
 chordIdManager.idPrefixText = "chord-module-container-";
 
-function setModuleParams () {
-  $('.guitar-module-main-wrapper').each(function(){
+// function setModuleParams () {
+//   $('.guitar-module-main-wrapper').each(function(){
 
-    var container = $(this).parent();
-    var containerID = container.attr('id');
+//     var container = $(this).parent();
+//     var containerID = container.attr('id');
 
-    if($(this).find('.meta').length) {
+//     if($(this).find('.meta').length) {
 
-      necks[containerID] = Object.create(neckModule);
+//       necks[containerID] = Object.create(neckModule);
 
-      var presetParams = {};
-      $(this).find('.meta').each(function(){
-        var paramName = $(this).attr('id');
-        var paramVal = $(this).attr('data-content');
-        // check for boolean
-        if(paramVal == "true") { paramVal = true; }
-        if(paramVal == "false") { paramVal = false; }
-        presetParams[paramName] = paramVal;
-      });
+//       var presetParams = {};
+//       $(this).find('.meta').each(function(){
+//         var paramName = $(this).attr('id');
+//         var paramVal = $(this).attr('data-content');
+//         // check for boolean
+//         if(paramVal == "true") { paramVal = true; }
+//         if(paramVal == "false") { paramVal = false; }
+//         presetParams[paramName] = paramVal;
+//       });
 
-      necks[containerID].initParams(presetParams);
+//       necks[containerID].initParams(presetParams);
 
-      necks[containerID].initLayout();
+//       necks[containerID].initLayout();
 
-      necks[containerID].initActions();
+//       necks[containerID].initActions();
 
-    }
-  });
+//     }
+//   });
 
   $('.vertical-neck-module-wrapper').each(function(){
 
