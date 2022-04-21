@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Neck module</title>
+	<!-- FONT -->
+  <link href='http://fonts.googleapis.com/css?family=Archivo+Narrow:400,700' rel='stylesheet' type='text/css'>
+  <!-- Must include the following stylesheet. If you want, you can style it differently -->
+	<link rel="stylesheet" href="assets/css/common.css">
+  <link rel="stylesheet" href="assets/css/neckmodule.css">
+  <link rel="stylesheet" href="assets/css/long-neck-g.css">
+  <link rel="stylesheet" href="assets/css/long-neck-f.css">
+  <link rel="stylesheet" href="assets/css/vertical-neck-module.css">
+  <!-- example.css is only used to style the example pages themselves -->
+  <link rel="stylesheet" href="assets/css/examples.css">
+</head>
+<body>
+<div class="main-wrapper">
+  <h1>Isolate One Fretboard Section</h1>
+  <p>In the example below, there are 3 neck-modules created in 3 different key areas. Each are set exactly the same with the exception of the 'myContainer' and 'rootNote' settings. View the source of this file to study the way it's set up.</p>
+  <h2>LESSON IDEA</h2>
+  <p>So, if you're a teacher or a student and want an aid for soloing over a chord progression that uses chords from the key of E, G and Bb, you could use the 3 charts produced below.</p>
+  <h3>Sample Chord Progression</h3>
+  <p>The chord progression below consists of the 5sus chord in the key of E, G and Bb. So, you can play the E major scale notes for the Bsus chord, the G major scale notes for the Dsus chord and the Bb major scale for the Fsus chord.</p>
+  <div>
+    <p>The audio file below loops through the progression a few times and then ends. Click the play button and play along. Every time you hear the chord change, you'll be in the new key. So, you'll start on the Bsus chord, then the Dsus and then Fsus.</p>
+    <p>Use the low and high fret selectors to isolate one area of the neck for practicing moving from one key to another in the same general area of the neck.</p>
+    <h2>|: Bsus &nbsp; &nbsp; &nbsp; &nbsp; | &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; | Dsus &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; | &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; | Fsus &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; | &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; :|</h2>
+    <p>    
+      <audio controls loop>
+        <source src="/audio/Bsus-Dsus-Fsus.ogg" type="audio/ogg">
+        <source src="/audio/Bsus-Dsus-Fsus.mp3" type="audio/mpeg">
+        Your browser does not support the audio tag.
+      </audio>
+    </p>
+  </div>
+  <div id="e-major"></div>
+  <div id="g-major"></div>
+  <div id="bb-major"></div>
+</div>
+<!-- Must include the neckmodule.js files -->
+<script
+  src="https://code.jquery.com/jquery-3.6.0.min.js"
+  integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+  crossorigin="anonymous"></script>
+<script src="assets/js/neckmodule.js"></script>
+<script src="assets/js/vexflow-min.js"></script>
+<script src="assets/js/underscore-min.js"></script>
+<script src="assets/js/tabdiv.js"></script>
+<script src="assets/js/tabdiv-debug.js"></script>
+<script src="assets/js/vertical.neckmodule.js"></script>
+<script src="assets/js/id.manager.js"></script>
+  <script>
+  $ = jQuery;
+  $(function(){
+    var neck1 = Object.create(neckModule);
+    neck1.initParams(
+      {
+        myContainer: 'e-major',
+        rootNote: 'E',
+        showInitialChord: true,
+        showFretRangeSelectors: true,
+        showResetLink: true,
+        showNeckStyleSelectors: true,
+        showScaleOnlyLink: true,
+        showFretRange: true,
+        chordInterval: 1,
+        neckStyleClass: 'long-neck-default',
+        totalFrets: 21,
+        topfret: 12,
+        lowfret:5,
+        scalesArray: 'majorScales'
+      }
+    );
+    neck1.initLayout();
+    neck1.initActions();
+
+    var neck2 = Object.create(neckModule);
+    neck2.initParams(
+      {
+        myContainer: 'g-major',
+        rootNote: 'G',
+        showInitialChord: true,
+        showFretRangeSelectors: true,
+        showResetLink: true,
+        showNeckStyleSelectors: true,
+        showScaleOnlyLink: true,
+        showFretRange: true,
+        chordInterval: 1,
+        neckStyleClass: 'long-neck-default',
+        totalFrets: 21,
+        topfret: 12,
+        lowfret: 5,
+        scalesArray: 'majorScales'
+      }
+    );
+    neck2.initLayout();
+    neck2.initActions();
+
+    var neck3 = Object.create(neckModule);
+    neck3.initParams(
+      {
+        myContainer: 'bb-major',
+        rootNote: 'Bb',
+        showInitialChord: true,
+        showFretRangeSelectors: true,
+        showResetLink: true,
+        showNeckStyleSelectors: true,
+        showScaleOnlyLink: true,
+        showFretRange: true,
+        chordInterval: 1,
+        neckStyleClass: 'long-neck-default',
+        totalFrets: 21,
+        topfret: 12,
+        lowfret: 5,
+        scalesArray: 'majorScales'
+      }
+    );
+    neck3.initLayout();
+    neck3.initActions();
+
+    var colorKey = $('#color_key');
+    colorKey.detach();
+    $('#guitar-neck .guitar-module-main-wrapper').append(colorKey);
+});
+  </script>
+</body>
+</html>
