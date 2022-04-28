@@ -130,12 +130,12 @@
 /*.guitar-module-main-wrapper .guitar-module-main-wrapper .note { cursor: hand; cursor: pointer; }*/
 
 .note { -webkit-font-smoothing: antialiased; line-height: 15px; }
-#color-key-wrapper h4 { margin: 15px 0 0; }
+#color-key-wrapper h4 { margin: 5px 0 0; }
 
 #color-key td div { width: 20px; height: 20px; border: 1px solid black; font-size: 1.25em; text-align: center; }
 
 #color_key { width: auto; padding: 0 5px; background: #f7f7f7; border: 1px gray solid; border-radius: 3px; margin: 5px 0; text-align: center; max-width: 380px; margin: 5px auto; }
-#color_key #color-key-wrapper ul#color-key { width: auto; margin: 10px auto; padding: 0; }
+#color_key #color-key-wrapper ul#color-key { width: auto; margin: 5px auto; padding: 0; }
 #color_key #color-key-wrapper ul#color-key li { display: inline-block; width: 20px; height: 20px; margin-right: 5px; text-align: center; line-height: 16px; }
 #color_key #color-key-wrapper ul#color-key li div { border: 1px black solid; border-radius: 10px; height: 20px; font-size: 16px; line-height: 18px; }
 

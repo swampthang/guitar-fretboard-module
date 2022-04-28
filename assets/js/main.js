@@ -1,6 +1,8 @@
-let chordsNeck, scalesNeck;
-$(function(){
-chordsNeck = Object.create(neckModule);
+import { neckModule } from "./neckmodule.js";
+
+const chordsNeck = neckModule();
+const scalesNeck = neckModule();
+
 chordsNeck.initParams({
   myContainer: 'chords-container',
   rootNote: 'C',
@@ -8,9 +10,10 @@ chordsNeck.initParams({
   showFretRangeSelectors: true,
   showResetLink: true,
   showNeckStyleSelectors: false,
-  showScaleOnlyLink: false,
+  showScaleOnlyLink: true,
   showFretRange: true,
   chordInterval: 1,
+  showIntervalColorKey: true,
   neckStyleClass: 'long-neck-default',
   totalFrets: 21,
   topfret: 21,
@@ -20,7 +23,6 @@ chordsNeck.initParams({
 chordsNeck.initLayout();
 chordsNeck.initActions();
 
-scalesNeck = Object.create(neckModule);
 scalesNeck.initParams({
   myContainer: 'scales-container',
   rootNote: 'C',
@@ -40,8 +42,3 @@ scalesNeck.initParams({
 });
 scalesNeck.initLayout();
 scalesNeck.initActions();
-
-var colorKey = $('#color_key');
-colorKey.detach();
-$('#guitar-neck .guitar-module-main-wrapper').append(colorKey);
-});

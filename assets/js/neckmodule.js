@@ -26,11 +26,11 @@
   * };
   **/
 
-var neckModule = ( () => {
+let $ = jQuery.noConflict();
 
-  let $ = jQuery.noConflict();
+function neckModule() {
 
-  let neck = {
+  return {
     myContainer: {},
     containerSelectorType: 'id',
     wrapper: {},
@@ -38,16 +38,13 @@ var neckModule = ( () => {
     htmlPieces: '',
     totalFrets: 21,
     webAudArr: [],
-    majorScales: new Array(),
-    naturalMinorScales: new Array(),
-    harmonicMinorScales: new Array(),
     showingChord: false,
     cropping: false,
     intval: 0,
     naturals: ('A', 'B', 'C', 'D', 'E', 'F', 'G'),
     accidentals: ('A#', 'Bb', 'C#', 'Db', 'D#', 'Eb', 'F#', 'Gb', 'G#', 'Ab'),
     stringDivs: "",
-    audioArr: new Array(),
+    audioArr: [],
     fret: "",
     string: "",
     note: "",
@@ -59,13 +56,10 @@ var neckModule = ( () => {
     topfret: 21,
     lowfret: 0,
     pair: false,
-    pairArr: new Array(),
-    currentScale: new Array(),
+    pairArr: [],
+    currentScale: [],
     currentScaleType: "",
-    chordsArr: new Array(),
-    naturalMinorChordsArr: new Array(),
-    harmonicMinorChordsArr: new Array(),
-    currentChordsArr: new Array(),
+    currentChordsArr: [],
     currentKey: "",
     currentInterval: "",
     notesOfKey: "",
@@ -85,95 +79,95 @@ var neckModule = ( () => {
       6: ['E,Fb', 'E#,F', 'F#,Gb', 'G', 'G#,Ab', 'A', 'A#,Bb', 'B,Cb', 'B#,C', 'C#,Db', 'D', 'D#,Eb', 'E,Fb', 'E#,F', 'F#,Gb', 'G', 'G#,Ab', 'A', 'A#,Bb', 'B,Cb', 'B#,C', 'C#,Db']
     },
     sounds: {
-      1: ['E4','F4','Gb4','G4','Ab4','A4','Bb4','B4','C5','Db5','D5','Eb5','E5','F5','Gb5','G5','Ab5','A5','Bb5','B5','C6','Db6'],
-      2: ['B3','C4','Db4','D4','Eb4','E4','F4','Gb4','G4','Ab4','A4','Bb4','B4','C5','Db5','D5','Eb5','E5','F5','Gb5','G5','Ab5'],
-      3: ['G3','Ab3','A3','Bb3','B3','C4','Db4','D4','Eb4','E4','F4','Gb4','G4','Ab4','A4','Bb4','B4','C5','Db5','D5','Eb5','E5'],
-      4: ['D3','Eb3','E3','F3','Gb3','G3','Ab3','A3','Bb3','B3','C4','Db4','D4','Eb4','E4','F4','Gb4','G4','Ab4','A4','Bb4','B4'],
-      5: ['A2','Bb2','B2','C3','Db3','D3','Eb3','E3','F3','Gb3','G3','Ab3','A3','Bb3','B3','C4','Db4','D4','Eb4','E4','F4','Gb4'],
-      6: ['E2','F2','Gb2','G2','Ab2','A2','Bb2','B2','C3','Db3','D3','Eb3','E3','F3','Gb3','G3','Ab3','A3','Bb3','B3','C4','Db4']
+      1: ['E4', 'F4', 'Gb4', 'G4', 'Ab4', 'A4', 'Bb4', 'B4', 'C5', 'Db5', 'D5', 'Eb5', 'E5', 'F5', 'Gb5', 'G5', 'Ab5', 'A5', 'Bb5', 'B5', 'C6', 'Db6'],
+      2: ['B3', 'C4', 'Db4', 'D4', 'Eb4', 'E4', 'F4', 'Gb4', 'G4', 'Ab4', 'A4', 'Bb4', 'B4', 'C5', 'Db5', 'D5', 'Eb5', 'E5', 'F5', 'Gb5', 'G5', 'Ab5'],
+      3: ['G3', 'Ab3', 'A3', 'Bb3', 'B3', 'C4', 'Db4', 'D4', 'Eb4', 'E4', 'F4', 'Gb4', 'G4', 'Ab4', 'A4', 'Bb4', 'B4', 'C5', 'Db5', 'D5', 'Eb5', 'E5'],
+      4: ['D3', 'Eb3', 'E3', 'F3', 'Gb3', 'G3', 'Ab3', 'A3', 'Bb3', 'B3', 'C4', 'Db4', 'D4', 'Eb4', 'E4', 'F4', 'Gb4', 'G4', 'Ab4', 'A4', 'Bb4', 'B4'],
+      5: ['A2', 'Bb2', 'B2', 'C3', 'Db3', 'D3', 'Eb3', 'E3', 'F3', 'Gb3', 'G3', 'Ab3', 'A3', 'Bb3', 'B3', 'C4', 'Db4', 'D4', 'Eb4', 'E4', 'F4', 'Gb4'],
+      6: ['E2', 'F2', 'Gb2', 'G2', 'Ab2', 'A2', 'Bb2', 'B2', 'C3', 'Db3', 'D3', 'Eb3', 'E3', 'F3', 'Gb3', 'G3', 'Ab3', 'A3', 'Bb3', 'B3', 'C4', 'Db4']
     },
     majorScales: {
-      'C': new Array('C', 'D', 'E', 'F', 'G', 'A', 'B'),
-      'G': new Array('G', 'A', 'B', 'C', 'D', 'E', 'F#'),
-      'D': new Array('D', 'E', 'F#', 'G', 'A', 'B', 'C#'),
-      'A': new Array('A', 'B', 'C#', 'D', 'E', 'F#', 'G#'),
-      'E': new Array('E', 'F#', 'G#', 'A', 'B', 'C#', 'D#'),
-      'B': new Array('B', 'C#', 'D#', 'E', 'F#', 'G#', 'A#'),
-      'F#': new Array('F#', 'G#', 'A#', 'B', 'C#', 'D#', 'E#'),
-      'C#': new Array('C#', 'D#', 'E#', 'F#', 'G#', 'A#', 'B#'),
-      'F': new Array('F', 'G', 'A', 'Bb', 'C', 'D', 'E'),
-      'Bb': new Array('Bb', 'C', 'D', 'Eb', 'F', 'G', 'A'),
-      'Eb': new Array('Eb', 'F', 'G', 'Ab', 'Bb', 'C', 'D'),
-      'Ab': new Array('Ab', 'Bb', 'C', 'Db', 'Eb', 'F', 'G'),
-      'Db': new Array('Db', 'Eb', 'F', 'Gb', 'Ab', 'Bb', 'C'),
-      'Gb': new Array('Gb', 'Ab', 'Bb', 'Cb', 'Db', 'Eb', 'F'),
-      'Cb': new Array('Cb', 'Db', 'Eb', 'Fb', 'Gb', 'Ab', 'Bb')
+      'C': ['C', 'D', 'E', 'F', 'G', 'A', 'B'],
+      'G': ['G', 'A', 'B', 'C', 'D', 'E', 'F#'],
+      'D': ['D', 'E', 'F#', 'G', 'A', 'B', 'C#'],
+      'A': ['A', 'B', 'C#', 'D', 'E', 'F#', 'G#'],
+      'E': ['E', 'F#', 'G#', 'A', 'B', 'C#', 'D#'],
+      'B': ['B', 'C#', 'D#', 'E', 'F#', 'G#', 'A#'],
+      'F#': ['F#', 'G#', 'A#', 'B', 'C#', 'D#', 'E#'],
+      'C#': ['C#', 'D#', 'E#', 'F#', 'G#', 'A#', 'B#'],
+      'F': ['F', 'G', 'A', 'Bb', 'C', 'D', 'E'],
+      'Bb': ['Bb', 'C', 'D', 'Eb', 'F', 'G', 'A'],
+      'Eb': ['Eb', 'F', 'G', 'Ab', 'Bb', 'C', 'D'],
+      'Ab': ['Ab', 'Bb', 'C', 'Db', 'Eb', 'F', 'G'],
+      'Db': ['Db', 'Eb', 'F', 'Gb', 'Ab', 'Bb', 'C'],
+      'Gb': ['Gb', 'Ab', 'Bb', 'Cb', 'Db', 'Eb', 'F'],
+      'Cb': ['Cb', 'Db', 'Eb', 'Fb', 'Gb', 'Ab', 'Bb']
     },
     naturalMinorScales: {
-      'A': new Array('A', 'B', 'C', 'D', 'E', 'F', 'G'),
-      'E': new Array('E', 'F#', 'G', 'A', 'B', 'C', 'D'),
-      'B': new Array('B', 'C#', 'D', 'E', 'F#', 'G', 'A'),
-      'F#': new Array('F#', 'G#', 'A', 'B', 'C#', 'D', 'E'),
-      'C#': new Array('C#', 'D#', 'E', 'F#', 'G#', 'A', 'B'),
-      'G#': new Array('G#', 'A#', 'B', 'C#', 'D#', 'E', 'F#'),
-      'D#': new Array('D#', 'E#', 'F#', 'G#', 'A#', 'B', 'C#'),
-      'A#': new Array('A#', 'B#', 'C#', 'D#', 'E#', 'F#', 'G#'),
-      'F': new Array('F', 'G', 'Ab', 'Bb', 'C', 'Db', 'Eb'),
-      'C': new Array('C', 'D', 'Eb', 'F', 'G', 'Ab', 'Bb'),
-      'G': new Array('G', 'A', 'Bb', 'C', 'D', 'Eb', 'F'),
-      'D': new Array('D', 'E', 'F', 'G', 'A', 'Bb', 'C'),
-      'Bb': new Array('Bb', 'C', 'Db', 'Eb', 'F', 'Gb', 'Ab'),
-      'Eb': new Array('Eb', 'F', 'Gb', 'Ab', 'Bb', 'Cb', 'Db'),
-      'Ab': new Array('Ab', 'Bb', 'Cb', 'Db', 'Eb', 'Fb', 'Gb')
+      'A': ['A', 'B', 'C', 'D', 'E', 'F', 'G'],
+      'E': ['E', 'F#', 'G', 'A', 'B', 'C', 'D'],
+      'B': ['B', 'C#', 'D', 'E', 'F#', 'G', 'A'],
+      'F#': ['F#', 'G#', 'A', 'B', 'C#', 'D', 'E'],
+      'C#': ['C#', 'D#', 'E', 'F#', 'G#', 'A', 'B'],
+      'G#': ['G#', 'A#', 'B', 'C#', 'D#', 'E', 'F#'],
+      'D#': ['D#', 'E#', 'F#', 'G#', 'A#', 'B', 'C#'],
+      'A#': ['A#', 'B#', 'C#', 'D#', 'E#', 'F#', 'G#'],
+      'F': ['F', 'G', 'Ab', 'Bb', 'C', 'Db', 'Eb'],
+      'C': ['C', 'D', 'Eb', 'F', 'G', 'Ab', 'Bb'],
+      'G': ['G', 'A', 'Bb', 'C', 'D', 'Eb', 'F'],
+      'D': ['D', 'E', 'F', 'G', 'A', 'Bb', 'C'],
+      'Bb': ['Bb', 'C', 'Db', 'Eb', 'F', 'Gb', 'Ab'],
+      'Eb': ['Eb', 'F', 'Gb', 'Ab', 'Bb', 'Cb', 'Db'],
+      'Ab': ['Ab', 'Bb', 'Cb', 'Db', 'Eb', 'Fb', 'Gb']
     },
     harmonicMinorScales: {
-      'A': new Array('A', 'B', 'C', 'D', 'E', 'F', 'G#'),
-      'E': new Array('E', 'F#', 'G', 'A', 'B', 'C', 'D#'),
-      'B': new Array('B', 'C#', 'D', 'E', 'F#', 'G', 'A#'),
-      'F#': new Array('F#', 'G#', 'A', 'B', 'C#', 'D', 'E#'),
-      'C#': new Array('C#', 'D#', 'E', 'F#', 'G#', 'A', 'B#'),
-      'G#': new Array('G#', 'A#', 'B', 'C#', 'D#', 'E', 'G'),
-      'D#': new Array('D#', 'E#', 'F#', 'G#', 'A#', 'B', 'D'),
-      'A#': new Array('A#', 'B#', 'C#', 'D#', 'E#', 'F#', 'A'),
-      'F': new Array('F', 'G', 'Ab', 'Bb', 'C', 'Db', 'E'),
-      'C': new Array('C', 'D', 'Eb', 'F', 'G', 'Ab', 'B'),
-      'G': new Array('G', 'A', 'Bb', 'C', 'D', 'Eb', 'F#'),
-      'D': new Array('D', 'E', 'F', 'G', 'A', 'Bb', 'C#'),
-      'Bb': new Array('Bb', 'C', 'Db', 'Eb', 'F', 'Gb', 'A'),
-      'Eb': new Array('Eb', 'F', 'Gb', 'Ab', 'Bb', 'Cb', 'D'),
-      'Ab': new Array('Ab', 'Bb', 'Cb', 'Db', 'Eb', 'Fb', 'G')
+      'A': ['A', 'B', 'C', 'D', 'E', 'F', 'G#'],
+      'E': ['E', 'F#', 'G', 'A', 'B', 'C', 'D#'],
+      'B': ['B', 'C#', 'D', 'E', 'F#', 'G', 'A#'],
+      'F#': ['F#', 'G#', 'A', 'B', 'C#', 'D', 'E#'],
+      'C#': ['C#', 'D#', 'E', 'F#', 'G#', 'A', 'B#'],
+      'G#': ['G#', 'A#', 'B', 'C#', 'D#', 'E', 'G'],
+      'D#': ['D#', 'E#', 'F#', 'G#', 'A#', 'B', 'D'],
+      'A#': ['A#', 'B#', 'C#', 'D#', 'E#', 'F#', 'A'],
+      'F': ['F', 'G', 'Ab', 'Bb', 'C', 'Db', 'E'],
+      'C': ['C', 'D', 'Eb', 'F', 'G', 'Ab', 'B'],
+      'G': ['G', 'A', 'Bb', 'C', 'D', 'Eb', 'F#'],
+      'D': ['D', 'E', 'F', 'G', 'A', 'Bb', 'C#'],
+      'Bb': ['Bb', 'C', 'Db', 'Eb', 'F', 'Gb', 'A'],
+      'Eb': ['Eb', 'F', 'Gb', 'Ab', 'Bb', 'Cb', 'D'],
+      'Ab': ['Ab', 'Bb', 'Cb', 'Db', 'Eb', 'Fb', 'G']
     },
     chordsArr: {
-      '1': new Array(0, 2, 4, 6, 1, '', '<sup>maj7</sup>', '<sup>maj9</sup>'),
-      '2': new Array(1, 3, 5, 0, 2, '<sup>m</sup>', '<sup>m7</sup>', '<sup>m9</sup>'),
-      '3': new Array(2, 4, 6, 1, 3, '<sup>m</sup>', '<sup>m7</sup>', '<sup>m7b9</sup>'),
-      '4': new Array(3, 5, 0, 2, 4, '', '<sup>maj7</sup>', '<sup>maj9</sup>'),
-      '5': new Array(4, 6, 1, 3, 5, '', '7', '9'),
-      '6': new Array(5, 0, 2, 4, 6, '<sup>m</sup>', '<sup>m7</sup>', '<sup>m9</sup>'),
-      '7': new Array(6, 1, 3, 5, 0, '<sup>dim</sup>', '<sup>m7b5</sup>', '<sup>m7b5b9</sup>')
+      '1': [0, 2, 4, 6, 1, '', '<sup>maj7</sup>', '<sup>maj9</sup>'],
+      '2': [1, 3, 5, 0, 2, '<sup>m</sup>', '<sup>m7</sup>', '<sup>m9</sup>'],
+      '3': [2, 4, 6, 1, 3, '<sup>m</sup>', '<sup>m7</sup>', '<sup>m7b9</sup>'],
+      '4': [3, 5, 0, 2, 4, '', '<sup>maj7</sup>', '<sup>maj9</sup>'],
+      '5': [4, 6, 1, 3, 5, '', '7', '9'],
+      '6': [5, 0, 2, 4, 6, '<sup>m</sup>', '<sup>m7</sup>', '<sup>m9</sup>'],
+      '7': [6, 1, 3, 5, 0, '<sup>dim</sup>', '<sup>m7b5</sup>', '<sup>m7b5b9</sup>']
     },
     naturalMinorChordsArr: {
-      '1': new Array(0, 2, 4, 6, 1, '<sup>m</sup>', '<sup>m7</sup>', '<sup>m9</sup>'),
-      '2': new Array(1, 3, 5, 0, 2, '<sup>dim</sup>', '<sup>m7b5</sup>', '<sup>m7b5b9</sup>'),
-      '3': new Array(2, 4, 6, 1, 3, '', '<sup>maj7</sup>', '<sup>maj9</sup>'),
-      '4': new Array(3, 5, 0, 2, 4, '<sup>m</sup>', '<sup>m7</sup>', '<sup>m9</sup>'),
-      '5': new Array(4, 6, 1, 3, 5, '<sup>m</sup>', '<sup>m7</sup>', '<sup>m7b9</sup>'),
-      '6': new Array(5, 0, 2, 4, 6, '', '<sup>maj7</sup>', '<sup>maj9</sup>'),
-      '7': new Array(6, 1, 3, 5, 0, '', '7', '9')
+      '1': [0, 2, 4, 6, 1, '<sup>m</sup>', '<sup>m7</sup>', '<sup>m9</sup>'],
+      '2': [1, 3, 5, 0, 2, '<sup>dim</sup>', '<sup>m7b5</sup>', '<sup>m7b5b9</sup>'],
+      '3': [2, 4, 6, 1, 3, '', '<sup>maj7</sup>', '<sup>maj9</sup>'],
+      '4': [3, 5, 0, 2, 4, '<sup>m</sup>', '<sup>m7</sup>', '<sup>m9</sup>'],
+      '5': [4, 6, 1, 3, 5, '<sup>m</sup>', '<sup>m7</sup>', '<sup>m7b9</sup>'],
+      '6': [5, 0, 2, 4, 6, '', '<sup>maj7</sup>', '<sup>maj9</sup>'],
+      '7': [6, 1, 3, 5, 0, '', '7', '9']
     },
     harmonicMinorChordsArr: {
-      '1': new Array(0, 2, 4, 6, 1, '<sup>m</sup>', '<sup>mMaj7</sup>', '<sup>m9#7</sup>'),
-      '2': new Array(1, 3, 5, 0, 2, '<sup>dim</sup>', '<sup>m7b5</sup>', '<sup>m7b5b9</sup>'),
-      '3': new Array(2, 4, 6, 1, 3, 'aug', '<sup>maj7#5</sup>', '<sup>maj9#5</sup>'),
-      '4': new Array(3, 5, 0, 2, 4, '<sup>m</sup>', '<sup>m7</sup>', '<sup>m9</sup>'),
-      '5': new Array(4, 6, 1, 3, 5, '<sup></sup>', '<sup>7</sup>', '<sup>7b9</sup>'),
-      '6': new Array(5, 0, 2, 4, 6, '', '<sup>maj7</sup>', '<sup>minMaj7</sup>'),
-      '7': new Array(6, 1, 3, 5, 0, '<sup>dim</sup>', '<sup>dim7</sup>', '<sup>dim7b9</sup>')
+      '1': [0, 2, 4, 6, 1, '<sup>m</sup>', '<sup>mMaj7</sup>', '<sup>m9#7</sup>'],
+      '2': [1, 3, 5, 0, 2, '<sup>dim</sup>', '<sup>m7b5</sup>', '<sup>m7b5b9</sup>'],
+      '3': [2, 4, 6, 1, 3, 'aug', '<sup>maj7#5</sup>', '<sup>maj9#5</sup>'],
+      '4': [3, 5, 0, 2, 4, '<sup>m</sup>', '<sup>m7</sup>', '<sup>m9</sup>'],
+      '5': [4, 6, 1, 3, 5, '<sup></sup>', '<sup>7</sup>', '<sup>7b9</sup>'],
+      '6': [5, 0, 2, 4, 6, '', '<sup>maj7</sup>', '<sup>minMaj7</sup>'],
+      '7': [6, 1, 3, 5, 0, '<sup>dim</sup>', '<sup>dim7</sup>', '<sup>dim7b9</sup>']
     },
 
 
     // MODULE METHODS **************************************************************************************************** //
-    build_chord_buttons: function () {
+    build_chord_buttons() {
       let symbol_num = parseInt(this.notesPerChord) + 2; // this will change if we go beyond 9th chords in the chordsArray
       let cnt = 0;
       let that = this;
@@ -186,19 +180,21 @@ var neckModule = ( () => {
       });
     },
 
-    deactivateChordbuttons: function () {
+    deactivateChordbuttons() {
       this.wrapper.find('#chordButtons .chordButton').each(function () {
         $(this).removeClass('active');
       });
     },
 
-    hideChordButtons: function () {
+    hideChordButtons() {
       this.wrapper.find('#chord-buttons').hide();
       this.wrapper.find('#chord_instructions').hide();
 
     },
 
-    buildNoteDiv: function (note, s, f) {
+    buildNoteDiv(note, s, f) {
+
+      let noteType;
 
       if (note.indexOf('#') !== -1) {
         noteType = 'sharp';
@@ -207,26 +203,26 @@ var neckModule = ( () => {
       } else {
         noteType = 'natural';
       }
-      string = 'string' + s;
-      fret = 'fret' + f;
+      let string = 'string' + s;
+      let fret = 'fret' + f;
 
       let stringDiv = document.createElement('div');
       stringDiv.setAttribute('id', `st_${s}_${f}`);
       stringDiv.setAttribute('notename', note);
-      stringDiv.className = `note ${string} ${fret} ${this.noteType} f${s}_${f}`;
+      stringDiv.className = `note ${string} ${fret} ${noteType} f${s}_${f}`;
       stringDiv.innerText = note;
 
       return stringDiv;
     },
 
-    hide_chord_divs: function () {
+    hide_chord_divs() {
       this.wrapper.find('.chord_in_key').hide();
       this.wrapper.find('#color_key').hide();
       this.wrapper.find('.showing').hide();
       this.wrapper.find('.notes-per-chord-wrapper').hide();
     },
 
-    show_chord_divs: function () {
+    show_chord_divs() {
       this.wrapper.find('.chord_in_key').show();
       this.wrapper.find('#color_key').show();
       this.wrapper.find('.showing').show();
@@ -234,12 +230,12 @@ var neckModule = ( () => {
       this.wrapper.find('.chord_instructions').show();
     },
 
-    getVisibleNotes: function () {
+    getVisibleNotes() {
 
       return this.myContainer[0].querySelectorAll('.neckmodule .in-scale:not(.muted)');
     },
 
-    changeScale: function (rootNote) {
+    changeScale(rootNote) {
 
       if (this.params.scaleOnlyMode && this.showingPentatonic) {
         this.revertPentatonic();
@@ -272,11 +268,11 @@ var neckModule = ( () => {
       }
     },
 
-    attachSound: function(note) {
+    attachSound(note) {
 
     },
 
-    changeNatMinorScale: function (rootNote) {
+    changeNatMinorScale(rootNote) {
 
       if (this.params.scaleOnlyMode && this.showingPentatonic) {
         this.revertPentatonic();
@@ -307,7 +303,7 @@ var neckModule = ( () => {
       }
     },
 
-    changeHarmMinorScale: function (rootNote) {
+    changeHarmMinorScale(rootNote) {
 
       if (this.params.scaleOnlyMode && this.showingPentatonic) {
         this.revertPentatonic();
@@ -334,14 +330,16 @@ var neckModule = ( () => {
       }
     },
 
-    doScale: function () {
+    doScale() {
 
       this.wrapper.find('#chord_instructions').show();
       this.wrapper.find('.note').removeClass('int-3 int-5 int-7 int-11 int-1 int-9 in-scale');
       this.wrapper.find('.note').hide();
-      this.hide_chord_divs();
+      // this.hide_chord_divs();
       if (!this.params.scaleOnlyMode) {
         this.build_chord_buttons();
+      } else {
+        this.hide_chord_divs();
       }
       this.notesOfKey = '<ul><li>Scale notes: </li>';
       for (var s = 0; s < this.currentScale.length; s++) {
@@ -351,41 +349,46 @@ var neckModule = ( () => {
       this.wrapper.find('#keyNotes').html(this.notesOfKey);
       // for testing
       this.wrapper.find('#info').html('lowfret: ' + this.lowfret + ' - topfret: ' + this.topfret);
+      if (!this.showScaleNotes) {
+        this.wrapper.find('.note').addClass('muted');
+      }
       for (var i = 0; i < this.currentScale.length; i++) {
         var theNote = this.currentScale[i];
         for (var f = this.lowfret; f <= this.topfret; f++) {
 
-          this.wrapper.find(".note[notename='" + theNote + "'].fret" + f).show().addClass('in-scale');
+          this.wrapper.find(".note[notename='" + theNote + "'].fret" + f).show().addClass('in-scale').removeClass('muted');
         }
       }
     },
 
-    resetToScale: function () {
-      $('.note').removeClass('muted');
+    resetToScale() {
+      this.wrapper.find('.note').removeClass('muted');
       this.showingChord = false;
-      $('.chord-name').html('');
-      $('.chordButton').removeClass('active');
-      $('.meta#notesPerChord').remove();
-      $('.meta#currentInterval').remove();
-      $('.meta#showInitialChord').remove();
-      $('.meta#chordInterval').remove();
+      this.wrapper.find('.chord-name').html('');
+      this.wrapper.find('.chordButton').removeClass('active');
+      this.wrapper.find('.meta#notesPerChord').remove();
+      this.wrapper.find('.meta#currentInterval').remove();
+      this.wrapper.find('.meta#showInitialChord').remove();
+      this.wrapper.find('.meta#chordInterval').remove();
       this.doScale();
     },
 
-    muteNotes: function (noteArr) {
+    muteNotes(noteArr) {
       for (var n = 0; n < noteArr.length; n++) {
         noteArr[n].addClass('muted');
       }
     },
 
-    unMuteNotes: function (noteArr) {
+    unMuteNotes(noteArr) {
       for (var n = 0; n < noteArr.length; n++) {
         noteArr[n].removeClass('muted');
       }
     },
 
-    getPentaExcludes: function () {
-      let excludes = [];
+    getPentaExcludes() {
+
+      let excludes = [], int4, int7;
+
       switch (this.currentScaleType) {
         case 'major':
           int4 = 3;
@@ -405,7 +408,7 @@ var neckModule = ( () => {
       return excludes;
     },
 
-    pentaButtonToggler: function () {
+    pentaButtonToggler() {
       if (this.showingPentatonic) {
         this.revertPentatonic();
       } else {
@@ -413,13 +416,13 @@ var neckModule = ( () => {
       }
     },
 
-    convertToPentatonic: function () {
+    convertToPentatonic() {
       let int4,
-          int7,
-          el4,
-          el7,
-          noteArr = [],
-          excludes = this.getPentaExcludes();
+        int7,
+        el4,
+        el7,
+        noteArr = [],
+        excludes = this.getPentaExcludes();
 
       int4 = excludes[0];
       int7 = excludes[1];
@@ -436,13 +439,13 @@ var neckModule = ( () => {
       this.showingPentatonic = true;
     },
 
-    revertPentatonic: function () {
+    revertPentatonic() {
       let int4,
-          int7,
-          el4,
-          el7,
-          noteArr = [],
-          excludes = this.getPentaExcludes();
+        int7,
+        el4,
+        el7,
+        noteArr = [],
+        excludes = this.getPentaExcludes();
 
       int4 = excludes[0];
       int7 = excludes[1];
@@ -459,7 +462,7 @@ var neckModule = ( () => {
       this.showingPentatonic = false;
     },
 
-    showChord: function (interval) {
+    showChord(interval) {
 
       this.showingChord = true;
       // this.wrapper.find('#chord_instructions').hide();
@@ -512,7 +515,7 @@ var neckModule = ( () => {
       this.updateMetaDivs("showInitialChord", true);
     },
 
-    resetHiddenStrings: function () {
+    resetHiddenStrings() {
       for (let s = 1; s <= 6; s++) {
         if (this.wrapper.find('.in-scale.string' + s).hasClass('hidden')) {
           this.wrapper.find('.in-scale.string' + s).hide();
@@ -520,25 +523,25 @@ var neckModule = ( () => {
       }
     },
 
-    hideNotesOutOfRange: function () {
+    hideNotesOutOfRange() {
       for (let f = 0; f < this.lowfret; f++) {
         this.wrapper.find(".note.fret" + f).hide();
       }
 
-      for (let f =( parseInt(this.topfret) + 1); f <= this.totalFrets; f++) {
+      for (let f = (parseInt(this.topfret) + 1); f <= this.totalFrets; f++) {
         this.wrapper.find(".note.fret" + f).hide();
       }
     },
 
-    setNotesPerChord: function (num) {
+    setNotesPerChord(num) {
       this.notesPerChord = num;
       this.build_chord_buttons();
       this.showChord(this.currentInterval);
       this.updateMetaDivs('notesPerChord', num);
     },
 
-    setHighFret: function (top) {
-      if ( top > this.lowfret ) {
+    setHighFret(top) {
+      if (top > this.lowfret) {
 
         this.topfret = top;
         this.updateMetaDivs("topfret", this.topfret);
@@ -557,7 +560,7 @@ var neckModule = ( () => {
 
     },
 
-    setLowFret: function (bottom) {
+    setLowFret(bottom) {
       if (bottom < parseInt(this.topfret)) {
         this.lowfret = bottom;
         this.updateMetaDivs("lowfret", this.lowfret);
@@ -574,20 +577,20 @@ var neckModule = ( () => {
       }
     },
 
-    toggleShowHideString: function (stringNumber, el) {
+    toggleShowHideString(stringNumber, el) {
 
       if (this.wrapper.find('.in-scale.string' + stringNumber).hasClass('hidden')) {
-        this.wrapper.find('.in-scale.string' + stringNumber).show().removeClass('hidden');
+        this.wrapper.find('.in-scale.string' + stringNumber).show().removeClass('hidden').removeClass('muted');
         this.wrapper.find('.meta#hideString' + stringNumber).remove();
         el.removeClass('off');
       } else {
-        this.wrapper.find('.in-scale.string' + stringNumber).hide().addClass('hidden');
+        this.wrapper.find('.in-scale.string' + stringNumber).hide().addClass('hidden').addClass('muted');
         this.updateMetaDivs('hideString' + stringNumber, stringNumber);
         el.addClass('off');
       }
     },
 
-    buildNoteGrid: function (notesContainer) {
+    buildNoteGrid(notesContainer) {
       var note;
       for (var s = 1; s <= 6; s++) {
         for (var f = 0; f <= this.totalFrets; f++) {
@@ -603,32 +606,32 @@ var neckModule = ( () => {
               note = this.pairArr[n];
               noteDiv = this.buildNoteDiv(note, s, f);
               notesContainer[0].append(noteDiv);
-              this.setNoteClickListener(noteDiv,s,f);
+              this.setNoteClickListener(noteDiv, s, f);
             }
           } else {
             noteDiv = this.buildNoteDiv(note, s, f);
             notesContainer[0].append(noteDiv);
-            this.setNoteClickListener(noteDiv,s,f);
+            this.setNoteClickListener(noteDiv, s, f);
           }
         }
       }
       // return this.stringDivs;
     },
 
-    handleChordButtonClick: function (el) {
+    handleChordButtonClick(el) {
       this.intval = el.attr('scaleInt');
       this.isolateChord(this.intval);
       // add or update the active chord metadata
       this.updateMetaDivs('chordInterval', this.intval);
     },
 
-    isolateChord: function (intval) {
+    isolateChord(intval) {
       this.intval = intval;
 
       if (this.params.showChordButtons) {
         this.deactivateChordbuttons();
         var el = this.wrapper.find('.chordButton[scaleint="' + intval + '"]');
-        el.addClass('active');
+        el.addClass('active').removeClass('muted');
         this.params.chordInterval = intval;
       }
 
@@ -645,13 +648,13 @@ var neckModule = ( () => {
       }
     },
 
-    setScaleOnlyMode: function () {
+    setScaleOnlyMode() {
       this.resetToScale();
       this.hideChordButtons();
     },
 
     // FRET RANGE SELECTORS
-    buildFretRangeSelectors: function () {
+    buildFretRangeSelectors() {
 
       var fretRangeSelectors = '<div class="controller" id="fretselectors">Set lowest fret:';
       fretRangeSelectors += ' <select id="lowfret">';
@@ -679,14 +682,14 @@ var neckModule = ( () => {
     },
 
     // KEY SELECTORS
-    buildKeySelectors: function () {
+    buildKeySelectors() {
       var keySelectors = '<div class="changeKey controller info-display-div"><h4>Select key:</h4>';
       keySelectors += ' <select id="scaleSelector">';
       keySelectors += '   <option value="">Major...</option>';
       for (var key in this.majorScales) {
-        if (key === 'length' || !this.majorScales.hasOwnProperty(key)) 
+        if (key === 'length' || !this.majorScales.hasOwnProperty(key))
           continue;
-        
+
         keySelectors += '<option value="' + key + '">' + key + ' major</option>';
       }
       keySelectors += ' </select>';
@@ -694,9 +697,9 @@ var neckModule = ( () => {
       keySelectors += ' <select id="minorScaleSelector">';
       keySelectors += '   <option value="">Natural minor...</option>';
       for (var key in this.naturalMinorScales) {
-        if (key === 'length' || !this.naturalMinorScales.hasOwnProperty(key)) 
+        if (key === 'length' || !this.naturalMinorScales.hasOwnProperty(key))
           continue;
-        
+
         keySelectors += '<option value="' + key + '">' + key + ' minor</option>';
       }
       keySelectors += ' </select>';
@@ -704,9 +707,9 @@ var neckModule = ( () => {
       keySelectors += ' <select id="harMinorScaleSelector">';
       keySelectors += '   <option value="">Harmonic minor...</option>';
       for (var key in this.harmonicMinorScales) {
-        if (key === 'length' || !this.harmonicMinorScales.hasOwnProperty(key)) 
+        if (key === 'length' || !this.harmonicMinorScales.hasOwnProperty(key))
           continue;
-        
+
         keySelectors += '<option value="' + key + '">' + key + ' harmonic minor</option>';
       }
       keySelectors += ' </select>';
@@ -715,11 +718,11 @@ var neckModule = ( () => {
       return keySelectors;
     },
 
-    buildScaleOnlyLink: function () {
+    buildScaleOnlyLink() {
       return '<div class="scale-only-link-wrapper"><a class="refresh-scale-link" href="#">Show scale only</a></div>';
     },
 
-    updateMetaDivs: function (tagID, val) {
+    updateMetaDivs(tagID, val) {
       if (this.wrapper.find(".meta#" + tagID).length) {
         this.wrapper.find(".meta#" + tagID).attr('data-content', val);
       } else {
@@ -727,29 +730,29 @@ var neckModule = ( () => {
       }
     },
 
-    removeMetaDivs: function () {
+    removeMetaDivs() {
       this.wrapper.find('.meta').remove();
     },
 
-    freezeSettings: function () { // console.log(this.params);
+    freezeSettings() { // console.log(this.params);
     },
 
-    getObj: function () {
+    getObj() {
       var objCopy = returnThis();
       return objCopy;
     },
 
-    writeChordName: function (chordName) {
+    writeChordName(chordName) {
       this.wrapper.find('.chordNameHeaderDiv').html(chordName);
     },
 
-    resetNeck: function () {
+    resetNeck() {
       this.initLayout(this.initialParams);
     },
 
-    initParams: function () {
+    initParams() {
 
-      if (objectIsEmpty(this.params)) {
+      if (Object.keys(this.params).length === 0) {
         this.params = {
           myContainer: 'neck-container',
           containerSelectorType: 'id',
@@ -817,7 +820,7 @@ var neckModule = ( () => {
 
     },
 
-    preserveMetaData: function () {
+    preserveMetaData() {
 
       if (this.myContainer.find('.meta').length) {
 
@@ -840,23 +843,23 @@ var neckModule = ( () => {
       }
     },
 
-    initLayout: function () {
+    initLayout() {
 
       var params = this.params;
 
       this.htmlPieces = "";
 
       // MAIN MODULE WRAPPER
-      this.htmlPieces += openMainWrapper();
+      this.htmlPieces += this.openMainWrapper();
 
-      this.htmlPieces += buildControlsToggler();
+      this.htmlPieces += this.buildControlsToggler();
 
       if (params.showTitle) {
-        this.htmlPieces += buildMaintitleDiv(params);
+        this.htmlPieces += this.buildMaintitleDiv(params);
       }
 
       if (params.scaleOnlyMode) {
-        this.htmlPieces += buildPentatonicConvertButton();
+        this.htmlPieces += this.buildPentatonicConvertButton();
       }
 
       if (params.showKeySelectors) {
@@ -868,17 +871,17 @@ var neckModule = ( () => {
       }
 
       // TOP
-      this.htmlPieces += openTopDiv();
+      this.htmlPieces += this.openTopDiv();
 
       // TOP LEFT
-      this.htmlPieces += openTopLeftDiv();
+      this.htmlPieces += this.openTopLeftDiv();
 
       if (params.showScaleNotes) {
-        this.htmlPieces += buildScaleNotesDiv();
+        this.htmlPieces += this.buildScaleNotesDiv();
       }
 
       if (params.showFretRange) {
-        this.htmlPieces += buildFretRangeInfoDiv();
+        this.htmlPieces += this.buildFretRangeInfoDiv();
       }
 
       if (params.showFretRangeSelectors) {
@@ -889,48 +892,48 @@ var neckModule = ( () => {
       //   this.htmlPieces += buildChordNameHeaderDiv();
       // }
       // close topLeftDiv
-      this.htmlPieces += closeDiv();
+      this.htmlPieces += this.closeDiv();
 
       // TOP RIGHT
-      this.htmlPieces += openTopRighttDiv();
+      this.htmlPieces += this.openTopRighttDiv();
 
       if (params.showNotesPerChordSelector) {
         this.htmlPieces += this.buildNotesPerChordSelectorDiv();
       }
 
       if (params.showIntervalColorKey) {
-        this.htmlPieces += buildColorKeyDiv();
+        this.htmlPieces += this.buildColorKeyDiv();
       }
       // close topRightDiv
-      this.htmlPieces += closeDiv();
+      this.htmlPieces += this.closeDiv();
       // close topDiv
-      this.htmlPieces += closeDiv();
+      this.htmlPieces += this.closeDiv();
 
-      this.htmlPieces += buildNeckModuleDiv();
+      this.htmlPieces += this.buildNeckModuleDiv();
 
-      if (params.showChordButtons && ! params.scaleOnlyMode) {
-        this.htmlPieces += buildChordInstructionsDiv();
+      if (params.showChordButtons && !params.scaleOnlyMode) {
+        this.htmlPieces += this.buildChordInstructionsDiv();
       }
 
-      this.htmlPieces += openControlsDiv();
+      this.htmlPieces += this.openControlsDiv();
 
       if (params.showResetLink) {
-        this.htmlPieces += buildResetLink();
+        this.htmlPieces += this.buildResetLink();
       }
 
       if (params.showChordButtons) {
-        this.htmlPieces += buildChordButtonsDiv();
+        this.htmlPieces += this.buildChordButtonsDiv();
       }
       // console.log(params.showNeckStyleSelectors);
       if (params.showNeckStyleSelectors) {
-        this.htmlPieces += buildNeckStyleSelector();
+        this.htmlPieces += this.buildNeckStyleSelector();
       }
 
       // close controlsDiv
-      this.htmlPieces += closeDiv();
+      this.htmlPieces += this.closeDiv();
 
       var metaData = this.preserveMetaData();
-      
+
       if (metaData !== null) {
         this.htmlPieces += metaData;
       }
@@ -945,7 +948,7 @@ var neckModule = ( () => {
       }
 
       // close mainModuleWrapper
-      this.htmlPieces += closeDiv();
+      this.htmlPieces += this.closeDiv();
 
       var el = this.myContainer;
       el.html(this.htmlPieces);
@@ -954,23 +957,23 @@ var neckModule = ( () => {
 
     },
 
-    setNoteClickListener: function(note, s, f) {
+    setNoteClickListener(note, s, f) {
       const soundFile = this.sounds[s][f] + '.mp3';
       const audio = new Audio(`./assets/sounds/nylon/${soundFile}`);
       note.setAttribute('snd', soundFile);
       this.webAudArr.push(audio);
-      note.addEventListener('click', ()=>{
-        if( note.classList.contains('muted') ) return;
-        for( let aud of this.webAudArr ) {
+      note.addEventListener('click', () => {
+        if (note.classList.contains('muted')) return;
+        for (let aud of this.webAudArr) {
           aud.currentTime = 0;
           aud.pause();
         }
         audio.play();
       })
-      note.addEventListener('mouseover', ()=>{  
-        if( note.classList.contains('muted') ) return;
-        if( !this.myContainer.find('.sound-trigger-options input')[0].checked ) return;
-        for( let aud of this.webAudArr ) {
+      note.addEventListener('mouseover', () => {
+        if (note.classList.contains('muted')) return;
+        if (!this.myContainer.find('.sound-trigger-options input')[0].checked) return;
+        for (let aud of this.webAudArr) {
           aud.currentTime = 0;
           aud.pause();
         }
@@ -978,37 +981,40 @@ var neckModule = ( () => {
       })
     },
 
-    replaceModuleInitScript: function (id) { // console.log("id: "+id);
-      var snippet = '<div><script id="neckModuleScript" type="text/javascript">\n    function buildModule() {\n      var this_script = document.getElementById("neckModuleScript");\n      var container = idMaganager.processScriptInstance(this_script);\n      var neckID = idMaganager.setId(container);\n      neckModuleInit(neckID);\n    }\n    </script></div>';
+    replaceModuleInitScript(id) { // console.log("id: "+id);
+      return '<div><script id="neckModuleScript" type="text/javascript">\n    function buildModule() {\n      var this_script = document.getElementById("neckModuleScript");\n      var container = idMaganager.processScriptInstance(this_script);\n      var neckID = idMaganager.setId(container);\n      neckModuleInit(neckID);\n    }\n    </script></div>';
       // $('.js-module')[0].innerHTML = snippet;
-      return snippet;
     },
 
-    createSoundTriggerOptions: function(wrapper) {
+    createSoundTriggerOptions(wrapper) {
       const container = document.createElement('div');
       container.className = 'sound-trigger-options';
       const cb = document.createElement('input');
-      cb.setAttribute('type','checkbox');
+      cb.setAttribute('type', 'checkbox');
       const rnd = Math.random() * 1000;
       cb.setAttribute('id', `trigger-on-mouseover-${rnd}`);
       const lbl = document.createElement('label');
-      lbl.setAttribute('for',`trigger-on-mouseover-${rnd}`);
+      lbl.setAttribute('for', `trigger-on-mouseover-${rnd}`);
       lbl.innerText = 'Play sounds on mouse-over.';
       container.append(lbl);
       container.append(cb);
       wrapper.append(container);
     },
 
-    initActions: function () { // debugger;
-      var container = this.myContainer;
-      wrapper = this.wrapper = container.find('.guitar-module-main-wrapper');
-      var that = this;
-      
+    buildRandomRiff() {
+      let notes = document.querySelectorAll('.note')
+    },
+
+    initActions() { // debugger;
+      let container = this.myContainer;
+      let wrapper = this.wrapper = container.find('.guitar-module-main-wrapper');
+      let that = this;
+
       this.buildNoteGrid(wrapper.find('.neckmodule'));
 
       this.createSoundTriggerOptions(wrapper);
 
-      var togglers = buildStringViewTogglers();
+      let togglers = this.buildStringViewTogglers();
       wrapper.find('.neckmodule').append(togglers);
 
       wrapper.find('.notes-per-chord-wrapper').hide();
@@ -1119,7 +1125,7 @@ var neckModule = ( () => {
 
     },
 
-    initStringDisplay: function () { // ran on initActions();
+    initStringDisplay() { // ran on initActions();
       for (var s = 1; s <= 6; s++) {
         if (this.wrapper.find('#hideString' + s).length) {
           var el = this.wrapper.find('.string-togglers li[string=' + s + ']');
@@ -1128,7 +1134,7 @@ var neckModule = ( () => {
       }
     },
 
-    toggleControls: function () { // debugger;
+    toggleControls() { // debugger;
       if (this.controlsHidden) { // show controls
         this.controlsHidden = false;
         this.updateMetaDivs('hideControls', false);
@@ -1145,7 +1151,7 @@ var neckModule = ( () => {
 
     },
 
-    switchNeckStyle: function (el) {
+    switchNeckStyle(el) {
       var selector = el.attr('class');
       this.myContainer.removeAttr('class');
       switch (selector) {
@@ -1162,196 +1168,193 @@ var neckModule = ( () => {
           this.myContainer.addClass(this.neckStyleClass);
           break;
       }
-    }
-  }
-  // END MODULE METHODS ********************************************************* \\
+    },
+    // }
+    // END MODULE METHODS ********************************************************* \\
 
 
-  // DISPLAY BUILDERS ******************************************************************************** //
+    // DISPLAY BUILDERS ******************************************************************************** //
 
-  var openMainWrapper = function () {
-    return '<div class="guitar-module-main-wrapper">';
-  }
+    openMainWrapper() {
+      return '<div class="guitar-module-main-wrapper">';
+    },
 
-  var buildControlsToggler = function () {
-    return "<div class='controls-toggler'>\n  <span class='show-controls'>Show Controls</span>\n  <span class='hide-controls'>Hide Controls</span>\n</div>";
-  }
+    buildControlsToggler() {
+      return "<div class='controls-toggler'>\n  <span class='show-controls'>Show Controls</span>\n  <span class='hide-controls'>Hide Controls</span>\n</div>";
+    },
 
-  var buildMaintitleDiv = function (params) {
-    if( params.showChordNameHeader ) {
-      return `
+    buildMaintitleDiv(params) {
+      if (params.showChordNameHeader) {
+        return `
       <div class="container">
         <div class="info-display-div" id="main_title"></div>
         <h2 class="chord-name"></h2>
       </div>`;
-    } else {
-      return '<div class="info-display-div" id="main_title"></div>';
-    }
-  }
-
-  var buildPentatonicConvertButton = function () {
-    return '<button class="pentatonic-btn">Convert to pentatonic</button>';
-  }
-
-  // TOP DIV BUILDER
-  var openTopDiv = function () {
-    return '<div class="top-wrapper info-display-div">';
-  }
-  // TOP LEFT BUILDER
-  var openTopLeftDiv = function () {
-    return '<div class="top-left">';
-  }
-
-  // SCALE NOTES
-  var buildScaleNotesDiv = function () {
-    return '<div id="keyNotes"></div>';
-  }
-
-  // FRET RANGE DISPLAY
-  var buildFretRangeInfoDiv = function () {
-    return '<div class="controller" id="info"></div>';
-  }
-
-  // CHORD NAME
-  var buildChordNameHeaderDiv = function () {
-    return '<h2 class="chord-name"></h2>';
-  }
-
-  // TOP RIGHT BUILDER
-  var openTopRighttDiv = function () {
-    return '<div class="top-right">';
-  }
-
-  // NOTES PER CHORD SELECTOR
-  neck.buildNotesPerChordSelectorDiv = function () {
-
-    var notesPerChordSelectorDiv = '<div class="controller notes-per-chord-wrapper">';
-    var btnArr = {
-      0: {
-        'ctype': 3,
-        'label': 'basic chords'
-      },
-      1: {
-        'ctype': 4,
-        'label': '7th chords'
-      },
-      2: {
-        'ctype': 5,
-        'label': '9th chords'
+      } else {
+        return '<div class="info-display-div" id="main_title"></div>';
       }
-    };
+    },
 
-    for (var n = 0; n <= 2; n++) {
-      var thisArr = btnArr[n];
-      var activeClass = "";
-      if (this.params.notesPerChord == thisArr['ctype']) {
-        activeClass = " active";
+    buildPentatonicConvertButton() {
+      return '<button class="pentatonic-btn">Convert to pentatonic</button>';
+    },
+
+    // TOP DIV BUILDER
+    openTopDiv() {
+      return '<div class="top-wrapper info-display-div">';
+    },
+    // TOP LEFT BUILDER
+    openTopLeftDiv() {
+      return '<div class="top-left">';
+    },
+
+    // SCALE NOTES
+    buildScaleNotesDiv() {
+      return '<div id="keyNotes"></div>';
+    },
+
+    // FRET RANGE DISPLAY
+    buildFretRangeInfoDiv() {
+      return '<div class="controller" id="info"></div>';
+    },
+
+    // CHORD NAME
+    buildChordNameHeaderDiv() {
+      return '<h2 class="chord-name"></h2>';
+    },
+
+    // TOP RIGHT BUILDER
+    openTopRighttDiv() {
+      return '<div class="top-right">';
+    },
+
+    // NOTES PER CHORD SELECTOR
+    buildNotesPerChordSelectorDiv() {
+
+      var notesPerChordSelectorDiv = '<div class="controller notes-per-chord-wrapper">';
+      var btnArr = {
+        0: {
+          'ctype': 3,
+          'label': 'basic chords'
+        },
+        1: {
+          'ctype': 4,
+          'label': '7th chords'
+        },
+        2: {
+          'ctype': 5,
+          'label': '9th chords'
+        }
+      };
+
+      for (var n = 0; n <= 2; n++) {
+        var thisArr = btnArr[n];
+        var activeClass = "";
+        if (this.params.notesPerChord == thisArr['ctype']) {
+          activeClass = " active";
+        }
+        notesPerChordSelectorDiv += ' <div class="notesPerChord">\n<a class="notes-per-chord-button' + activeClass + '" ctype="' + thisArr['ctype'] + '" href="#">' + thisArr['label'] + '</a>\n </div>';
       }
-      notesPerChordSelectorDiv += ' <div class="notesPerChord">\n<a class="notes-per-chord-button' + activeClass + '" ctype="' + thisArr['ctype'] + '" href="#">' + thisArr['label'] + '</a>\n </div>';
+      notesPerChordSelectorDiv += '</div>';
+      return notesPerChordSelectorDiv;
+    },
+
+    // COLOR KEY DISPLAY
+    buildColorKeyDiv() {
+      var colorKeyDiv = '<div id="color_key">';
+      colorKeyDiv += '  <div id="color-key-wrapper">';
+      colorKeyDiv += '    <h4>Color Key for chord note intervals</h4>';
+      colorKeyDiv += '    <ul id="color-key">';
+      colorKeyDiv += '        <li>';
+      colorKeyDiv += '          <div class="int-1">1</div>';
+      colorKeyDiv += '        </li>';
+      colorKeyDiv += '        <li>';
+      colorKeyDiv += '          <div class="int-3">3</div>';
+      colorKeyDiv += '        </li>';
+      colorKeyDiv += '        <li>';
+      colorKeyDiv += '          <div class="int-5">5</div>';
+      colorKeyDiv += '        </li>';
+      colorKeyDiv += '        <li>';
+      colorKeyDiv += '          <div class="int-7">7</div>';
+      colorKeyDiv += '        </li>';
+      colorKeyDiv += '        <li>';
+      colorKeyDiv += '          <div class="int-9">9</div>';
+      colorKeyDiv += '        </li>';
+      colorKeyDiv += '    </ul>';
+      colorKeyDiv += '  </div>';
+      colorKeyDiv += '</div>';
+
+      return colorKeyDiv;
+    },
+
+
+    closeDiv() {
+      return '</div>';
+    },
+
+    buildNeckModuleDiv() {
+      return '<div class="nm-container"><div class="neckmodule"></div></div>';
+    },
+
+    buildStringViewTogglers() {
+      var stringViewTogglersDiv = '<div class="string-togglers controller">';
+      stringViewTogglersDiv += '  <ul>';
+      stringViewTogglersDiv += '    <li string="1"></li>';
+      stringViewTogglersDiv += '    <li string="2"></li>';
+      stringViewTogglersDiv += '    <li string="3"></li>';
+      stringViewTogglersDiv += '    <li string="4"></li>';
+      stringViewTogglersDiv += '    <li string="5"></li>';
+      stringViewTogglersDiv += '    <li string="6"></li>';
+      stringViewTogglersDiv += '  </ul>';
+      stringViewTogglersDiv += '</div>';
+
+      return stringViewTogglersDiv;
+    },
+
+    openControlsDiv() { // all the subsequent stuff gets injected into here so this has to be created first!
+      return '<div class="controller info-display-div" id="chord-buttons">';
+    },
+
+    buildChordInstructionsDiv() {
+      return '  <div class="controller info-display-div" id="chord_instructions">Use buttons below to display corresponding chord notes</div>';
+    },
+
+    buildResetLink() {
+      return '<p class="reset-link controller"><a href="#">Reset guitar neck to initially loaded view</a></p>';
+    },
+
+    buildChordButtonsDiv() {
+
+      var chordButtonsDiv = '  <div class="controller" id="chordButtons">';
+      chordButtonsDiv += '    <div class="chordButton" scaleInt="1">Cmaj7</div>';
+      chordButtonsDiv += '    <div class="chordButton" scaleInt="2">Dm7</div>';
+      chordButtonsDiv += '    <div class="chordButton" scaleInt="3">Em7</div>';
+      chordButtonsDiv += '    <div class="chordButton" scaleInt="4">Fmaj7</div>';
+      chordButtonsDiv += '    <div class="chordButton" scaleInt="5">G7</div>';
+      chordButtonsDiv += '    <div class="chordButton" scaleInt="6">Am7</div>';
+      chordButtonsDiv += '    <div class="chordButton" scaleInt="7">Bm7b5</div>';
+      chordButtonsDiv += '  </div>';
+
+      return chordButtonsDiv;
+    },
+
+    buildNeckStyleSelector() {
+      return "<div class='neckstyle-selector'>\n  <ul>\n    <li class='neck-default'></li>\n    <li class='neck-g'></li>\n    <li class='neck-f'></li>\n  </ul>\n</div>";
+    },
+
+    returnThis() {
+      var that = this;
+      return that;
+    },
+
+    objectIsEmpty(obj) {
+      if (Object.keys(obj).length === 0) {
+        return true;
+      } else {
+        return false;
+      }
     }
-    notesPerChordSelectorDiv += '</div>';
-    return notesPerChordSelectorDiv;
-  };
-
-  // COLOR KEY DISPLAY
-  var buildColorKeyDiv = function () {
-    var colorKeyDiv = '<div id="color_key">';
-    colorKeyDiv += '  <div id="color-key-wrapper">';
-    colorKeyDiv += '    <h4>Color Key for chord note intervals</h4>';
-    colorKeyDiv += '    <ul id="color-key">';
-    colorKeyDiv += '        <li>';
-    colorKeyDiv += '          <div class="int-1">1</div>';
-    colorKeyDiv += '        </li>';
-    colorKeyDiv += '        <li>';
-    colorKeyDiv += '          <div class="int-3">3</div>';
-    colorKeyDiv += '        </li>';
-    colorKeyDiv += '        <li>';
-    colorKeyDiv += '          <div class="int-5">5</div>';
-    colorKeyDiv += '        </li>';
-    colorKeyDiv += '        <li>';
-    colorKeyDiv += '          <div class="int-7">7</div>';
-    colorKeyDiv += '        </li>';
-    colorKeyDiv += '        <li>';
-    colorKeyDiv += '          <div class="int-9">9</div>';
-    colorKeyDiv += '        </li>';
-    colorKeyDiv += '    </ul>';
-    colorKeyDiv += '  </div>';
-    colorKeyDiv += '</div>';
-
-    return colorKeyDiv;
   }
-
-
-  var closeDiv = function () {
-    return '</div>';
-  }
-
-  var buildNeckModuleDiv = function () {
-    return '<div class="nm-container"><div class="neckmodule"></div></div>';
-  }
-
-  var buildStringViewTogglers = function () {
-    var stringViewTogglersDiv = '<div class="string-togglers controller">';
-    stringViewTogglersDiv += '  <ul>';
-    stringViewTogglersDiv += '    <li string="1"></li>';
-    stringViewTogglersDiv += '    <li string="2"></li>';
-    stringViewTogglersDiv += '    <li string="3"></li>';
-    stringViewTogglersDiv += '    <li string="4"></li>';
-    stringViewTogglersDiv += '    <li string="5"></li>';
-    stringViewTogglersDiv += '    <li string="6"></li>';
-    stringViewTogglersDiv += '  </ul>';
-    stringViewTogglersDiv += '</div>';
-
-    return stringViewTogglersDiv;
-  }
-
-  var openControlsDiv = function () { // all the subsequent stuff gets injected into here so this has to be created first!
-    return '<div class="controller info-display-div" id="chord-buttons">';
-  }
-
-  var buildChordInstructionsDiv = function () {
-    return '  <div class="controller info-display-div" id="chord_instructions">Use buttons below to display corresponding chord notes</div>';
-  }
-
-  var buildResetLink = function () {
-    return '<p class="reset-link controller"><a href="#">Reset guitar neck to initially loaded view</a></p>';
-  }
-
-  var buildChordButtonsDiv = function () {
-
-    var chordButtonsDiv = '  <div class="controller" id="chordButtons">';
-    chordButtonsDiv += '    <div class="chordButton" scaleInt="1">Cmaj7</div>';
-    chordButtonsDiv += '    <div class="chordButton" scaleInt="2">Dm7</div>';
-    chordButtonsDiv += '    <div class="chordButton" scaleInt="3">Em7</div>';
-    chordButtonsDiv += '    <div class="chordButton" scaleInt="4">Fmaj7</div>';
-    chordButtonsDiv += '    <div class="chordButton" scaleInt="5">G7</div>';
-    chordButtonsDiv += '    <div class="chordButton" scaleInt="6">Am7</div>';
-    chordButtonsDiv += '    <div class="chordButton" scaleInt="7">Bm7b5</div>';
-    chordButtonsDiv += '  </div>';
-
-    return chordButtonsDiv;
-  }
-
-  var buildNeckStyleSelector = function () {
-    return "<div class='neckstyle-selector'>\n  <ul>\n    <li class='neck-default'></li>\n    <li class='neck-g'></li>\n    <li class='neck-f'></li>\n  </ul>\n</div>";
-  }
-
-  var returnThis = function () {
-    var that = this;
-    return that;
-  }
-
-  var objectIsEmpty = function (obj) {
-    if (Object.keys(obj).length === 0) {
-      return true;
-    } else {
-      return false;
-    }
-  }
-
-  return neck;
-
-})();
-
-function neckCopy(neckObj) { // console.log(neckObj.params);
 }
+
+export { neckModule }

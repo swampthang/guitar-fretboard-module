@@ -1,0 +1,25 @@
+{
+  "name": "guitar-fretboard-module",
+  "version": "1.0.0",
+  "description": "\"Create a guitar fretboard diagram with the ability to display all the chords in any key or any major, minor or harmonic minor scale.\"",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/swampthang/guitar-fretboard-module.git"
+  },
+  "keywords": [
+    "guitar",
+    "fretboard",
+    "learning"
+  ],
+  "author": "Carvel Avis",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/swampthang/guitar-fretboard-module/issues"
+  },
+  "homepage": "https://github.com/swampthang/guitar-fretboard-module#readme"
+}

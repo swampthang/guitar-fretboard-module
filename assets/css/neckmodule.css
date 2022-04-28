@@ -105,14 +105,6 @@
 
 .long-neck-default .guitar-module-main-wrapper .nm-container { padding-top: 20px; padding-bottom: 20px; }
 
-/* Color settings for chord interval notes in grid when viewing a chord/arpeggio */
-.long-neck-default .guitar-module-main-wrapper .int-1 { background: rgb(219, 3, 3); color: white; border-color: white; } /* root */
-.long-neck-default .guitar-module-main-wrapper .int-3 { background: #FFFF00; color: black; border-color: black; } /* 3rd */
-.long-neck-default .guitar-module-main-wrapper .int-5 {background: #0000FF; color: #fff; border-color: white; } /* 5th */
-.long-neck-default .guitar-module-main-wrapper .int-9 { background: white; color: black; border-color: black; } /* 9th */
-.long-neck-default .guitar-module-main-wrapper .int-7 { background: black; color: white; border-color: white; } /* 7th */
-.long-neck-default .guitar-module-main-wrapper .int-11 { background: #FF00FF; } /* reserved for 11th? */
-
 .long-neck-default .string-togglers {
   position: absolute;
   top: -14px;
@@ -198,11 +190,11 @@
 }
 
 /* Color settings for chord interval notes in grid when viewing a chord/arpeggio */
-.long-neck-default .guitar-module-main-wrapper .int-1 { background: red; }
-.long-neck-default .guitar-module-main-wrapper .int-3 { background: yellow; }
-.long-neck-default .guitar-module-main-wrapper .int-5 {background: blue; }
-.long-neck-default .guitar-module-main-wrapper .int-9 { background: #FFFF00; }
-.long-neck-default .guitar-module-main-wrapper .int-7 { background: #00FF00; }
+.long-neck-default .guitar-module-main-wrapper .int-1 { background: red; color: white; border-color: white; }
+.long-neck-default .guitar-module-main-wrapper .int-3 { background: yellow; color: black; border-color: black; }
+.long-neck-default .guitar-module-main-wrapper .int-5 {background: blue; color: #fff; border-color: white; }
+.long-neck-default .guitar-module-main-wrapper .int-9 { background: #FFFF00; color: black; border-color: black; }
+.long-neck-default .guitar-module-main-wrapper .int-7 { background: #72ff72; color: black; border-color: black; }
 .long-neck-default .guitar-module-main-wrapper .int-11 { background: #FF00FF; }
 
 .guitar-module-main-wrapper .nm-container {
