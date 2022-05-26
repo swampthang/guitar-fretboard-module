@@ -181,14 +181,14 @@ function neckModule() {
     },
 
     deactivateChordbuttons() {
-      this.wrapper.find('#chordButtons .chordButton').each(function () {
+      this.wrapper.find('.chord-buttons .chordButton').each(function () {
         $(this).removeClass('active');
       });
     },
 
     hideChordButtons() {
-      this.wrapper.find('#chord-buttons').hide();
-      this.wrapper.find('#chord_instructions').hide();
+      this.wrapper.find('.chord-buttons').hide();
+      this.wrapper.find('.chord-instructions').hide();
 
     },
 
@@ -253,9 +253,9 @@ function neckModule() {
       this.currentChordsArr = this.chordsArr;
 
       if (this.params.scaleOnlyMode) {
-        this.wrapper.find('#main_title').html(this.currentKey + ' major scale');
+        this.wrapper.find('.main-title').html(this.currentKey + ' major scale');
       } else {
-        this.wrapper.find('#main_title').html('Key of ' + this.currentKey);
+        this.wrapper.find('.main-title').html('Key of ' + this.currentKey);
       }
 
       this.updateMetaDivs("rootNote", rootNote);
@@ -289,9 +289,9 @@ function neckModule() {
       this.currentScaleType = 'natural minor';
       this.currentChordsArr = this.naturalMinorChordsArr;
       if (this.params.scaleOnlyMode) {
-        this.wrapper.find('#main_title').html(this.currentKey + ' natural minor scale');
+        this.wrapper.find('.main-title').html(this.currentKey + ' natural minor scale');
       } else {
-        this.wrapper.find('#main_title').html('Key of ' + this.currentKey + ' natural minor');
+        this.wrapper.find('.main-title').html('Key of ' + this.currentKey + ' natural minor');
       }
       this.updateMetaDivs("rootNote", rootNote);
       this.updateMetaDivs("scalesArray", "naturalMinorScales");
@@ -316,9 +316,9 @@ function neckModule() {
       this.currentScaleType = 'harmonic minor';
       this.currentChordsArr = this.harmonicMinorChordsArr;
       if (this.params.scaleOnlyMode) {
-        this.wrapper.find('#main_title').html(this.currentKey + ' harmonic minor scale');
+        this.wrapper.find('.main-title').html(this.currentKey + ' harmonic minor scale');
       } else {
-        this.wrapper.find('#main_title').html('Key of ' + this.currentKey + ' harmonic minor');
+        this.wrapper.find('.main-title').html('Key of ' + this.currentKey + ' harmonic minor');
       }
       this.updateMetaDivs("rootNote", rootNote);
       this.updateMetaDivs("scalesArray", "harmonicMinorScales");
@@ -332,7 +332,7 @@ function neckModule() {
 
     doScale() {
 
-      this.wrapper.find('#chord_instructions').show();
+      this.wrapper.find('.chord-instructions').show();
       this.wrapper.find('.note').removeClass('int-3 int-5 int-7 int-11 int-1 int-9 in-scale');
       this.wrapper.find('.note').hide();
       // this.hide_chord_divs();
@@ -434,7 +434,7 @@ function neckModule() {
       this.muteNotes(noteArr);
       this.wrapper.find('#keyNotes li:contains("' + this.currentScale[int4] + '")').hide();
       this.wrapper.find('#keyNotes li:contains("' + this.currentScale[int7] + '")').hide();
-      this.wrapper.find('#main_title').html(this.currentKey + ' ' + this.currentScaleType + ' pentatonic scale');
+      this.wrapper.find('.main-title').html(this.currentKey + ' ' + this.currentScaleType + ' pentatonic scale');
       this.wrapper.find('.pentatonic-btn').text("Revert to full scale");
       this.showingPentatonic = true;
     },
@@ -457,7 +457,7 @@ function neckModule() {
       this.unMuteNotes(noteArr);
       this.wrapper.find('#keyNotes li:contains("' + this.currentScale[int4] + '")').show();
       this.wrapper.find('#keyNotes li:contains("' + this.currentScale[int7] + '")').show();
-      this.wrapper.find('#main_title').html(this.currentKey + ' ' + this.currentScaleType + ' scale');
+      this.wrapper.find('.main-title').html(this.currentKey + ' ' + this.currentScaleType + ' scale');
       this.wrapper.find('.pentatonic-btn').text("Convert to pentatonic");
       this.showingPentatonic = false;
     },
@@ -465,7 +465,7 @@ function neckModule() {
     showChord(interval) {
 
       this.showingChord = true;
-      // this.wrapper.find('#chord_instructions').hide();
+      // this.wrapper.find('.chord-instructions').hide();
       this.wrapper.find('.note').removeClass('int-3 int-5 int-7 int-11 int-1 int-9');
       this.currentInterval = interval;
       let noteSelectArr = this.currentChordsArr[interval];
@@ -1187,11 +1187,11 @@ function neckModule() {
       if (params.showChordNameHeader) {
         return `
       <div class="container">
-        <div class="info-display-div" id="main_title"></div>
+        <div class="main-title info-display-div"></div>
         <h2 class="chord-name"></h2>
       </div>`;
       } else {
-        return '<div class="info-display-div" id="main_title"></div>';
+        return '<div class="main-title info-display-div"></div>';
       }
     },
 
@@ -1312,11 +1312,11 @@ function neckModule() {
     },
 
     openControlsDiv() { // all the subsequent stuff gets injected into here so this has to be created first!
-      return '<div class="controller info-display-div" id="chord-buttons">';
+      return '<div class="controller info-display-div chord-buttons">';
     },
 
     buildChordInstructionsDiv() {
-      return '  <div class="controller info-display-div" id="chord_instructions">Use buttons below to display corresponding chord notes</div>';
+      return '  <div class="controller info-display-div chord-instructions">Use buttons below to display corresponding chord notes</div>';
     },
 
     buildResetLink() {
@@ -1325,7 +1325,7 @@ function neckModule() {
 
     buildChordButtonsDiv() {
 
-      var chordButtonsDiv = '  <div class="controller" id="chordButtons">';
+      var chordButtonsDiv = '  <div class="button-wrapper controller">';
       chordButtonsDiv += '    <div class="chordButton" scaleInt="1">Cmaj7</div>';
       chordButtonsDiv += '    <div class="chordButton" scaleInt="2">Dm7</div>';
       chordButtonsDiv += '    <div class="chordButton" scaleInt="3">Em7</div>';

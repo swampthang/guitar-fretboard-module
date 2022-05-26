@@ -212,14 +212,14 @@
 }
 
 @media screen and ( max-width: 400px ) {
-  .long-neck-default .guitar-module-main-wrapper #main_title {
+  .long-neck-default .guitar-module-main-wrapper .main-title {
     font-size: 2.0em;
     text-transform: capitalize;
   }
 }
 
 @media screen and ( max-width: 360px ) {
-  .long-neck-default .guitar-module-main-wrapper #main_title {
+  .long-neck-default .guitar-module-main-wrapper .main-title {
     font-size: 1.75em;
     text-transform: capitalize;
   }

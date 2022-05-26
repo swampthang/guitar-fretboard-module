@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "\"Create a guitar fretboard diagram with the ability to display all the chords in any key or any major, minor or harmonic minor scale.\"",
   "type": "module",
-  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

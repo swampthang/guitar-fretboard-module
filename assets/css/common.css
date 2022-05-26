@@ -4,7 +4,7 @@
 .guitar-module-main-wrapper a { color: blue; }
 
 .guitar-module-main-wrapper { margin: 0; padding-top: 5px; }
-.guitar-module-main-wrapper, .guitar-module-main-wrapper #main_title, .guitar-module-main-wrapper h2, .guitar-module-main-wrapper p {
+.guitar-module-main-wrapper, .guitar-module-main-wrapper .main-title, .guitar-module-main-wrapper h2, .guitar-module-main-wrapper p {
   font-family: 'Archivo Narrow', sans-serif;
   font-size: 13px;
 }
@@ -35,7 +35,7 @@
 .guitar-module-main-wrapper #controls { position: relative; }
 .guitar-module-main-wrapper #color_key { position: relative; left: 0; max-width: 240px; }
 .guitar-module-main-wrapper #color_key h5 {  padding: 0; margin: 0; height: 20px; }
-.guitar-module-main-wrapper #main_title { font-family: 'Archivo Narrow', sans-serif; font-size: 2.75em; margin: 2px 0 0; }
+.guitar-module-main-wrapper .main-title { font-family: 'Archivo Narrow', sans-serif; font-size: 2.75em; margin: 2px 0 0; }
 
 .guitar-module-main-wrapper .showing { font-size: 16px; }
 .guitar-module-main-wrapper #notesPerChord, .guitar-module-main-wrapper #showing { padding: 0; margin: 0; }
@@ -61,7 +61,7 @@
 /* end selectors */
 
 /* Buttons that show up below the fretboard for each chord in a key area. See note re styling templates above */
-.guitar-module-main-wrapper #chordButtons { margin: 1em 0; }
+.guitar-module-main-wrapper .button-wrapper { margin: 1em 0; }
 .guitar-module-main-wrapper .chordButton {
   -moz-box-shadow: inset 0px 1px 0px 0px #ffffff;
   -webkit-box-shadow: inset 0px 1px 0px 0px #ffffff;
