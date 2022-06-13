@@ -3,8 +3,8 @@ Guitar Fretboard Module
 
 A javascript module for creating multiple instances of interactive guitar fretboard diagrams showing scales and all chords in a given key on any web page.
 EXAMPLES AND MORE INFO:
-Arpeggio Builder: https://guitarcreative.com/tools/arpeggios
-Scale Builder: https://guitarcreative.com/tools/scales
+- Arpeggio Builder: https://guitarcreative.com/tools/arpeggios
+- Scale Builder: https://guitarcreative.com/tools/scales
 
 Directions
 ==========
